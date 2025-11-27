@@ -1,0 +1,122 @@
+[
+  {
+    "model": "Family Dome 600",
+    "dailyPrice": 250.00,
+    "capacity": "6 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Trail Trekker 2P",
+    "dailyPrice": 150.00,
+    "capacity": "2 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Instant Pop-Up 4X",
+    "dailyPrice": 200.00,
+    "capacity": "4 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Ultralight Solo",
+    "dailyPrice": 120.00,
+    "capacity": "1 person",
+    "type": "Tent"
+  },
+  {
+    "model": "Group Cabin 8000",
+    "dailyPrice": 350.00,
+    "capacity": "8 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Trekking Pro 50L",
+    "dailyPrice": 80.00,
+    "capacity": "50L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Day Explorer 35L",
+    "dailyPrice": 55.00,
+    "capacity": "35L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Summit 75L",
+    "dailyPrice": 110.00,
+    "capacity": "75L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Light Carry 20L",
+    "dailyPrice": 40.00,
+    "capacity": "20L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Hauler Max 90L",
+    "dailyPrice": 130.00,
+    "capacity": "90L",
+    "type": "Backpack"
+  },
+  {
+    "model": "River Cruiser 3P",
+    "dailyPrice": 280.00,
+    "capacity": "3 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Arctic Shield 4S",
+    "dailyPrice": 450.00,
+    "capacity": "2 people",
+    "type": "Tent"
+  },
+  {
+    "model": "Junior Hiker 15L",
+    "dailyPrice": 30.00,
+    "capacity": "15L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Expedition 110L",
+    "dailyPrice": 150.00,
+    "capacity": "110L",
+    "type": "Backpack"
+  },
+  {
+    "model": "Portable Gas Stove",
+    "dailyPrice": 25.00,
+    "capacity": "N/A",
+    "type": "Other Gear"
+  },
+  {
+    "model": "Double Hammock Pro",
+    "dailyPrice": 45.00,
+    "capacity": "2 people",
+    "type": "Other Gear"
+  },
+  {
+    "model": "Solar Powered Lantern",
+    "dailyPrice": 15.00,
+    "capacity": "N/A",
+    "type": "Other Gear"
+  },
+  {
+    "model": "Water Filter System",
+    "dailyPrice": 35.00,
+    "capacity": "N/A",
+    "type": "Other Gear"
+  },
+  {
+    "model": "Camp Chair Deluxe",
+    "dailyPrice": 10.00,
+    "capacity": "1 person",
+    "type": "Other Gear"
+  },
+  {
+    "model": "Sleeping Bag -20C",
+    "dailyPrice": 60.00,
+    "capacity": "1 person",
+    "type": "Other Gear"
+  }
+]

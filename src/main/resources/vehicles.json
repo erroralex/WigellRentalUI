@@ -1,0 +1,162 @@
+[
+  {
+    "make": "Ford",
+    "model": "E-Series RV",
+    "dailyPrice": 1200.00,
+    "year": "2018",
+    "type": "Motorhome",
+    "capacity": "8 people"
+  },
+  {
+    "make": "Hobby",
+    "model": "De Luxe 545",
+    "dailyPrice": 750.00,
+    "year": "2020",
+    "type": "Caravan",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Mercedes-Benz",
+    "model": "Sprinter Van Conversion",
+    "dailyPrice": 1500.00,
+    "year": "2022",
+    "type": "Campervan",
+    "capacity": "2 people"
+  },
+  {
+    "make": "Kabe",
+    "model": "Estate 630",
+    "dailyPrice": 600.00,
+    "year": "2019",
+    "type": "Caravan",
+    "capacity": "3 people"
+  },
+  {
+    "make": "Fiat",
+    "model": "Ducato 4x4 Camper",
+    "dailyPrice": 1350.00,
+    "year": "2021",
+    "type": "Campervan",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Adria",
+    "model": "Altea 552",
+    "dailyPrice": 900.00,
+    "year": "2023",
+    "type": "Caravan",
+    "capacity": "6 people"
+  },
+  {
+    "make": "Citroën",
+    "model": "Jumper RV",
+    "dailyPrice": 1050.00,
+    "year": "2017",
+    "type": "Motorhome",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Polar",
+    "model": "Edition 590",
+    "dailyPrice": 820.00,
+    "year": "2019",
+    "type": "Caravan",
+    "capacity": "5 people"
+  },
+  {
+    "make": "Volkswagen",
+    "model": "California Ocean",
+    "dailyPrice": 1100.00,
+    "year": "2024",
+    "type": "Campervan",
+    "capacity": "2 people"
+  },
+  {
+    "make": "Svenska",
+    "model": "Mini Caravan",
+    "dailyPrice": 550.00,
+    "year": "2020",
+    "type": "Caravan",
+    "capacity": "2 people"
+  },
+  {
+    "make": "Hymer",
+    "model": "Exsis-i",
+    "dailyPrice": 1800.00,
+    "year": "2023",
+    "type": "Motorhome",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Fendt",
+    "model": "Opal 560",
+    "dailyPrice": 950.00,
+    "year": "2022",
+    "type": "Caravan",
+    "capacity": "5 people"
+  },
+  {
+    "make": "Dethleffs",
+    "model": "Globetrotter",
+    "dailyPrice": 2100.00,
+    "year": "2024",
+    "type": "Motorhome",
+    "capacity": "6 people"
+  },
+  {
+    "make": "Eriba",
+    "model": "Touring 310",
+    "dailyPrice": 700.00,
+    "year": "2021",
+    "type": "Caravan",
+    "capacity": "3 people"
+  },
+  {
+    "make": "Peugeot",
+    "model": "Boxer Vanlife",
+    "dailyPrice": 1150.00,
+    "year": "2020",
+    "type": "Campervan",
+    "capacity": "2 people"
+  },
+  {
+    "make": "Chausson",
+    "model": "Welcome 747",
+    "dailyPrice": 1650.00,
+    "year": "2018",
+    "type": "Motorhome",
+    "capacity": "7 people"
+  },
+  {
+    "make": "Bürstner",
+    "model": "Premio Life 420",
+    "dailyPrice": 650.00,
+    "year": "2023",
+    "type": "Caravan",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Renault",
+    "model": "Master Camper",
+    "dailyPrice": 980.00,
+    "year": "2019",
+    "type": "Campervan",
+    "capacity": "3 people"
+  },
+  {
+    "make": "Niesmann+Bischoff",
+    "model": "Arto 77E",
+    "dailyPrice": 2500.00,
+    "year": "2024",
+    "type": "Motorhome",
+    "capacity": "4 people"
+  },
+  {
+    "make": "Knaus",
+    "model": "Sport 400",
+    "dailyPrice": 780.00,
+    "year": "2021",
+    "type": "Caravan",
+    "capacity": "4 people"
+  }
+]

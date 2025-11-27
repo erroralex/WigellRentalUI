@@ -1,0 +1,328 @@
+/*
+ * Dark Theme for Wigell Camping Rental UI
+ * Inspired by the provided sleek, minimalist design.
+ */
+
+/* =========================== */
+/* --- Color Palette / Variables --- */
+/* =========================== */
+.root {
+    /* **CRITICAL**: Use hardcoded values for these system properties to avoid StackOverflowError */
+    -fx-background-color: #212121;
+    -fx-base: #212121;
+
+    /* Secondary Dark Background (for containers/views/side nav) */
+    -fx-color-background-secondary: #2c2c2c;
+
+    /* Light Text/Primary Color */
+    -fx-text-color-primary: #f0f0f0;
+
+    /* Accent Color (subtle orange/brown line in the image) */
+    -fx-accent-color: #e69d67;
+
+    /* Border Color (subtle lines) */
+    -fx-border-color-subtle: #444444;
+
+    /* Global Font Settings */
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* =========================== */
+/* --- Global Elements --- */
+/* =========================== */
+
+/* Labels and Text */
+.label, .text-field, .password-field {
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+.label.login-title {
+    -fx-font-size: 2.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* Application Title Text in Sidebar */
+.app-title {
+    -fx-text-fill: -fx-accent-color;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 15 0; /* Add padding below the title */
+}
+
+/* =========================== */
+/* --- Custom Title Bar (MODIFIED) --- */
+/* =========================== */
+
+.custom-title-bar {
+    -fx-background-color: #1a1a1a; /* Very dark background for the title bar */
+    -fx-padding: 5 0 5 15; /* Top/Bottom padding 5, left 15, right 0 */
+}
+
+.custom-title-bar .title-label {
+    -fx-text-fill: -fx-accent-color; /* Golden accent color for the title */
+    -fx-font-size: 1.0em;
+    -fx-font-weight: bold;
+}
+
+.custom-title-bar .window-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-accent-color; /* MODIFIED: Set default text color to golden accent */
+    -fx-font-size: 1.2em;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+}
+
+.custom-title-bar .window-button:hover {
+    -fx-background-color: #333333;
+    -fx-text-fill: -fx-text-color-primary; /* Changed hover text back to white for contrast */
+}
+
+.custom-title-bar .window-close:hover {
+    -fx-background-color: #ff6666; /* Retained red background on close hover */
+    -fx-text-fill: #ffffff;
+}
+
+/* =========================== */
+/* --- Input Fields (Text and Password) --- */
+/* =========================== */
+.text-field, .password-field, .text-area { /* Added .text-area for consistency */
+    -fx-background-color: -fx-color-background-secondary;
+    -fx-prompt-text-fill: #999999;
+    -fx-highlight-fill: -fx-accent-color;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-control-inner-background: -fx-color-background-secondary;
+    -fx-text-fill: -fx-text-color-primary; /* Ensure text fill is defined here too */
+    -fx-border-color: -fx-border-color-subtle;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8 10;
+}
+
+.text-field:focused, .password-field:focused, .text-area:focused {
+    -fx-border-color: -fx-accent-color;
+    -fx-background-color: #333333; /* Slightly lighter on focus */
+}
+
+/* =========================== */
+/* --- Buttons --- */
+/* =========================== */
+.button {
+    -fx-background-color: -fx-color-background-secondary;
+    -fx-text-fill: -fx-text-color-primary;
+    -fx-border-color: -fx-border-color-subtle;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #383838;
+}
+
+/* Login Button (Accent Color) */
+.login-button {
+    /* MODIFIED: Darker, richer accent color */
+    -fx-background-color: #d48d5b; /* Darker than #e69d67 */
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-color: #d48d5b;
+}
+
+.login-button:hover {
+    /* MODIFIED: Even darker on hover */
+    -fx-background-color: #c27c4f; /* Darker accent on hover */
+}
+
+/* Exit Button (Secondary Action) */
+.exit-button {
+    /* Keep a subtle look */
+    -fx-background-color: #444444;
+    -fx-text-fill: #f0f0f0;
+}
+
+.exit-button:hover {
+    -fx-background-color: #555555;
+}
+
+/* =========================== */
+/* --- Icons (FontIcon) --- */
+/* =========================== */
+.ikonli-font-icon {
+    /* Setting the default icon color to the accent color (golden hue) */
+    -fx-fill: -fx-accent-color; /* MODIFIED: Now uses full accent color */
+}
+
+/* Ensure icons in HBox containers retain color */
+.createInputContainer .ikonli-font-icon {
+    -fx-fill: -fx-accent-color; /* MODIFIED: Set to full accent color */
+}
+
+/* Icon inside Login Button */
+.login-button .ikonli-font-icon {
+    -fx-fill: #ffffff; /* White icon for accent button (overrides default) */
+}
+
+/* =========================== */
+/* --- Alert Dialogs (DialogPane) --- */
+/* =========================== */
+
+/* Targets the main dialog background */
+.dialog-pane {
+    -fx-background-color: -fx-color-background-secondary;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 0 2;
+}
+
+/* Targets the header area (where the icon and title are) */
+.dialog-pane .header-panel {
+    /* FIX FOR STACKOVERFLOW ERROR: Use hardcoded hex value instead of -fx-background-color */
+    -fx-background-color: #212121;
+}
+
+/* Targets the main content text within the dialog */
+.dialog-pane .content {
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* Targets the text inside the dialog buttons */
+.dialog-pane .button .text {
+    -fx-fill: -fx-text-color-primary;
+}
+
+/* Ensure the label text within the dialog content is styled */
+.dialog-pane .label {
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* =========================== */
+/* --- Side Navigation Additions --- */
+/* =========================== */
+
+/* Style for the sub-menu container for visual grouping */
+.side-navigation .sub-menu {
+    /* Optional: A very subtle background or border for grouping */
+}
+
+/* Base style for all navigation buttons (already exists, but check for consistency) */
+.nav-button {
+    /* ... existing styles for buttons ... */
+}
+
+/* Added: Drop shadow for button text elements (targets all buttons) */
+.button .text {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 2, 0.0, 1, 1);
+}
+
+/* --- Active Navigation Button Style (Highlight) --- */
+.nav-button-active {
+    -fx-background-color: derive(-fx-color-background-secondary, -10%);
+    -fx-text-fill: -fx-accent-color; /* Highlight text with golden hue */
+    -fx-font-weight: bold;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 0 3; /* Accent line on the left */
+    -fx-padding: 8 15 8 12; /* Adjust left padding for border width */
+}
+
+/* Active Icon Color (inside the active button) */
+.nav-button-active .ikonli-font-icon {
+    -fx-fill: -fx-accent-color; /* Highlight icon with golden hue */
+}
+
+
+/* Style for the Inventory toggle button (Parent) */
+.nav-button-toggle {
+    /* Use padding to create space for the toggle icon if not using the UIUtil HBox structure */
+}
+
+/* Visual cue for when the parent button is toggled ON (expanded) */
+.nav-button-toggle-active {
+    /* Subtle change to indicate the menu is open, e.g., slightly darker background */
+    -fx-background-color: derive(-fx-color-background-secondary, -10%);
+}
+
+/* Style for Sub-Buttons (Vehicles and Gear) */
+.sub-nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: derive(-fx-text-color-primary, -20%); /* Lighter text */
+    -fx-padding: 8 10 8 20; /* Increased left padding for deeper indentation */
+}
+
+.sub-nav-button:hover {
+    -fx-background-color: derive(-fx-color-background-secondary, 10%);
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* Active sub-button (uses the same color and accent line as main active button) */
+.sub-nav-button.nav-button-active {
+    -fx-background-color: derive(-fx-color-background-secondary, -10%);
+    -fx-text-fill: -fx-accent-color;
+    -fx-font-weight: bold;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 0 3; /* Accent line on the left */
+    -fx-padding: 8 10 8 17; /* Adjust left padding (was 20) for border width */
+}
+
+/* Icon specifically used for the toggle arrow (e.g., the ANGLE_DOWN icon) */
+.nav-icon-toggle {
+    -fx-fill: -fx-accent-color; /* Confirmed: Golden hue for the indicator arrow */
+}
+
+/* =========================== */
+/* --- TableView / Data Grids --- */
+/* =========================== */
+
+/* Main TableView Container */
+.table-view {
+    -fx-base: -fx-color-background-secondary;
+    -fx-background-color: -fx-color-background-secondary;
+    -fx-control-inner-background: -fx-color-background-secondary;
+    -fx-border-color: -fx-border-color-subtle;
+    -fx-border-width: 1;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}
+
+/* Table Header Background (Darker background) */
+.table-view .column-header-background {
+    -fx-background-color: #1e1e1e; /* Darker color for pronounced header */
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 2 0; /* Highlight line below header */
+}
+
+/* Table Column Header Text (Golden Hue) */
+.table-view .column-header .label {
+    -fx-text-fill: -fx-accent-color; /* Golden hue for headers */
+    -fx-font-weight: bold;
+}
+
+/* Alternating Row Colors (More pronounced striping) */
+/* Even Rows - Default background */
+.table-row-cell:even {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* Odd Rows - Visibly darker background for contrast */
+.table-row-cell:odd {
+    -fx-background-color: #242424; /* Darker than even rows to pronounce striping */
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* Selected Row */
+.table-row-cell:selected {
+    -fx-background-color: derive(-fx-accent-color, -30%); /* Darker accent color on selection */
+    -fx-text-fill: #ffffff;
+}
+
+/* Table Cell Styling */
+.table-cell {
+    /* Subtle vertical line separation */
+    -fx-border-color: transparent -fx-border-color-subtle transparent transparent;
+    -fx-padding: 8 10;
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": 8519,
+    "firstName": "Mikael",
+    "lastName": "Persbrandt",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 2640,
+    "firstName": "Peter",
+    "lastName": "Forsberg",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 9173,
+    "firstName": "Viktoria",
+    "lastName": "Bernadotte",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 5028,
+    "firstName": "Mia",
+    "lastName": "Parnevik",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 3761,
+    "firstName": "Kurt",
+    "lastName": "Olsson",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 1495,
+    "firstName": "Stellan",
+    "lastName": "Skarsgård",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 4832,
+    "firstName": "Robyn",
+    "lastName": "Carlsson",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 7306,
+    "firstName": "Zlatan",
+    "lastName": "Ibrahimović",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 6924,
+    "firstName": "Alicia",
+    "lastName": "Vikander",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 1057,
+    "firstName": "Felix",
+    "lastName": "Kjellberg",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 3588,
+    "firstName": "Malin",
+    "lastName": "Åkerman",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 9211,
+    "firstName": "Björn",
+    "lastName": "Skifs",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 5703,
+    "firstName": "Noel",
+    "lastName": "Floren",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 2049,
+    "firstName": "Sarah",
+    "lastName": "Sjöström",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 7180,
+    "firstName": "Joel",
+    "lastName": "Kinnaman",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 4355,
+    "firstName": "Carola",
+    "lastName": "Häggkvist",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 8907,
+    "firstName": "Danny",
+    "lastName": "Saucedo",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 6622,
+    "firstName": "Markoolio",
+    "lastName": "Lehtosalo",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 1334,
+    "firstName": "Lill",
+    "lastName": "Babs",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 9846,
+    "firstName": "Avicii",
+    "lastName": "Bergling",
+    "membershipLevel": "Premium",
+    "history": []
+  }
+]
