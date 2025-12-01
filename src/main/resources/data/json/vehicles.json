@@ -1,12 +1,12 @@
 [ {
-  "dailyPrice" : 1200.0,
+  "dailyPrice" : 1223.0,
   "make" : "Ford",
   "model" : "E-Series RV",
-  "year" : "2018",
+  "year" : "2019",
   "capacity" : "8 people",
   "type" : "Motorhome"
 }, {
-  "dailyPrice" : 750.0,
+  "dailyPrice" : 752.0,
   "make" : "Hobby",
   "model" : "De Luxe 545",
   "year" : "2020",

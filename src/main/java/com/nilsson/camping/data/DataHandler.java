@@ -3,8 +3,8 @@ package com.nilsson.camping.data;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.Gear;
+import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 
 import java.io.File;
@@ -34,7 +34,7 @@ public class DataHandler {
     // Load Members
     public static List<Member> loadMembers() {
         File file = new File(MEMBERS_PERSISTENCE_PATH);
-        List<Member> members = new ArrayList<>();
+        List<com.nilsson.camping.model.Member> members = new ArrayList<>();
 
         if (!file.exists() || file.length() == 0) {
             System.out.println("INFO: Members file not found or is empty at " + MEMBERS_PERSISTENCE_PATH + ". Starting with empty list.");
@@ -42,7 +42,7 @@ public class DataHandler {
         }
 
         try {
-            members = MAPPER.readValue(file, new TypeReference<List<Member>>() {});
+            members = MAPPER.readValue(file, new TypeReference<List<com.nilsson.camping.model.Member>>() {});
             System.out.println("Successfully loaded " + members.size() + " members from " + MEMBERS_PERSISTENCE_PATH);
 
         } catch (IOException e) {
@@ -54,7 +54,7 @@ public class DataHandler {
     }
 
     // Save Members
-    public static void saveMembers(List<Member> members) {
+    public static void saveMembers(List<com.nilsson.camping.model.Member> members) {
         try {
             File file = new File(MEMBERS_PERSISTENCE_PATH);
             file.getParentFile().mkdirs();
@@ -114,32 +114,32 @@ public class DataHandler {
     // Load Gear
     public static List<Gear> loadGear() {
         File file = new File(GEAR_PERSISTENCE_PATH);
-        List<Gear> gear = new ArrayList<>();
+        List<Gear> gearList = new ArrayList<>();
 
         if (!file.exists() || file.length() == 0) {
             System.out.println("INFO: Gear file not found or is empty at " + GEAR_PERSISTENCE_PATH + ". Starting with empty list.");
-            return gear;
+            return gearList;
         }
 
         try {
-            gear = MAPPER.readValue(file, new TypeReference<List<Gear>>() {});
-            System.out.println("Successfully loaded " + gear.size() + " items from " + GEAR_PERSISTENCE_PATH);
+            gearList = MAPPER.readValue(file, new TypeReference<List<Gear>>() {});
+            System.out.println("Successfully loaded " + gearList.size() + " items from " + GEAR_PERSISTENCE_PATH);
 
         } catch (IOException e) {
             System.err.println("FATAL ERROR: Could not load gear data from JSON: " + e.getMessage());
             e.printStackTrace();
         }
 
-        return gear;
+        return gearList;
     }
 
     // Save Gear
-    public static void saveGear(List<Gear> gears) {
+    public static void saveGear(List<Gear> gearList) {
         try {
             File file = new File(GEAR_PERSISTENCE_PATH);
             file.getParentFile().mkdirs();
-            MAPPER.writeValue(file, gears);
-            System.out.println("Successfully saved " + gears.size() + " gear to " + GEAR_PERSISTENCE_PATH);
+            MAPPER.writeValue(file, gearList);
+            System.out.println("Successfully saved " + gearList.size() + " gear to " + GEAR_PERSISTENCE_PATH);
 
         } catch (IOException e) {
             System.err.println("FATAL ERROR: Could not save gear data to JSON: " + e.getMessage());

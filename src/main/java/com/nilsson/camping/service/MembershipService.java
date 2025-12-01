@@ -3,37 +3,45 @@ package com.nilsson.camping.service;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.AddMemberDialog;
+
+import java.util.Optional;
 
 public class MembershipService {
 
     public Member handleAddMember() {
-        // Step 1: Display the input form and collect data (simulated result for brevity)
-        String firstName = "Lena";
-        String lastName = "Svensson";
-        String membershipLevel = "Premium";
+        // Display the input form and collect data
+        AddMemberDialog dialog = new AddMemberDialog();
+        Optional<Member> result = dialog.showAndWait();
 
-        // Check if the user cancelled the dialog (e.g., if firstName is null)
-        if (firstName == null) {
-            // User cancelled the operation
-            return null; // Return null if nothing was added
+        if (result.isPresent()) {
+            Member newMemberData = result.get();
+
+            // Create a new Member object
+            MemberRegistry registry = MemberRegistry.getInstance();
+            int newID = registry.getUniqueID();
+
+            // Assign unique ID
+            Member newMember = new Member(
+                    newID,
+                    newMemberData.getFirstName(),
+                    newMemberData.getLastName(),
+                    newMemberData.getMembershipLevel(),
+                    null
+            );
+
+            // Add to registry
+            registry.addMember(newMember);
+
+            // Show success confirmation
+            UIUtil.showInfoAlert("Member Added", "Success",
+                    newMember.getFirstName() + " " + newMember.getLastName() + " (ID: " + newMember.getId() + ") has been successfully added.");
+            return newMember;
         }
-
-        // Step 2: Create a new Member object
-        MemberRegistry registry = MemberRegistry.getInstance();
-        int newId = registry.getUniqueID(); // Get a unique ID
-
-        Member newMember = new Member(newId, firstName, lastName, membershipLevel, null);
-
-        // Step 3: Add the new member to the registry (handles persistence)
-        registry.addMember(newMember);
-
-        // Step 4: Show success confirmation
-        UIUtil.showInfoAlert("Member Added", "Success",
-                newMember.getFirstName() + " " + newMember.getLastName() + " (ID: " + newMember.getId() + ") has been successfully added.");
-
-        // Return the newly created member object
-        return newMember;
+        // Cancel was clicked
+        return null;
     }
+
 
     // Accept the Member object from the View
     public void handleEditMember(Member selectedMember) {

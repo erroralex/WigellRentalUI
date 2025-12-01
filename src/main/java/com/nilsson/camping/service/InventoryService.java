@@ -1,9 +1,15 @@
 package com.nilsson.camping.service;
 
+import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.EditGearDialog;
+import com.nilsson.camping.ui.dialogs.EditVehicleDialog;
+import com.nilsson.camping.ui.dialogs.AddVehicleDialog;
+
+import java.util.Optional;
 
 public class InventoryService {
 
@@ -11,41 +17,46 @@ public class InventoryService {
     // Vehicle Operations
     // ──────────────────────────────────────────────────────
     public RecreationalVehicle handleAddRecreationalVehicle() {
-        // Step 1: Display the input form and collect data (simulated result for brevity)
-        String make = "Volvo";
-        String model = "L70";
-        String type = "Wheel-loader";
-        double dailyPrice = 1000;
-        String year = "2025";
-        String capacity = "12 tons";
+        // Display the input form and collect data
+        AddVehicleDialog dialog = new AddVehicleDialog();
+        Optional<RecreationalVehicle> result = dialog.showAndWait();
 
-        // Check if the user cancelled the dialog (e.g., if make is null)
-        if (make == null) {
-            // User cancelled the operation
-            return null; // Must return null if the operation is cancelled
+        if (result.isPresent()) {
+            RecreationalVehicle newVehicleData = result.get();
+
+            // Create a new Vehicle object
+            Inventory inventory = Inventory.getInstance();
+
+            // Add to registry
+            inventory.addRecreationalVehicle(newVehicleData);
+
+            // Show success confirmation
+            UIUtil.showInfoAlert("Vehicle Added", "Success",
+                    newVehicleData.getMake() + " " + newVehicleData.getModel() + " has been successfully added.");
+            return newVehicleData;
         }
-
-        // Create a new RecreationalVehicle object
-        Inventory inventory = Inventory.getInstance();
-        RecreationalVehicle newRecreationalVehicle = new RecreationalVehicle(make, model, type, dailyPrice, year, capacity);
-
-        // Add the new vehicle to the registry
-        inventory.addRecreationalVehicle(newRecreationalVehicle);
-
-        // Show success confirmation
-        UIUtil.showInfoAlert("Recreational Vehicle Added", "Success", newRecreationalVehicle.getMake() + " " + newRecreationalVehicle.getModel() + " has been successfully added.");
-
-        // Return the newly created object for the UI view to display
-        return newRecreationalVehicle;
+        // Cancel was clicked
+        return null;
     }
 
 
     // Accept the Vehicle object from the View
     public void handleEditRecreationalVehicle(RecreationalVehicle selectedRecreationalVehicle) {
-        if (selectedRecreationalVehicle != null) {
-            UIUtil.showInfoAlert("Edit Recreational Vehicle", "Functionality Pending", "A dialog/form for editing recreational vehicle " + selectedRecreationalVehicle.getMake() + " will be implemented here.");
-        } else {
-            // Error handling remains in the service, but ideally, the view handles null
+        if (selectedRecreationalVehicle == null) {
+            UIUtil.showErrorAlert("Edit Error", "No Vehicle Selected", "Please select a vehicle to edit.");
+            return;
+        }
+
+        EditVehicleDialog dialog = new EditVehicleDialog(selectedRecreationalVehicle);
+        Optional<RecreationalVehicle> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+            RecreationalVehicle updatedRecreationalVehicle = result.get();
+
+            DataHandler.saveRecreationalVehicle(Inventory.getInstance().getRecreationalVehicleList());
+
+            UIUtil.showInfoAlert("Vehicle Updated", "Success",
+                    updatedRecreationalVehicle.getModel() + " " + updatedRecreationalVehicle.getMake() + " has been successfully updated.");
         }
     }
 
@@ -67,28 +78,45 @@ public class InventoryService {
     // ──────────────────────────────────────────────────────
 
     public Gear handleAddGear() {
-        // Step 1: Simulate user input for new gear
-        String model = "Trekking Tent";
-        String type = "Shelter";
-        String capacity = "4 Person";
-        double dailyPrice = 150.00;
+        // Display the input form and collect data
+        EditGearDialog dialog = new EditGearDialog();
+        Optional<Gear> result = dialog.showAndWait();
 
-        // Check for cancellation (placeholder for a real dialog)
-        if (model == null) {
-            return null;
+        if (result.isPresent()) {
+            Gear newGearData = result.get();
+
+            // Create a new Vehicle object
+            Inventory inventory = Inventory.getInstance();
+
+            // Add to registry
+            inventory.addGear(newGearData);
+
+            // Show success confirmation
+            UIUtil.showInfoAlert("Gear Added", "Success",
+                    newGearData.getModel() + " has been successfully added.");
+            return newGearData;
+        }
+        // Cancel was clicked
+        return null;
+    }
+
+    public void handleEditGear(Gear selectedGear) {
+        if (selectedGear == null) {
+            UIUtil.showErrorAlert("Edit Error", "No Gear Selected", "Please select a gear item to edit.");
+            return;
         }
 
-        // Create a new Gear object
-        Inventory inventory = Inventory.getInstance();
-        Gear newGear = new Gear(model, type, capacity, dailyPrice);
+        EditGearDialog dialog = new EditGearDialog(selectedGear);
+        Optional<Gear> result = dialog.showAndWait();
 
-        // Add to registry
-        inventory.addGear(newGear);
+        if (result.isPresent()) {
+            Gear updatedGear = result.get();
 
-        // Show success confirmation
-        UIUtil.showInfoAlert("Gear Added", "Success", newGear.getModel() + " has been successfully added.");
-        // Return the newly created object for the UI view to display
-        return newGear;
+            DataHandler.saveGear(Inventory.getInstance().getGearList());
+
+            UIUtil.showInfoAlert("Gear Updated", "Success",
+                    updatedGear.getModel() + " has been successfully updated.");
+        }
     }
 
     public boolean handleRemoveGear(Gear selectedGear) {
