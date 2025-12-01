@@ -1,6 +1,6 @@
 /*
  * Dark Theme for Wigell Camping Rental UI
- * Inspired by the provided sleek, minimalist design.
+ * This file contains all global styles and dialog-specific overrides.
  */
 
 /* =========================== */
@@ -52,7 +52,7 @@
 }
 
 /* =========================== */
-/* --- Custom Title Bar (MODIFIED) --- */
+/* --- Custom Title Bar --- */
 /* =========================== */
 
 .custom-title-bar {
@@ -68,7 +68,7 @@
 
 .custom-title-bar .window-button {
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-accent-color; /* MODIFIED: Set default text color to golden accent */
+    -fx-text-fill: -fx-accent-color; /* Set default text color to golden accent */
     -fx-font-size: 1.2em;
     -fx-padding: 5 10;
     -fx-cursor: hand;
@@ -93,7 +93,7 @@
     -fx-background-color: -fx-color-background-secondary;
     -fx-prompt-text-fill: #999999;
     -fx-highlight-fill: -fx-accent-color;
-    -fx-highlight-text-fill: #ffffff;
+    -fx-highlight-text-fill: #212121;
     -fx-control-inner-background: -fx-color-background-secondary;
     -fx-text-fill: -fx-text-color-primary; /* Ensure text fill is defined here too */
     -fx-border-color: -fx-border-color-subtle;
@@ -155,12 +155,12 @@
 /* =========================== */
 .ikonli-font-icon {
     /* Setting the default icon color to the accent color (golden hue) */
-    -fx-fill: -fx-accent-color; /* MODIFIED: Now uses full accent color */
+    -fx-fill: -fx-accent-color; /* Now uses full accent color */
 }
 
 /* Ensure icons in HBox containers retain color */
 .createInputContainer .ikonli-font-icon {
-    -fx-fill: -fx-accent-color; /* MODIFIED: Set to full accent color */
+    -fx-fill: -fx-accent-color; /* Set to full accent color */
 }
 
 /* Icon inside Login Button */
@@ -169,7 +169,7 @@
 }
 
 /* =========================== */
-/* --- Alert Dialogs (DialogPane) --- */
+/* --- Alert Dialogs (General) --- */
 /* =========================== */
 
 /* Targets the main dialog background */
@@ -325,4 +325,97 @@
     /* Subtle vertical line separation */
     -fx-border-color: transparent -fx-border-color-subtle transparent transparent;
     -fx-padding: 8 10;
+}
+
+/* ==================================================== */
+/* --- DIALOG-SPECIFIC STYLES (Merged from dialogs.css) --- */
+/* ==================================================== */
+
+/* Target the main dialog pane container */
+.dialog-pane.add-entity-dialog {
+    -fx-padding: 0; /* Remove default dialog padding */
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 0 4; /* Thicker accent line */
+    -fx-background-radius: 4;
+}
+
+/* Header Text (e.g., "Enter the details...") */
+.dialog-pane.add-entity-dialog .header-panel .label {
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-fill: -fx-accent-color; /* Change text color to orange accent */
+    -fx-font-size: 1.1em; /* Slightly larger font size for emphasis */
+}
+
+/* Button Bar (Where Add/Cancel buttons live) */
+.dialog-pane .button-bar {
+    /* Match the overall dark tone */
+    -fx-background-color: derive(-fx-color-background-secondary, -10%);
+    -fx-padding: 10 15 10 15; /* Padding around the buttons */
+}
+
+/* Apply the accent style to the primary 'Add' button */
+.dialog-pane .button:default {
+    /* Style the default action button using the login-button look */
+    -fx-background-color: #d48d5b;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-color: #d48d5b;
+}
+
+.dialog-pane .button:default:hover {
+    -fx-background-color: #c27c4f;
+}
+
+/* General button styling for the dialog (e.g., Cancel button) */
+.dialog-pane .button {
+    -fx-background-color: #444444; /* Subtle background */
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #555555;
+}
+
+
+/* =========================== */
+/* --- GridPane Layout / Spacing (Dialog Forms) --- */
+/* =========================== */
+
+/* Target the Grid inside the DialogPane content area */
+.dialog-pane .content .grid-pane {
+    -fx-padding: 20px;
+    -fx-hgap: 15; /* Increased horizontal gap between label and field */
+    -fx-vgap: 20; /* Increased vertical gap between rows */
+}
+
+/* Label style for the Grid elements */
+.dialog-pane .grid-pane .label {
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 0 0; /* Ensures space to the right of the label */
+    -fx-text-fill: -fx-text-color-primary;
+}
+
+/* =========================== */
+/* --- ComboBox (Dialog Forms) --- */
+/* =========================== */
+
+/* Ensure ComboBox also adopts the dark style */
+.combo-box {
+    -fx-background-color: -fx-color-background-secondary;
+    -fx-border-color: -fx-border-color-subtle;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: -fx-text-color-primary;
+    -fx-background-color: -fx-color-background-secondary;
+}
+
+/* Style the arrow button */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: -fx-text-color-primary; /* White arrow */
 }

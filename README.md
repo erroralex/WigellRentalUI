@@ -1,6 +1,6 @@
 # 🏕️ Wigell Camping Management System
 
-This is a simple application designed for managing inventory and memberships for a camping gear and vehicle rental service. The program is built entirely using **Java 8** with **programmatic JavaFX** for the graphical user interface.
+This is a simple application designed for managing inventory and memberships for a camping member and vehicle rental service. The program is built entirely using **Java 8** with **programmatic JavaFX** for the graphical user interface.
 
 ---
 

@@ -1,10 +1,7 @@
 package com.nilsson.camping.ui;
 
 import com.nilsson.camping.app.UserSession;
-import com.nilsson.camping.ui.views.GearView;
-import com.nilsson.camping.ui.views.HomeView;
-import com.nilsson.camping.ui.views.VehicleView;
-import com.nilsson.camping.ui.views.MemberView;
+import com.nilsson.camping.ui.views.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -85,10 +82,17 @@ public class SideNavigation extends VBox {
             setActiveButton(btnMembers);
         });
 
+        // Rentals Button
+        Button btnRentals = createNavButton("Rentals", FontAwesome.PRODUCT_HUNT);
+        btnRentals.setOnAction(e -> {
+            rootLayout.setContent(new RentalView());
+            setActiveButton(btnRentals);
+        });
+
         // Profits Button
         Button btnProfits = createNavButton("Profits", FontAwesome.MONEY);
         btnProfits.setOnAction(e -> {
-            rootLayout.setContent(new MemberView());
+            rootLayout.setContent(new ProfitsView());
             setActiveButton(btnProfits);
         });
 
@@ -159,6 +163,7 @@ public class SideNavigation extends VBox {
                 btnMembers,
                 btnInventory,
                 inventorySubMenu,
+                btnRentals,
                 btnProfits,
                 btnLogout
         );

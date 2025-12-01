@@ -91,6 +91,44 @@ public class VehicleView extends VBox {
         recreationalVehicleData.addAll(recreationalVehicles);
     }
 
+    private void handleAddRecreationalVehicle() {
+        RecreationalVehicle newRecreationalVehicle = inventoryService.handleAddRecreationalVehicle();
+
+        if (newRecreationalVehicle != null) {
+            recreationalVehicleData.add(newRecreationalVehicle);
+        }
+    }
+
+    private void handleEditRecreationalVehicle() {
+        RecreationalVehicle selectedRecreationalVehicle = recreationalVehicleTable.getSelectionModel().getSelectedItem();
+
+        // 1. Check if an item is selected
+        if (selectedRecreationalVehicle == null) {
+            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required",
+                    "Please select a vehicle from the table to edit.");
+            return;
+        }
+
+        // 2. Delegate the editing task to the service layer.
+        // The service layer handles opening the dialog and updating the Gear object in memory.
+        inventoryService.handleEditRecreationalVehicle(selectedRecreationalVehicle);
+
+        // 3. Refresh the TableView.
+        // Since the selectedGear object was modified *in place* by the dialog
+        // and service (passed by reference), we just need to tell the table to refresh
+        // the display for that item.
+        refreshTable();
+    }
+
+    /**
+     * Utility method to force the TableView to redraw its content,
+     * specifically useful after an item in the ObservableList is modified.
+     */
+    private void refreshTable() {
+        recreationalVehicleTable.getColumns().get(0).setVisible(false);
+        recreationalVehicleTable.getColumns().get(0).setVisible(true);
+    }
+
     //Removing a vehicle, involving both the Service and the View UI update.
     private void handleRemoveRecreationalVehicle() {
         RecreationalVehicle selectedRecreationalVehicle = recreationalVehicleTable.getSelectionModel().getSelectedItem();
@@ -133,8 +171,7 @@ public class VehicleView extends VBox {
 
         Button btnEdit = new Button("Edit Vehicle");
         btnEdit.getStyleClass().add("action-button");
-        btnEdit.setOnAction(actionEvent -> inventoryService.handleEditRecreationalVehicle(
-                recreationalVehicleTable.getSelectionModel().getSelectedItem()));
+        btnEdit.setOnAction(actionEvent -> handleEditRecreationalVehicle());
 
         Button btnRemove = new Button("Remove Vehicle");
         btnRemove.getStyleClass().add("action-button");

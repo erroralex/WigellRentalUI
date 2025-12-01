@@ -1,8 +1,8 @@
 package com.nilsson.camping.model.registries;
 
 import com.nilsson.camping.data.DataHandler;
-import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.items.Gear;
+import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.items.Vehicle;
 
 import java.util.ArrayList;

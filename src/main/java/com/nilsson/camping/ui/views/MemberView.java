@@ -80,6 +80,36 @@ public class MemberView extends VBox {
         memberData.addAll(members);
     }
 
+    private void handleEditMember() {
+        Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
+
+        // 1. Check if an item is selected
+        if (selectedMember == null) {
+            UIUtil.showErrorAlert("No Item Selected", "Selection Required",
+                    "Please select an item from the table to edit.");
+            return;
+        }
+
+        // 2. Delegate the editing task to the service layer.
+        // The service layer handles opening the dialog and updating the Gear object in memory.
+        membershipService.handleEditMember(selectedMember);
+
+        // 3. Refresh the TableView.
+        // Since the selectedGear object was modified *in place* by the dialog
+        // and service (passed by reference), we just need to tell the table to refresh
+        // the display for that item.
+        refreshTable();
+    }
+
+    /**
+     * Utility method to force the TableView to redraw its content,
+     * specifically useful after an item in the ObservableList is modified.
+     */
+    private void refreshTable() {
+        memberTable.getColumns().get(0).setVisible(false);
+        memberTable.getColumns().get(0).setVisible(true);
+    }
+
     //Removing a member, involving both the Service and the View (UI update).
     private void handleRemoveMember() {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
