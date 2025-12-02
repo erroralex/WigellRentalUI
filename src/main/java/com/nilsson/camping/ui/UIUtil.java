@@ -1,15 +1,15 @@
 package com.nilsson.camping.ui;
 
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
-import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Optional;
@@ -20,20 +20,59 @@ import java.util.Optional;
  */
 public class UIUtil {
 
+    private static double xOffset = 0;
+    private static double yOffset = 0;
+
     private static final String CSS_PATH = "/dark-theme.css";
 
-    // Helper method to apply the custom dark theme to any Alert dialog.
-    private static void applyTheme(Alert alert) {
+    /**
+     * Applies the custom dark theme, removes the title bar (undecorated style),
+     * and adds drag functionality to any JavaFX Dialog or Alert.
+     *
+     * @param dialog The Dialog object to modify.
+     */
+    public static void applyDialogSetup(Dialog<?> dialog) {
         try {
-            // Applies CSS file to the dialog's root container (DialogPane)
+            DialogPane dialogPane = dialog.getDialogPane();
+
+            // Set Stage to UNDECORATED
+            Stage stage = (Stage) dialogPane.getScene().getWindow();
+            stage.initStyle(StageStyle.UNDECORATED);
+
+            // Apply CSS
             String cssUrl = UIUtil.class.getResource(CSS_PATH).toExternalForm();
-            alert.getDialogPane().getStylesheets().add(cssUrl);
+            dialogPane.getStylesheets().add(cssUrl);
+
+            // Apply custom style class
+            dialogPane.getStyleClass().add("add-entity-dialog");
+
+            // Add Drag Functionality
+            applyDragListeners(dialogPane, stage);
+
         } catch (Exception e) {
-            // Handle error if CSS file is not found
-            System.err.println("Could not load CSS stylesheet: " + CSS_PATH);
+            System.err.println("Could not load CSS stylesheet or apply dialog setup: " + CSS_PATH);
             e.printStackTrace();
         }
     }
+
+    private static void applyDragListeners(Node root, Stage stage) {
+        // Store the initial position when the mouse is pressed
+        root.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        // Move the stage when the mouse is dragged
+        root.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
+
+    // Helper method to apply the custom dark theme to any Alert dialog.
+        private static void applyTheme(Alert alert) {
+            applyDialogSetup(alert);
+        }
 
     /**
      * Shows a standard error alert dialog to the user.

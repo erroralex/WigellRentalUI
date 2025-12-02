@@ -93,28 +93,19 @@ public class GearView extends VBox {
     private void handleEditGear() {
         Gear selectedGear = gearTable.getSelectionModel().getSelectedItem();
 
-        // 1. Check if an item is selected
+        // Check if an item is selected
         if (selectedGear == null) {
             UIUtil.showErrorAlert("No Item Selected", "Selection Required",
                     "Please select an item from the table to edit.");
             return;
         }
-
-        // 2. Delegate the editing task to the service layer.
-        // The service layer handles opening the dialog and updating the Gear object in memory.
         inventoryService.handleEditGear(selectedGear);
 
-        // 3. Refresh the TableView.
-        // Since the selectedGear object was modified *in place* by the dialog
-        // and service (passed by reference), we just need to tell the table to refresh
-        // the display for that item.
+        // Refresh the TableView.
         refreshTable();
     }
 
-    /**
-     * Utility method to force the TableView to redraw its content,
-     * specifically useful after an item in the ObservableList is modified.
-     */
+    // Utility method to force the TableView to refresh its content
     private void refreshTable() {
         gearTable.getColumns().get(0).setVisible(false);
         gearTable.getColumns().get(0).setVisible(true);

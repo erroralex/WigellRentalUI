@@ -8,7 +8,7 @@ import java.util.*;
 public class MemberRegistry {
 
     private List<Member> membersList = new ArrayList<>();
-    // Tracks all used IDs for fast lookup and unique ID generation
+    // Tracks all used IDs for unique ID generation
     private Set<Integer> usedIDs = new HashSet<>();
 
     private MemberRegistry() {
@@ -43,11 +43,7 @@ public class MemberRegistry {
         return membersList;
     }
 
-    /**
-     * Adds a new member to the registry and updates the used ID set.
-     * Persistence (saving to file) should ideally happen here or be triggered from the service.
-     * @param member The member to add.
-     */
+    // Adds a new member to the registry and updates the used ID set.
     public void addMember(Member member) {
         membersList.add(member);
         // Ensure the ID of the new member is registered as used
@@ -55,13 +51,7 @@ public class MemberRegistry {
         DataHandler.saveMembers(this.membersList);
     }
 
-    /**
-     * Removes a specified Member object from the in-memory list and
-     * updates the used IDs set. Triggers persistence of the change.
-     * * This method fulfills the requirement for the MembershipService.
-     * * @param member The Member object to remove.
-     * @return true if the member was present and successfully removed, false otherwise.
-     */
+    // Removes a specified Member object from the in-memory list and updates the used IDs set.
     public boolean removeMember(Member member) {
         if (member == null) {
             return false;

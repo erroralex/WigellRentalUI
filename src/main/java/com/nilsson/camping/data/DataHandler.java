@@ -28,7 +28,7 @@ public class DataHandler {
             System.getProperty("user.dir") + "/src/main/resources/data/json/gear.json";
 
     // ──────────────────────────────────────────────────────
-    // Member Operations
+    //                      Member Operations
     // ──────────────────────────────────────────────────────
 
     // Load Members
@@ -68,7 +68,7 @@ public class DataHandler {
     }
 
     // ──────────────────────────────────────────────────────
-    // Vehicle Operations
+    //                  Vehicle Operations
     // ──────────────────────────────────────────────────────
 
     // Load Vehicles
@@ -108,7 +108,7 @@ public class DataHandler {
     }
 
     // ──────────────────────────────────────────────────────
-    // Gear Operations
+    //                  Gear Operations
     // ──────────────────────────────────────────────────────
 
     // Load Gear

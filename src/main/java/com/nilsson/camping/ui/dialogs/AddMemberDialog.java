@@ -1,6 +1,7 @@
 package com.nilsson.camping.ui.dialogs;
 
 import com.nilsson.camping.model.Member;
+import com.nilsson.camping.ui.UIUtil;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -9,10 +10,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-// Dialog for adding new Members
 public class AddMemberDialog extends Dialog<Member> {
 
     private final TextField firstNameField = new TextField();
@@ -27,13 +25,10 @@ public class AddMemberDialog extends Dialog<Member> {
         setTitle("Add New Member");
         setHeaderText("Enter the details for the new member.");
 
-        // Remove Title bar
-        Stage stage = (Stage) getDialogPane().getScene().getWindow();
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        // CSS
-        getDialogPane().getStylesheets().add(getClass().getResource("/dark-theme.css").toExternalForm());
-        getDialogPane().getStyleClass().add("add-entity-dialog");
+        // Apply theme and mouse-drag
+        this.setOnShowing(dialogEvent -> {
+            UIUtil.applyDialogSetup(this);
+        });
 
         ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
@@ -80,7 +75,7 @@ public class AddMemberDialog extends Dialog<Member> {
                         null
                 );
             }
-            //If Cancel is clicked
+            // If Cancel is clicked
             return null;
         });
     }

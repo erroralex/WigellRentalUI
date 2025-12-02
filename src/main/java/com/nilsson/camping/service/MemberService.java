@@ -1,15 +1,18 @@
 package com.nilsson.camping.service;
 
+import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
 import com.nilsson.camping.ui.UIUtil;
 import com.nilsson.camping.ui.dialogs.AddMemberDialog;
+import com.nilsson.camping.ui.dialogs.EditMemberDialog;
 
 import java.util.Optional;
 
-public class MembershipService {
+public class MemberService {
 
     public Member handleAddMember() {
+
         // Display the input form and collect data
         AddMemberDialog dialog = new AddMemberDialog();
         Optional<Member> result = dialog.showAndWait();
@@ -45,11 +48,21 @@ public class MembershipService {
 
     // Accept the Member object from the View
     public void handleEditMember(Member selectedMember) {
-        if (selectedMember != null) {
-            UIUtil.showInfoAlert("Edit Member", "Functionality Pending",
-                    "A dialog/form for editing member " + selectedMember.getFirstName() + " will be implemented here.");
-        } else {
-            // Error handling remains in the service, but ideally, the view handles null
+        if (selectedMember == null) {
+            UIUtil.showErrorAlert("Edit Error", "No Member Selected", "Please select a member to edit.");
+            return;
+        }
+
+        EditMemberDialog dialog = new EditMemberDialog(selectedMember);
+        Optional<Member> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+            Member updatedMember = result.get();
+
+            DataHandler.saveMembers(MemberRegistry.getInstance().getMembers());
+
+            UIUtil.showInfoAlert("Member Updated", "Success",
+                    updatedMember.getFirstName() + " " + updatedMember.getLastName() + " has been successfully updated.");
         }
     }
 
@@ -70,7 +83,6 @@ public class MembershipService {
             UIUtil.showInfoAlert("Member Removed", "Success",
                     selectedMember.getFirstName() + " " + selectedMember.getLastName() + " has been successfully removed.");
         } else {
-            // This might happen if the member exists in the UI but was somehow already removed from the registry
             UIUtil.showErrorAlert("Removal Error", "Error", "Could not find member in registry.");
         }
 

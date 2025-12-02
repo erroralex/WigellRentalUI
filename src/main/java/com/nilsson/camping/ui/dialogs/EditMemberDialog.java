@@ -1,6 +1,7 @@
 package com.nilsson.camping.ui.dialogs;
 
 import com.nilsson.camping.model.Member;
+import com.nilsson.camping.ui.UIUtil;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -9,10 +10,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-// Dialog for editing a Member
 public class EditMemberDialog extends Dialog<Member> {
 
     private final TextField firstNameField = new TextField();
@@ -25,10 +23,6 @@ public class EditMemberDialog extends Dialog<Member> {
 
     private final Member memberToEdit;
 
-    public EditMemberDialog() {
-        this(null);
-    }
-
     public EditMemberDialog(Member memberToEdit) {
 
         this.memberToEdit = memberToEdit;
@@ -36,13 +30,10 @@ public class EditMemberDialog extends Dialog<Member> {
         setTitle("Edit Member");
         setHeaderText("Enter the details for " + memberToEdit.getFirstName() + " " + memberToEdit.getLastName());
 
-        // Remove Title bar
-        Stage stage = (Stage) getDialogPane().getScene().getWindow();
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        // CSS
-        getDialogPane().getStylesheets().add(getClass().getResource("/dark-theme.css").toExternalForm());
-        getDialogPane().getStyleClass().add("add-entity-dialog");
+        // Apply theme and mouse-drag
+        this.setOnShowing(dialogEvent -> {
+            UIUtil.applyDialogSetup(this);
+        });
 
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().clear();
@@ -88,7 +79,7 @@ public class EditMemberDialog extends Dialog<Member> {
                 memberToEdit.setMembershipLevel(levelBox.getValue());
                 return memberToEdit;
             }
-            //If Cancel is clicked
+            // If Cancel is clicked
             return null;
         });
     }

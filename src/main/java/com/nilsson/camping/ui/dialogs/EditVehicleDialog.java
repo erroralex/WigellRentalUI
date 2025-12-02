@@ -1,6 +1,7 @@
 package com.nilsson.camping.ui.dialogs;
 
 import com.nilsson.camping.model.items.RecreationalVehicle;
+import com.nilsson.camping.ui.UIUtil;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -9,10 +10,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-// Dialog for adding new Gear
 public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
 
     private final TextField makeField = new TextField();
@@ -28,10 +26,6 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
 
     private final RecreationalVehicle recreationalVehicleToEdit;
 
-    public EditVehicleDialog() {
-        this(null);
-    }
-
     public EditVehicleDialog(RecreationalVehicle recreationalVehicleToEdit) {
 
         this.recreationalVehicleToEdit = recreationalVehicleToEdit;
@@ -40,13 +34,10 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
         setHeaderText("Enter the details for " + recreationalVehicleToEdit.getMake() + " " +
                 recreationalVehicleToEdit.getModel());
 
-        // Remove Title bar
-        Stage stage = (Stage) getDialogPane().getScene().getWindow();
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        // CSS
-        getDialogPane().getStylesheets().add(getClass().getResource("/dark-theme.css").toExternalForm());
-        getDialogPane().getStyleClass().add("add-entity-dialog");
+        // Apply theme and mouse-drag
+        this.setOnShowing(dialogEvent -> {
+            UIUtil.applyDialogSetup(this);
+        });
 
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         getDialogPane().getButtonTypes().clear();
@@ -114,7 +105,7 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
                 recreationalVehicleToEdit.setDailyPrice(Double.parseDouble(priceField.getText().trim()));
                 return recreationalVehicleToEdit;
             }
-            //If Cancel is clicked
+            // If Cancel is clicked
             return null;
         });
     }

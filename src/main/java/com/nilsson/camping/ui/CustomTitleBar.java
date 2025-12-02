@@ -21,7 +21,7 @@ public class CustomTitleBar extends HBox {
     private Label prefixLabel = new Label("Session Timer: ");
     private HBox timerContainer;
 
-    public CustomTitleBar(Stage stage) {
+    public CustomTitleBar(Stage primarystage) {
 
         // Apply CSS class
         this.getStyleClass().add("custom-title-bar");
@@ -55,11 +55,11 @@ public class CustomTitleBar extends HBox {
         // Window Controls (Buttons)
         Button minimizeBtn = new Button("—");
         minimizeBtn.getStyleClass().add("window-button");
-        minimizeBtn.setOnAction(e -> stage.setIconified(true));
+        minimizeBtn.setOnAction(e -> primarystage.setIconified(true));
 
         Button closeBtn = new Button("✕");
         closeBtn.getStyleClass().addAll("window-button", "window-close");
-        closeBtn.setOnAction(e -> stage.close());
+        closeBtn.setOnAction(e -> primarystage.close());
 
         // Add components: Title | Left Spacer | Timer Container (Centered) | Right Spacer | Controls
         this.getChildren().addAll(titleLabel, leftSpacer, timerContainer, rightSpacer, minimizeBtn, closeBtn);
@@ -72,8 +72,8 @@ public class CustomTitleBar extends HBox {
 
         // Move the stage based on mouse
         this.setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
+            primarystage.setX(event.getScreenX() - xOffset);
+            primarystage.setY(event.getScreenY() - yOffset);
         });
     }
 

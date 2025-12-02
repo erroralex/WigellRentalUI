@@ -9,10 +9,10 @@ import com.nilsson.camping.ui.RootLayout;
 import com.nilsson.camping.ui.views.LoginView;
 import com.nilsson.camping.ui.CustomTitleBar;
 
-/**
- * The main entry point for the JavaFX application.
- * Sets the stage to UNDECORATED to enable the use of a custom title bar.
- */
+//TODO
+// ──────────────────────────────────────────────────────
+//  The main entry point for the JavaFX application.
+// ──────────────────────────────────────────────────────
 public class MainApp extends Application {
 
     private static final int WIDTH = 1200;

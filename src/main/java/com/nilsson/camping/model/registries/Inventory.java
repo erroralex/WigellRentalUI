@@ -74,7 +74,7 @@ public class Inventory {
     }
 
     public boolean removeGear(Gear gear) {
-        // Call List.remove(), which returns true if the element was removed.
+
         boolean wasRemoved = this.gearList.remove(gear);
 
         if (wasRemoved) {

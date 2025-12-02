@@ -2,7 +2,7 @@ package com.nilsson.camping.ui.views;
 
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
-import com.nilsson.camping.service.MembershipService;
+import com.nilsson.camping.service.MemberService;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,11 +18,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import java.util.List;
 
+//TODO - Add searchfield for filtering using streams for Members
 public class MemberView extends VBox {
 
     private final TableView<Member> memberTable = new TableView<>();
     private final ObservableList<Member> memberData = FXCollections.observableArrayList();
-    private final MembershipService membershipService = new MembershipService();
+    private final MemberService memberService = new MemberService();
 
     public MemberView() {
 
@@ -83,34 +84,25 @@ public class MemberView extends VBox {
     private void handleEditMember() {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
-        // 1. Check if an item is selected
+        // Check if an item is selected
         if (selectedMember == null) {
             UIUtil.showErrorAlert("No Item Selected", "Selection Required",
                     "Please select an item from the table to edit.");
             return;
         }
+        memberService.handleEditMember(selectedMember);
 
-        // 2. Delegate the editing task to the service layer.
-        // The service layer handles opening the dialog and updating the Gear object in memory.
-        membershipService.handleEditMember(selectedMember);
-
-        // 3. Refresh the TableView.
-        // Since the selectedGear object was modified *in place* by the dialog
-        // and service (passed by reference), we just need to tell the table to refresh
-        // the display for that item.
+        // Refresh the TableView.
         refreshTable();
     }
 
-    /**
-     * Utility method to force the TableView to redraw its content,
-     * specifically useful after an item in the ObservableList is modified.
-     */
+    // Utility method to force the TableView to refresh its content
     private void refreshTable() {
         memberTable.getColumns().get(0).setVisible(false);
         memberTable.getColumns().get(0).setVisible(true);
     }
 
-    //Removing a member, involving both the Service and the View (UI update).
+    // Removing a member, involving both the Service and the View (UI update).
     private void handleRemoveMember() {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
@@ -126,7 +118,7 @@ public class MemberView extends VBox {
                 "Do you want to permanently remove " + selectedMember.getFirstName() + "?");
 
         if (confirmed) {
-            boolean wasRemovedFromRegistry = membershipService.removeMemberFromRegistry(selectedMember);
+            boolean wasRemovedFromRegistry = memberService.removeMemberFromRegistry(selectedMember);
             if (wasRemovedFromRegistry) {
                 memberData.remove(selectedMember);
             } else {
@@ -142,19 +134,17 @@ public class MemberView extends VBox {
         Button btnAdd = new Button("Add Member");
         btnAdd.getStyleClass().add("action-button");
         btnAdd.setOnAction(actionEvent -> {
-            Member newMember = membershipService.handleAddMember(); // Call the service
+            Member newMember = memberService.handleAddMember();
 
-            // Check if the member was successfully created and added (not null)
+            // Check if the member was successfully created and added
             if (newMember != null) {
-                // This is the key: adding to the ObservableList immediately updates the TableView.
                 memberData.add(newMember);
             }
         });
 
         Button btnEdit = new Button("Edit Member");
         btnEdit.getStyleClass().add("action-button");
-        btnEdit.setOnAction(actionEvent ->
-                membershipService.handleEditMember(memberTable.getSelectionModel().getSelectedItem()));
+        btnEdit.setOnAction(actionEvent -> handleEditMember());
 
         Button btnRemove = new Button("Remove Member");
         btnRemove.getStyleClass().add("action-button");

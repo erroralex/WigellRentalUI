@@ -5,6 +5,7 @@ import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.AddGearDialog;
 import com.nilsson.camping.ui.dialogs.EditGearDialog;
 import com.nilsson.camping.ui.dialogs.EditVehicleDialog;
 import com.nilsson.camping.ui.dialogs.AddVehicleDialog;
@@ -14,17 +15,17 @@ import java.util.Optional;
 public class InventoryService {
 
     // ──────────────────────────────────────────────────────
-    // Vehicle Operations
+    //                  Vehicle Operations
     // ──────────────────────────────────────────────────────
     public RecreationalVehicle handleAddRecreationalVehicle() {
+
         // Display the input form and collect data
         AddVehicleDialog dialog = new AddVehicleDialog();
         Optional<RecreationalVehicle> result = dialog.showAndWait();
 
         if (result.isPresent()) {
-            RecreationalVehicle newVehicleData = result.get();
 
-            // Create a new Vehicle object
+            RecreationalVehicle newVehicleData = result.get();
             Inventory inventory = Inventory.getInstance();
 
             // Add to registry
@@ -65,27 +66,24 @@ public class InventoryService {
             return false;
         }
 
-        // This method removes the item from the in-memory list AND calls DataHandler.saveRecreationalVehicle().
         Inventory.getInstance().removeRecreationalVehicle(selectedRecreationalVehicle);
-
-        // The UIUtil alert should ideally be called based on the result of the removal.
         UIUtil.showInfoAlert("Recreational Vehicle Removed", "Success", selectedRecreationalVehicle.getMake() + " " + selectedRecreationalVehicle.getModel() + " has been removed.");
         return true;
     }
 
     // ──────────────────────────────────────────────────────
-    // Gear Operations
+    //                  Gear Operations
     // ──────────────────────────────────────────────────────
 
     public Gear handleAddGear() {
+
         // Display the input form and collect data
-        EditGearDialog dialog = new EditGearDialog();
+        AddGearDialog dialog = new AddGearDialog();
         Optional<Gear> result = dialog.showAndWait();
 
         if (result.isPresent()) {
-            Gear newGearData = result.get();
 
-            // Create a new Vehicle object
+            Gear newGearData = result.get();
             Inventory inventory = Inventory.getInstance();
 
             // Add to registry
@@ -124,14 +122,11 @@ public class InventoryService {
             return false;
         }
 
-        // Call the Inventory registry's removal method.
         boolean wasRemoved = Inventory.getInstance().removeGear(selectedGear);
 
         if (wasRemoved) {
-            // Show success confirmation only if the removal was successful
             UIUtil.showInfoAlert("Gear Removed", "Success", selectedGear.getModel() + " has been successfully removed.");
         } else {
-            // Error handling if registry failed to remove
             UIUtil.showErrorAlert("Removal Error", "Registry Mismatch", "Could not find the selected gear in the inventory registry.");
         }
         return wasRemoved;

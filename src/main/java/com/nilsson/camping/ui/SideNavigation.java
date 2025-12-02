@@ -19,16 +19,9 @@ public class SideNavigation extends VBox {
     private final Stage primaryStage;
     private final Runnable onLogout;
 
-    // Hold reference to the currently active button for styling
     private Button activeButton;
-
-    // Container for sub-buttons (Vehicles and Gear)
     private final VBox inventorySubMenu;
-
-    // Reference to the angle icon on the Inventory button for rotation
     private FontIcon inventoryToggleIcon;
-
-    // Reference to the Inventory parent button
     private final Button btnInventory;
 
 
@@ -148,6 +141,8 @@ public class SideNavigation extends VBox {
         // Initially hide the sub-menu
         inventorySubMenu.setVisible(false);
         inventorySubMenu.setManaged(false);
+
+        //TODO Add collapsible Rental Menu RENTAL > Show Rentals & Return Item
 
         // Logout Button
         Button btnLogout = createNavButton("Logout", FontAwesome.SIGN_OUT);
