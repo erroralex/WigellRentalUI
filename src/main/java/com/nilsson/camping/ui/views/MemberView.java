@@ -6,12 +6,11 @@ import com.nilsson.camping.service.MemberService;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,8 +21,10 @@ import java.util.List;
 public class MemberView extends VBox {
 
     private final TableView<Member> memberTable = new TableView<>();
-    private final ObservableList<Member> memberData = FXCollections.observableArrayList();
+    private final ObservableList<Member> masterData = FXCollections.observableArrayList();
     private final MemberService memberService = new MemberService();
+    private final TextField searchField = new TextField();
+    private FilteredList<Member> filteredData;
 
     public MemberView() {
 
@@ -37,14 +38,18 @@ public class MemberView extends VBox {
         Label title = new Label("Member Management");
         title.getStyleClass().add("content-title");
 
+        // Search Field Setup
+        searchField.setPromptText("Search by Name, Level or ID...");
+        searchField.setMaxWidth(385);
+
         // TableView
+        loadMasterData();
         initializeTable();
-        loadMemberData();
 
         HBox buttonBar = createButtonBar();
 
         // Add all sections to the main VBox
-        this.getChildren().addAll(title, buttonBar, memberTable);
+        this.getChildren().addAll(title, buttonBar, searchField, memberTable);
     }
 
     @SuppressWarnings("unchecked")
@@ -71,14 +76,52 @@ public class MemberView extends VBox {
 
         // Add to table
         memberTable.getColumns().addAll(idCol, firstNameCol, lastNameCol, membershipCol);
-        memberTable.setItems(memberData);
+        memberTable.setItems(masterData);
         memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Filtering using Streams
+        // Wrap the master data in a FilteredList.
+        filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Set the filter predicate when the search field text changes.
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(member -> {
+                // If the search field is empty, display all members.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Check if search string matches
+                if (member.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (member.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (member.getMembershipLevel().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(member.getId()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                // No match found.
+                return false;
+            });
+        });
+
+        // Wrap the FilteredList in a SortedList to ensure sorting works with filtering.
+        SortedList<Member> sortedData = new SortedList<>(filteredData);
+
+        // Bind the SortedList's comparator to the TableView's comparator.
+        sortedData.comparatorProperty().bind(memberTable.comparatorProperty());
+
+        // Set the sorted data to the TableView.
+        memberTable.setItems(sortedData);
     }
 
     // Loads member data from the registry into the ObservableList.
-    private void loadMemberData() {
+    private void loadMasterData() {
         List<Member> members = MemberRegistry.getInstance().getMembers();
-        memberData.addAll(members);
+        masterData.addAll(members);
     }
 
     private void handleEditMember() {
@@ -120,13 +163,12 @@ public class MemberView extends VBox {
         if (confirmed) {
             boolean wasRemovedFromRegistry = memberService.removeMemberFromRegistry(selectedMember);
             if (wasRemovedFromRegistry) {
-                memberData.remove(selectedMember);
+                masterData.remove(selectedMember);
             } else {
                 UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The member could not be removed from the registry.");
             }
         }
     }
-
 
     // Container for Add, Edit, and Remove buttons.
     private HBox createButtonBar() {
@@ -138,7 +180,7 @@ public class MemberView extends VBox {
 
             // Check if the member was successfully created and added
             if (newMember != null) {
-                memberData.add(newMember);
+                masterData.add(newMember);
             }
         });
 

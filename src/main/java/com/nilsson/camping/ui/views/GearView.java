@@ -6,12 +6,11 @@ import com.nilsson.camping.service.InventoryService;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,8 +21,10 @@ import java.util.List;
 public class GearView extends VBox {
 
     private final TableView<Gear> gearTable = new TableView<>();
-    private final ObservableList<Gear> gearData = FXCollections.observableArrayList();
+    private final ObservableList<Gear> masterData = FXCollections.observableArrayList();
     private final InventoryService inventoryService = new InventoryService();
+    private final TextField searchField = new TextField();
+    private FilteredList<Gear> filteredData;
 
     public GearView() {
 
@@ -37,14 +38,18 @@ public class GearView extends VBox {
         Label title = new Label("Gear Management");
         title.getStyleClass().add("content-title");
 
+        // Search Field Setup
+        searchField.setPromptText("Search by Model or Type etc...");
+        searchField.setMaxWidth(315);
+
         // TableView
+        loadMasterData();
         initializeTable();
-        loadGearData();
 
         HBox buttonBar = createButtonBar();
 
         // Add all sections to the main VBox
-        this.getChildren().addAll(title, buttonBar, gearTable);
+        this.getChildren().addAll(title, buttonBar, searchField, gearTable);
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +60,7 @@ public class GearView extends VBox {
         modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
         modelCol.setPrefWidth(200);
 
-        // Occupants Column
+        // Type Column
         TableColumn<Gear, String> typeCol = new TableColumn<>("Type");
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         typeCol.setPrefWidth(150);
@@ -72,21 +77,59 @@ public class GearView extends VBox {
 
         // Add to table
         gearTable.getColumns().addAll(modelCol, typeCol, capacityCol, priceCol);
-        gearTable.setItems(gearData);
+        gearTable.setItems(masterData);
         gearTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Filtering using Streams
+        // Wrap the master data in a FilteredList.
+        filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Set the filter predicate when the search field text changes.
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(gear -> {
+                // If the search field is empty, display all gear.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Check if search string matches
+                if (gear.getModel().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (gear.getCapacity().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (gear.getType().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(gear.getDailyPrice()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                // No match found.
+                return false;
+            });
+        });
+
+        // Wrap the FilteredList in a SortedList to ensure sorting works with filtering.
+        SortedList<Gear> sortedData = new SortedList<>(filteredData);
+
+        // Bind the SortedList's comparator to the TableView's comparator.
+        sortedData.comparatorProperty().bind(gearTable.comparatorProperty());
+
+        // Set the sorted data to the TableView.
+        gearTable.setItems(sortedData);
     }
 
     // Load vehicle data from the registry into the ObservableList.
-    private void loadGearData() {
+    private void loadMasterData() {
         List<Gear> gearList = Inventory.getInstance().getGearList();
-        gearData.addAll(gearList);
+        masterData.addAll(gearList);
     }
 
     private void handleAddGear() {
         Gear newGear = inventoryService.handleAddGear();
 
         if (newGear != null) {
-            gearData.add(newGear);
+            masterData.add(newGear);
         }
     }
 
@@ -129,7 +172,7 @@ public class GearView extends VBox {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveGear(selectedGear);
 
             if (wasRemovedFromRegistry) {
-                gearData.remove(selectedGear);
+                masterData.remove(selectedGear);
             } else {
                 UIUtil.showErrorAlert("Removal Failed", "Operation Error",
                         "The item could not be removed from the registry.");

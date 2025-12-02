@@ -59,7 +59,7 @@
   "type" : "Tent",
   "capacity" : "2 people"
 }, {
-  "dailyPrice" : 30.0,
+  "dailyPrice" : 33.0,
   "model" : "Junior Hiker 15L",
   "type" : "Backpack",
   "capacity" : "15L"

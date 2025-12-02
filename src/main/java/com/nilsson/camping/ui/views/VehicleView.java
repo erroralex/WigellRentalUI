@@ -1,17 +1,17 @@
 package com.nilsson.camping.ui.views;
 
+import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.service.InventoryService;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,8 +22,10 @@ import java.util.List;
 public class VehicleView extends VBox {
 
     private final TableView<RecreationalVehicle> recreationalVehicleTable = new TableView<>();
-    private final ObservableList<RecreationalVehicle> recreationalVehicleData = FXCollections.observableArrayList();
+    private final ObservableList<RecreationalVehicle> masterData = FXCollections.observableArrayList();
     private final InventoryService inventoryService = new InventoryService();
+    private final TextField searchField = new TextField();
+    private FilteredList<RecreationalVehicle> filteredData;
 
     public VehicleView() {
 
@@ -37,14 +39,18 @@ public class VehicleView extends VBox {
         Label title = new Label("Vehicle Management");
         title.getStyleClass().add("content-title");
 
+        // Search Field Setup
+        searchField.setPromptText("Search by Make or Model etc...");
+        searchField.setMaxWidth(360);
+
         // TableView
+        loadMasterData();
         initializeTable();
-        loadVehicleData();
 
         HBox buttonBar = createButtonBar();
 
         // Add all sections to the main VBox
-        this.getChildren().addAll(title, buttonBar, recreationalVehicleTable);
+        this.getChildren().addAll(title, buttonBar, searchField, recreationalVehicleTable);
     }
 
     @SuppressWarnings("unchecked")
@@ -81,21 +87,63 @@ public class VehicleView extends VBox {
 
         // Add to table
         recreationalVehicleTable.getColumns().addAll(makeCol, modelCol, typeCol, yearCol, capacityCol, priceCol);
-        recreationalVehicleTable.setItems(recreationalVehicleData);
+        recreationalVehicleTable.setItems(masterData);
         recreationalVehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Filtering using Streams
+        // Wrap the master data in a FilteredList.
+        filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Set the filter predicate when the search field text changes.
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(recreationalVehicle -> {
+                // If the search field is empty, display all vehicles.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Check if search string matches
+                if (recreationalVehicle.getMake().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (recreationalVehicle.getModel().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (recreationalVehicle.getCapacity().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (recreationalVehicle.getYear().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (recreationalVehicle.getType().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(recreationalVehicle.getDailyPrice()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                // No match found.
+                return false;
+            });
+        });
+
+        // Wrap the FilteredList in a SortedList to ensure sorting works with filtering.
+        SortedList<RecreationalVehicle> sortedData = new SortedList<>(filteredData);
+
+        // Bind the SortedList's comparator to the TableView's comparator.
+        sortedData.comparatorProperty().bind(recreationalVehicleTable.comparatorProperty());
+
+        // Set the sorted data to the TableView.
+        recreationalVehicleTable.setItems(sortedData);
     }
 
     // Load vehicle data from the registry into the ObservableList.
-    private void loadVehicleData() {
+    private void loadMasterData() {
         List<RecreationalVehicle> recreationalVehicles = Inventory.getInstance().getRecreationalVehicleList();
-        recreationalVehicleData.addAll(recreationalVehicles);
+        masterData.addAll(recreationalVehicles);
     }
 
     private void handleAddRecreationalVehicle() {
         RecreationalVehicle newRecreationalVehicle = inventoryService.handleAddRecreationalVehicle();
 
         if (newRecreationalVehicle != null) {
-            recreationalVehicleData.add(newRecreationalVehicle);
+            masterData.add(newRecreationalVehicle);
         }
     }
 
@@ -139,7 +187,7 @@ public class VehicleView extends VBox {
         if (confirmed) {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveRecreationalVehicle(selectedRecreationalVehicle);
             if (wasRemovedFromRegistry) {
-                recreationalVehicleData.remove(selectedRecreationalVehicle);
+                masterData.remove(selectedRecreationalVehicle);
             } else {
                 UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The vehicle could not be " +
                         "removed from the registry.");
@@ -155,7 +203,7 @@ public class VehicleView extends VBox {
         btnAdd.setOnAction(actionEvent -> {
             RecreationalVehicle newVehicle = inventoryService.handleAddRecreationalVehicle();
             if (newVehicle != null) {
-                recreationalVehicleData.add(newVehicle);
+                masterData.add(newVehicle);
             }
         });
 
