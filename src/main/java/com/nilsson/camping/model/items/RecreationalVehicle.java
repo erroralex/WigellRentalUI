@@ -4,6 +4,7 @@ public class RecreationalVehicle extends Vehicle {
 
     private String capacity;
     private String type;
+    private boolean rented;
 
     public RecreationalVehicle() {
 
@@ -29,5 +30,13 @@ public class RecreationalVehicle extends Vehicle {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 }

@@ -54,7 +54,7 @@ public class InventoryService {
         if (result.isPresent()) {
             RecreationalVehicle updatedRecreationalVehicle = result.get();
 
-            DataHandler.saveRecreationalVehicle(Inventory.getInstance().getRecreationalVehicleList());
+            DataHandler.saveRecreationalVehicle(Inventory.getInstance().getAvailableRecreationalVehicleList());
 
             UIUtil.showInfoAlert("Vehicle Updated", "Success",
                     updatedRecreationalVehicle.getModel() + " " + updatedRecreationalVehicle.getMake() + " has been successfully updated.");
@@ -110,7 +110,7 @@ public class InventoryService {
         if (result.isPresent()) {
             Gear updatedGear = result.get();
 
-            DataHandler.saveGear(Inventory.getInstance().getGearList());
+            DataHandler.saveGear(Inventory.getInstance().getAvailableGearList());
 
             UIUtil.showInfoAlert("Gear Updated", "Success",
                     updatedGear.getModel() + " has been successfully updated.");
