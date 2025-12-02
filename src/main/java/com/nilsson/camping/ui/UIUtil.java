@@ -23,10 +23,8 @@ public class UIUtil {
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    private static final String CSS_PATH = "/dark-theme.css";
-
     /**
-     * Applies the custom dark theme, removes the title bar (undecorated style),
+     * Applies the custom theme (retrieved from RootLayout), removes the title bar (undecorated style),
      * and adds drag functionality to any JavaFX Dialog or Alert.
      *
      * @param dialog The Dialog object to modify.
@@ -39,9 +37,13 @@ public class UIUtil {
             Stage stage = (Stage) dialogPane.getScene().getWindow();
             stage.initStyle(StageStyle.UNDECORATED);
 
-            // Apply CSS
-            String cssUrl = UIUtil.class.getResource(CSS_PATH).toExternalForm();
-            dialogPane.getStylesheets().add(cssUrl);
+            // Apply the currently active CSS theme from the RootLayout
+            String cssUrl = RootLayout.getCurrentThemeUrl();
+            if (cssUrl != null) {
+                if (!dialogPane.getStylesheets().contains(cssUrl)) {
+                    dialogPane.getStylesheets().add(cssUrl);
+                }
+            }
 
             // Apply custom style class
             dialogPane.getStyleClass().add("add-entity-dialog");
@@ -50,7 +52,7 @@ public class UIUtil {
             applyDragListeners(dialogPane, stage);
 
         } catch (Exception e) {
-            System.err.println("Could not load CSS stylesheet or apply dialog setup: " + CSS_PATH);
+            System.err.println("Could not load CSS stylesheet or apply dialog setup.");
             e.printStackTrace();
         }
     }
@@ -69,16 +71,17 @@ public class UIUtil {
         });
     }
 
-    // Helper method to apply the custom dark theme to any Alert dialog.
-        private static void applyTheme(Alert alert) {
-            applyDialogSetup(alert);
-        }
+    // Helper method to apply the currently active theme to any Alert dialog.
+    private static void applyTheme(Alert alert) {
+        applyDialogSetup(alert);
+    }
 
     /**
      * Shows a standard error alert dialog to the user.
      * *
-     * @param title The title of the alert window.
-     * @param header The header text (main message).
+     *
+     * @param title   The title of the alert window.
+     * @param header  The header text (main message).
      * @param content The detailed content message.
      */
     public static void showErrorAlert(String title, String header, String content) {
@@ -95,8 +98,8 @@ public class UIUtil {
     /**
      * Shows an alert dialog containing the full stack trace of an exception.
      *
-     * @param title The title of the alert window.
-     * @param header The header text.
+     * @param title     The title of the alert window.
+     * @param header    The header text.
      * @param throwable The exception or throwable to display.
      */
     public static void showExceptionAlert(String title, String header, Throwable throwable) {
@@ -139,8 +142,8 @@ public class UIUtil {
     /**
      * Shows standard information alert dialog.
      *
-     * @param title The title of the alert window.
-     * @param header The header text.
+     * @param title   The title of the alert window.
+     * @param header  The header text.
      * @param content The detailed content message.
      */
     public static void showInfoAlert(String title, String header, String content) {
@@ -157,8 +160,8 @@ public class UIUtil {
     /**
      * Shows a confirmation dialog with OK and Cancel options.
      *
-     * @param title The title of the alert window.
-     * @param header The header text (main message).
+     * @param title   The title of the alert window.
+     * @param header  The header text (main message).
      * @param content The detailed content message.
      * @return true if the user clicks OK, false if the user clicks Cancel or closes the dialog.
      */
@@ -181,7 +184,8 @@ public class UIUtil {
     /**
      * Creates an HBox layout that pushes the main graphic (like a FontIcon) and the toggle icon
      * to the opposite sides of the button text space.
-     * @param mainGraphic The main icon.
+     *
+     * @param mainGraphic   The main icon.
      * @param toggleGraphic The indicator icon.
      * @return An HBox containing the graphics with a spacer in between.
      */

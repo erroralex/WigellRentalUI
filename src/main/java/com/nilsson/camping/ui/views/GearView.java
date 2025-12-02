@@ -81,7 +81,6 @@ public class GearView extends VBox {
         gearTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
-        // Wrap the master data in a FilteredList.
         filteredData = new FilteredList<>(masterData, p -> true);
 
         // Set the filter predicate when the search field text changes.
@@ -138,8 +137,7 @@ public class GearView extends VBox {
 
         // Check if an item is selected
         if (selectedGear == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required",
-                    "Please select an item from the table to edit.");
+            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select an item from the table to edit.");
             return;
         }
         inventoryService.handleEditGear(selectedGear);
@@ -158,15 +156,12 @@ public class GearView extends VBox {
         Gear selectedGear = gearTable.getSelectionModel().getSelectedItem();
 
         if (selectedGear == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required",
-                    "Please select a item from the table to remove.");
+            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select a item from the table to remove.");
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal",
-                "Are you sure?",
-                "Do you want to permanently remove " + selectedGear.getModel() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedGear.getModel() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveGear(selectedGear);
@@ -174,8 +169,7 @@ public class GearView extends VBox {
             if (wasRemovedFromRegistry) {
                 masterData.remove(selectedGear);
             } else {
-                UIUtil.showErrorAlert("Removal Failed", "Operation Error",
-                        "The item could not be removed from the registry.");
+                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The item could not be removed from the registry.");
             }
         }
     }

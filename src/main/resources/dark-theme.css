@@ -1,43 +1,48 @@
 /*
- * =======================================================
- * WIGELL CAMPING RENTAL UI - DARK THEME
+ * ===================================================================================
+ * WIGELL CAMPING UI - DARK THEME
+ * ===================================================================================
  *
- * This theme uses a dark gray palette (#212121) paired with
- * a subtle, warm golden/orange accent color (#e69d67).
- * =======================================================
+ * THEME PHILOSOPHY:
+ * This theme uses a dark, professional palette designed for long sessions.
+ *
+ * 1. BASE: A very dark primary gray (#212121) for the background.
+ * 2. CONTAINERS: A slightly lighter gray (#2c2c2c) is used for controls, panels, and fields.
+ * 3. ACCENT: A subtle, warm golden/orange (#e69d67) is used for highlights, focus, and primary branding.
+ * 4. CONTRAST: Text elements use an off-white color (#f0f0f0) for high readability.
  */
 
-/* =========================== */
-/* --- 1. COLOR PALETTE / GLOBAL VARIABLES --- */
-/* =========================== */
+/* ==================================================== */
+/* --- 1. COLOR PALETTE / GLOBAL VARIABLES (ROOT) --- */
+/* ==================================================== */
 .root {
-    /* Primary Base Colors */
-    -fx-background-color: #212121; /* Very Dark Gray (Primary Background) */
-    -fx-base: #212121; /* Core JavaFX base property */
+    /* Primary Background Colors */
+    -fx-background-color: #212121;
+    -fx-base: #212121;
 
-    /* Secondary UI Colors */
-    -fx-color-background-secondary: #2c2c2c; /* Slightly Lighter Dark Gray (Containers/Fields) */
-    -fx-border-color-subtle: #444444; /* Dark Gray for subtle borders/separators */
+    /* Secondary UI Colors (Used for Controls/Containers) */
+    -fx-color-background-secondary: #2c2c2c;
+    -fx-border-color-subtle: #444444;
 
     /* Text & Accent Colors */
-    -fx-text-color-primary: #f0f0f0; /* Off-White/Light Gray (Primary Text) */
-    -fx-accent-color: #e69d67; /* Golden/Orange (Main Accent for highlights, icons) */
+    -fx-text-color-primary: #f0f0f0;
+    -fx-accent-color: #e69d67;
 
     /* Global Typography */
     -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-font-size: 14px;
 }
 
-/* =========================== */
+/* ========================================= */
 /* --- 2. GLOBAL ELEMENTS & TYPOGRAPHY --- */
-/* =========================== */
+/* ========================================= */
 
-/* Standard Labels and General Text */
+/* Standard Text Fill for Labels and Input Text */
 .label, .text-field, .password-field, .text-area {
     -fx-text-fill: -fx-text-color-primary;
 }
 
-/* Application Title (in Sidebar) */
+/* Sidebar Application Title */
 .app-title {
     -fx-text-fill: -fx-accent-color;
     -fx-font-size: 1.2em;
@@ -45,20 +50,20 @@
     -fx-padding: 0 0 15 0;
 }
 
-/* Login View Title */
+/* Login Screen Header Title */
 .label.login-title {
     -fx-font-size: 2.2em;
     -fx-font-weight: bold;
 }
 
-/* Icons (General) */
+/* General Icon Styling */
 .ikonli-font-icon {
     -fx-fill: -fx-accent-color;
 }
 
-/* =========================== */
-/* --- 3. CUSTOM TITLE BAR --- */
-/* =========================== */
+/* ================================ */
+/* --- 3. CUSTOM WINDOW TITLE BAR --- */
+/* ================================ */
 
 .custom-title-bar {
     -fx-background-color: #1a1a1a;
@@ -67,16 +72,13 @@
 
 .custom-title-bar .title-label {
     -fx-text-fill: -fx-accent-color;
-    -fx-font-size: 1.0em;
     -fx-font-weight: bold;
 }
 
+/* Minimize/Maximize/Close buttons */
 .custom-title-bar .window-button {
     -fx-background-color: transparent;
     -fx-text-fill: -fx-accent-color;
-    -fx-font-size: 1.2em;
-    -fx-padding: 5 10;
-    -fx-cursor: hand;
 }
 
 .custom-title-bar .window-button:hover {
@@ -84,14 +86,15 @@
     -fx-text-fill: -fx-text-color-primary;
 }
 
+/* Specific Close Button Hover */
 .custom-title-bar .window-close:hover {
     -fx-background-color: #ff6666;
     -fx-text-fill: #ffffff;
 }
 
-/* =========================== */
-/* --- 4. INPUT FIELDS & CONTROLS --- */
-/* =========================== */
+/* =================================== */
+/* --- 4. INPUT FIELDS (TEXT, COMBO) --- */
+/* =================================== */
 
 .text-field, .password-field, .text-area, .date-picker, .combo-box {
     -fx-background-color: -fx-color-background-secondary;
@@ -103,39 +106,25 @@
     -fx-padding: 8 10;
 }
 
+/* Focus State (Highlight with Accent Color) */
 .text-field:focused, .password-field:focused, .text-area:focused {
     -fx-border-color: -fx-accent-color;
     -fx-background-color: #333333;
 }
 
-/* --- DatePicker & ComboBox Specific Styling --- */
-
-/* DatePicker text field */
-.date-picker .text-field {
-    -fx-border-color: transparent; /* Handled by the parent .date-picker */
-}
-
-/* DatePicker calendar icon button */
-.date-picker .arrow-button {
+/* DatePicker & ComboBox Arrows/Icons */
+.date-picker .arrow-button, .combo-box .arrow-button {
     -fx-background-color: transparent;
-    -fx-border-width: 0 0 0 1;
-    -fx-border-color: -fx-border-color-subtle;
 }
-
-.date-picker .arrow-button .arrow {
+.date-picker .arrow-button .arrow, .combo-box .arrow-button .arrow {
     -fx-background-color: -fx-text-color-primary;
 }
 
-/* ComboBox arrow */
-.combo-box .arrow-button .arrow {
-    -fx-background-color: -fx-text-color-primary;
-}
-
-/* ==================================== */
+/* ======================================== */
 /* --- 5. DATEPICKER CALENDAR POPUP --- */
-/* ==================================== */
+/* ======================================== */
 
-/* Overall Popup Container */
+/* Popup Container Styling */
 .date-picker-popup {
     -fx-background-color: -fx-color-background-secondary;
     -fx-base: -fx-color-background-secondary;
@@ -143,70 +132,42 @@
     -fx-border-width: 1;
 }
 
-/* Internal Calendar View Components */
-.date-picker-popup .month-view,
-.date-picker-popup .month-view .calendar-grid,
-.date-picker-popup .month-year-pane {
+/* Calendar Month View Backgrounds */
+.date-picker-popup .month-view, .date-picker-popup .month-year-pane, .date-picker-popup .calendar-cell {
     -fx-background-color: -fx-color-background-secondary;
-    -fx-base: -fx-color-background-secondary;
-}
-
-/* Month/Year Text Label */
-.date-picker-popup .month-year-pane .label {
-    -fx-text-fill: -fx-text-color-primary !important;
-}
-
-/* Day/Weekday Cells */
-.date-picker-popup .calendar-cell,
-.date-picker-popup .day-name-cell,
-.date-picker-popup .weekday-cell,
-.date-picker-popup .day-cell {
-    -fx-background-color: #2c2c2c;
     -fx-text-fill: -fx-text-color-primary;
 }
 
-/* Dates from adjacent months */
-.date-picker-popup .day-cell.previous-month,
-.date-picker-popup .day-cell.next-month {
+/* Dates from adjacent months (muted) */
+.date-picker-popup .day-cell.previous-month, .date-picker-popup .day-cell.next-month {
     -fx-text-fill: #666666;
 }
 
-/* Hover and Selected State */
+/* Hover State */
 .date-picker-popup .day-cell:hover {
     -fx-background-color: -fx-accent-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #212121; /* Dark text on bright background for contrast */
 }
 
+/* Selected Date */
 .date-picker-popup .date-cell:selected {
     -fx-background-color: -fx-accent-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #212121;
 }
 
-/* Today's date */
-.date-picker-popup .today {
-    -fx-font-weight: bold;
-    -fx-background-color: #383838;
-}
-
-/* --- Calendar Navigation Arrows --- */
-.date-picker-popup .spinner-button {
-    -fx-background-color: transparent !important;
-    /* Removed redundant opacity line from here */
-}
-
-/* Aggressive attempt to style the internal arrow graphic (keeps the style from previous attempt) */
+/* Calendar Navigation Arrows (Force Accent Color) */
 .date-picker-popup .spinner-button .arrow,
 .date-picker-popup .spinner-button .left-arrow,
 .date-picker-popup .spinner-button .right-arrow {
     -fx-background-color: -fx-accent-color !important;
     -fx-mark-color: -fx-accent-color !important;
     -fx-fill: -fx-accent-color !important;
-    -fx-opacity: 1.0 !important; /* Force the graphic itself to be visible at all times */
+    -fx-opacity: 1.0 !important;
 }
 
-/* =========================== */
+/* ========================= */
 /* --- 6. BUTTONS --- */
-/* =========================== */
+/* ========================= */
 .button {
     -fx-background-color: -fx-color-background-secondary;
     -fx-text-fill: -fx-text-color-primary;
@@ -218,29 +179,28 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.0, 0, 1);
 }
 
-/* Hover State (for non-default buttons) */
+/* General Button Hover */
 .button:hover {
     -fx-background-color: -fx-accent-color;
-    -fx-text-fill: #212121; /* Dark text on bright hover */
+    -fx-text-fill: #212121;
 }
 
-/* Login/Primary Accent Button */
+/* Primary/Login Accent Button */
 .login-button {
-    -fx-background-color: #d48d5b; /* Richer accent */
+    -fx-background-color: #d48d5b;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
 .login-button:hover {
-    -fx-background-color: #c27c4f; /* Darker accent on hover */
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #c27c4f;
 }
 
 .login-button .ikonli-font-icon {
-    -fx-fill: #ffffff; /* White icon for primary buttons */
+    -fx-fill: #ffffff;
 }
 
-/* Exit/Secondary Button */
+/* Secondary/Exit Button */
 .exit-button {
     -fx-background-color: #444444;
 }
@@ -250,23 +210,17 @@
     -fx-text-fill: -fx-text-color-primary;
 }
 
-/* Drop shadow for button text for depth */
-.button .text {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 2, 0.0, 1, 1);
-}
-
-
-/* =========================== */
+/* ============================ */
 /* --- 7. SIDE NAVIGATION --- */
-/* =========================== */
+/* ============================ */
 
-/* Active Navigation Button */
+/* Active Navigation Button (Accent Line) */
 .nav-button-active {
     -fx-background-color: derive(-fx-color-background-secondary, -10%);
     -fx-text-fill: -fx-accent-color;
     -fx-font-weight: bold;
     -fx-border-color: -fx-accent-color;
-    -fx-border-width: 0 0 0 3; /* Accent line on the left */
+    -fx-border-width: 0 0 0 3;
     -fx-padding: 8 15 8 12;
 }
 
@@ -286,19 +240,14 @@
     -fx-text-fill: -fx-text-color-primary;
 }
 
-/* Active Sub-Button (inherits main active style but adjusts padding) */
-.sub-nav-button.nav-button-active {
-    -fx-padding: 8 10 8 17;
-}
-
-/* Toggle icon for sub-menus */
+/* Toggle icon color */
 .nav-icon-toggle {
     -fx-fill: -fx-accent-color;
 }
 
-/* =========================== */
+/* ================================== */
 /* --- 8. TABLEVIEW / DATA GRIDS --- */
-/* =========================== */
+/* ================================== */
 
 .table-view {
     -fx-base: -fx-color-background-secondary;
@@ -310,7 +259,7 @@
     -fx-border-radius: 4;
 }
 
-/* Table Header */
+/* Table Header (Accent Border) */
 .table-view .column-header-background {
     -fx-background-color: #1e1e1e;
     -fx-border-color: -fx-accent-color;
@@ -331,10 +280,10 @@
     -fx-background-color: #242424;
 }
 
-/* Row Selection */
+/* Row Selection (Consistent Accent Highlight) */
 .table-row-cell:selected {
     -fx-background-color: derive(-fx-accent-color, -30%);
-    -fx-text-fill: #212121; /* Changed text to dark gray for high contrast */
+    -fx-text-fill: #212121;
 }
 
 /* Cell Separators */
@@ -343,9 +292,9 @@
     -fx-padding: 8 10;
 }
 
-/* =========================== */
+/* ============================ */
 /* --- 9. DIALOGS / MODALS --- */
-/* =========================== */
+/* ============================ */
 
 /* Main Dialog Pane */
 .dialog-pane {
@@ -354,24 +303,18 @@
     -fx-border-width: 0 0 0 2;
 }
 
-/* Dialog Header/Title Panel */
+/* Dialog Header */
 .dialog-pane .header-panel {
     -fx-background-color: #212121;
 }
 
-/* Dialog Header/Title Text */
 .dialog-pane .header-panel .label {
     -fx-font-weight: bold;
     -fx-text-fill: -fx-accent-color;
-    -fx-font-size: 1.1em;
 }
 
 /* Dialog Content and Labels */
-.dialog-pane .content {
-    -fx-text-fill: -fx-text-color-primary;
-}
-
-.dialog-pane .label {
+.dialog-pane .content, .dialog-pane .label {
     -fx-text-fill: -fx-text-color-primary;
 }
 
@@ -381,7 +324,7 @@
     -fx-padding: 10 15 10 15;
 }
 
-/* Default Action Button (e.g., 'Add' or 'Save') */
+/* Default Action Button in Dialogs */
 .dialog-pane .button:default {
     -fx-background-color: #d48d5b;
     -fx-text-fill: #ffffff;
@@ -390,12 +333,44 @@
 
 .dialog-pane .button:default:hover {
     -fx-background-color: #c27c4f;
-    -fx-text-fill: #ffffff;
 }
 
-/* Grid layout for forms */
-.dialog-pane .content .grid-pane {
-    -fx-padding: 20px;
-    -fx-hgap: 15;
-    -fx-vgap: 20;
+/* ================================== */
+/* --- 10. LISTVIEW (General & History) --- */
+/* ================================== */
+
+/* Main List View container */
+.history-list-view, .list-view {
+    -fx-base: -fx-color-background-secondary;
+    -fx-background-color: derive(-fx-color-background-secondary, -5%);
+    -fx-border-color: -fx-border-color-subtle;
+    -fx-border-width: 1;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}
+
+/* Individual list cells */
+.history-list-view .list-cell, .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-color-primary;
+    -fx-padding: 8 10;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Hover effect */
+.history-list-view .list-cell:filled:hover, .list-view .list-cell:filled:hover {
+    -fx-background-color: derive(-fx-color-background-secondary, 10%);
+}
+
+/* Selected state (Overrides default blue and uses Accent color) */
+.history-list-view .list-cell:selected, .list-view .list-cell:selected {
+    -fx-background-color: derive(-fx-accent-color, -30%);
+    -fx-text-fill: #212121; /* Dark text for max contrast */
+    -fx-border-color: -fx-accent-color;
+}
+
+/* Focused Selected state (Brighter Accent color) */
+.history-list-view .list-cell:selected:focused, .list-view .list-cell:selected:focused {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #212121;
 }

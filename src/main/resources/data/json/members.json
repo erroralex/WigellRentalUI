@@ -1,121 +1,156 @@
-[ {
-  "id" : 8519,
-  "firstName" : "Mikael",
-  "lastName" : "Persbrandt",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 2640,
-  "firstName" : "Peter",
-  "lastName" : "Forsberg",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 9173,
-  "firstName" : "Viktoria",
-  "lastName" : "Bernadotte",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 5028,
-  "firstName" : "Mia",
-  "lastName" : "Parnevik",
-  "membershipLevel" : "Student",
-  "history" : [ ]
-}, {
-  "id" : 3761,
-  "firstName" : "Kurt",
-  "lastName" : "Olsson",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 1495,
-  "firstName" : "Stellan",
-  "lastName" : "Skarsgård",
-  "membershipLevel" : "Student",
-  "history" : [ ]
-}, {
-  "id" : 4832,
-  "firstName" : "Robyn",
-  "lastName" : "Carlsson",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 7306,
-  "firstName" : "Zlatan",
-  "lastName" : "Ibrahimović",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 6924,
-  "firstName" : "Alicia",
-  "lastName" : "Vikander",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 1057,
-  "firstName" : "Felix",
-  "lastName" : "Kjellberg",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 3588,
-  "firstName" : "Malin",
-  "lastName" : "Åkerman",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 9211,
-  "firstName" : "Björn",
-  "lastName" : "Skifs",
-  "membershipLevel" : "Student",
-  "history" : [ ]
-}, {
-  "id" : 5703,
-  "firstName" : "Noel",
-  "lastName" : "Floren",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 2049,
-  "firstName" : "Sarah",
-  "lastName" : "Sjöström",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 7180,
-  "firstName" : "Joel",
-  "lastName" : "Kinnaman",
-  "membershipLevel" : "Student",
-  "history" : [ ]
-}, {
-  "id" : 4355,
-  "firstName" : "Carola",
-  "lastName" : "Häggkvist",
-  "membershipLevel" : "Standard",
-  "history" : [ ]
-}, {
-  "id" : 8907,
-  "firstName" : "Danny",
-  "lastName" : "Saucedo",
-  "membershipLevel" : "Student",
-  "history" : [ ]
-}, {
-  "id" : 6622,
-  "firstName" : "Markoolio",
-  "lastName" : "Lehtosalo",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 1334,
-  "firstName" : "Tomas",
-  "lastName" : "Wigell",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-}, {
-  "id" : 9846,
-  "firstName" : "Avicii",
-  "lastName" : "Bergling",
-  "membershipLevel" : "Premium",
-  "history" : [ ]
-} ]
+[
+  {
+    "id": 8519,
+    "firstName": "Mikael",
+    "lastName": "Persbrandt",
+    "membershipLevel": "Premium",
+    "history": [
+      "Rented Vehicle: Adria Coral Motorhome (1001) for 7 days, starting 2025-11-20",
+      "Rented Gear: Expedition Backpack 80L (1011) for 3 days, starting 2025-12-04"
+    ]
+  },
+  {
+    "id": 2640,
+    "firstName": "Peter",
+    "lastName": "Forsberg",
+    "membershipLevel": "Standard",
+    "history": [
+      "Rented Gear: Family Tent 6P (1002) for 3 days, starting 2025-11-25",
+      "Rented Gear: Portable Cooler Box (1012) for 2 days, starting 2025-12-04"
+    ]
+  },
+  {
+    "id": 9173,
+    "firstName": "Viktoria",
+    "lastName": "Bernadotte",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 5028,
+    "firstName": "Mia",
+    "lastName": "Parnevik",
+    "membershipLevel": "Student",
+    "history": [
+      "Rented Vehicle: California Ocean Campervan (1004) for 14 days, starting 2025-11-29"
+    ]
+  },
+  {
+    "id": 3761,
+    "firstName": "Kurt",
+    "lastName": "Olsson",
+    "membershipLevel": "Standard",
+    "history": [
+      "Rented Gear: Kayaking Kit Single (1005) for 5 days, starting 2025-11-30",
+      "Rented Gear: Electric Scooter (1017) for 10 days, starting 2025-12-07"
+    ]
+  },
+  {
+    "id": 1495,
+    "firstName": "Stellan",
+    "lastName": "Skarsgård",
+    "membershipLevel": "Student",
+    "history": [
+      "Rented Gear: Mountain Bike Pro-X (1006) for 2 days, starting 2025-12-01"
+    ]
+  },
+  {
+    "id": 4832,
+    "firstName": "Robyn",
+    "lastName": "Carlsson",
+    "membershipLevel": "Premium",
+    "history": [
+      "Rented Gear: Portable Power Station 1000W (1007) for 7 days, starting 2025-12-01",
+      "Rented Gear: Camping Chair Comfort (1015) for 5 days, starting 2025-12-06"
+    ]
+  },
+  {
+    "id": 7306,
+    "firstName": "Zlatan",
+    "lastName": "Ibrahimović",
+    "membershipLevel": "Premium",
+    "history": [
+      "Rented Vehicle: Tucson 2024 SUV (1008) for 30 days, starting 2025-12-02",
+      "Rented Vehicle: Adria Coral Motorhome (1013) for 7 days, starting 2025-12-05"
+    ]
+  },
+  {
+    "id": 1057,
+    "firstName": "Felix",
+    "lastName": "Kjellberg",
+    "membershipLevel": "Premium",
+    "history": [
+      "Rented Gear: Climbing Harness Deluxe (1010) for 1 days, starting 2025-12-03"
+    ]
+  },
+  {
+    "id": 3588,
+    "firstName": "Malin",
+    "lastName": "Åkerman",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 9211,
+    "firstName": "Björn",
+    "lastName": "Skifs",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 5703,
+    "firstName": "Noel",
+    "lastName": "Floren",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 2049,
+    "firstName": "Sarah",
+    "lastName": "Sjöström",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 7180,
+    "firstName": "Joel",
+    "lastName": "Kinnaman",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 4355,
+    "firstName": "Carola",
+    "lastName": "Häggkvist",
+    "membershipLevel": "Standard",
+    "history": []
+  },
+  {
+    "id": 8907,
+    "firstName": "Danny",
+    "lastName": "Saucedo",
+    "membershipLevel": "Student",
+    "history": []
+  },
+  {
+    "id": 6622,
+    "firstName": "Markoolio",
+    "lastName": "Lehtosalo",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 1334,
+    "firstName": "Tomas",
+    "lastName": "Wigell",
+    "membershipLevel": "Premium",
+    "history": []
+  },
+  {
+    "id": 9846,
+    "firstName": "Avicii",
+    "lastName": "Bergling",
+    "membershipLevel": "Premium",
+    "history": []
+  }
+]

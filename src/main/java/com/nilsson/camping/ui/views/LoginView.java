@@ -80,7 +80,11 @@ public class LoginView extends VBox {
         Button exitButton = new Button("Exit");
         exitButton.getStyleClass().add("exit-button");
         exitButton.setMaxWidth(100);
-        exitButton.setOnAction(e -> primaryStage.close());
+        exitButton.setOnAction(e -> {
+            // Perform UserSession cleanup before closing
+            UserSession.logout();
+            primaryStage.close();
+        });
         exitButton.setGraphic(new FontIcon(FontAwesome.POWER_OFF));
 
         // Add components to the VBox
@@ -160,7 +164,8 @@ public class LoginView extends VBox {
 
     /**
      * Helper method to wrap a TextField/PasswordField and a FontIcon inside an HBox.
-     * @param field The input control.
+     *
+     * @param field    The input control.
      * @param iconCode The Ikonli icon code.
      * @return An HBox containing the icon and the input field.
      */

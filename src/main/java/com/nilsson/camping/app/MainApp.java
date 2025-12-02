@@ -1,5 +1,6 @@
 package com.nilsson.camping.app;
 
+import com.nilsson.camping.service.SessionTimerService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,14 +10,15 @@ import com.nilsson.camping.ui.RootLayout;
 import com.nilsson.camping.ui.views.LoginView;
 import com.nilsson.camping.ui.CustomTitleBar;
 
-//TODO
-// ──────────────────────────────────────────────────────
-//  The main entry point for the JavaFX application.
-// ──────────────────────────────────────────────────────
+/**
+ * The main entry point for the JavaFX application.
+ */
 public class MainApp extends Application {
 
     private static final int WIDTH = 1200;
     private static final int HEIGHT = 800;
+
+    private SessionTimerService sessionTimerService;
 
     @Override
     public void start(Stage primaryStage) {
@@ -27,20 +29,35 @@ public class MainApp extends Application {
             RootLayout rootLayout;
             BorderPane loginWrapper;
 
-            // Custom Title Bar
-            CustomTitleBar customTitleBar = new CustomTitleBar(primaryStage);
+            // Custom Title Bar - Pass the Runnable for 'X' button
+            CustomTitleBar customTitleBar = new CustomTitleBar(primaryStage, () -> {
+
+                // Stop the Timer Thread
+                if (sessionTimerService != null) {
+                    sessionTimerService.stop();
+                }
+                // Log out the user
+                UserSession.logout();
+            });
+
+            // Instantiate Session Timer
+            sessionTimerService = new SessionTimerService(customTitleBar);
 
             // Static UserSession/TimerService
             UserSession.initialize(customTitleBar);
 
+
+            // onLogout Runnable - Stops the timer cleanly
             Runnable onLogout = () -> {
                 // Ensure the timer is stopped and reset when logging out
+                if (sessionTimerService != null) {
+                    sessionTimerService.stop();
+                }
                 UserSession.logout();
 
                 LoginView newLoginView = new LoginView(primaryStage, null);
-
                 BorderPane newLoginWrapper = new BorderPane();
-                // Use the single CustomTitleBar instance for the new login screen
+
                 newLoginWrapper.setTop(customTitleBar);
                 newLoginWrapper.setCenter(newLoginView);
 
@@ -49,6 +66,7 @@ public class MainApp extends Application {
             };
 
             rootLayout = new RootLayout(primaryStage, onLogout, customTitleBar);
+            
             // The LoginView gets the RootLayout instance it will switch to
             LoginView loginView = new LoginView(primaryStage, rootLayout);
 

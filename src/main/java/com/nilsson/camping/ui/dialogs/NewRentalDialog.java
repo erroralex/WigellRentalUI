@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
         setTitle("New Rental");
         setHeaderText("Choose member, item and rental period.");
 
-        // Theme / drag support
+        // Theme/drag support
         this.setOnShowing(event -> UIUtil.applyDialogSetup(this));
 
         ButtonType createButtonType = new ButtonType("Create Rental", ButtonBar.ButtonData.OK_DONE);
@@ -40,13 +39,13 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
 
         GridPane grid = createGridPane();
 
-        // Member combo
+        // Member
         List<Member> members = MemberRegistry.getInstance().getMembers();
         memberBox.getItems().addAll(members);
         memberBox.setMaxWidth(Double.MAX_VALUE);
         memberBox.setPromptText("Select member");
 
-        // Show member nicely
+        // Show member
         memberBox.setCellFactory(cb -> new ListCell<Member>() {
             @Override
             protected void updateItem(Member item, boolean empty) {
@@ -65,20 +64,19 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
         itemTypeBox.setValue(TYPE_GEAR);
         itemTypeBox.setMaxWidth(Double.MAX_VALUE);
 
-        // Item combos (start as gear)
+        // Item combos
         loadAvailableGear();
         loadAvailableVehicles();
 
         gearBox.setMaxWidth(Double.MAX_VALUE);
         vehicleBox.setMaxWidth(Double.MAX_VALUE);
 
-        // How to display items
+        // Display items
         gearBox.setCellFactory(cb -> new ListCell<Gear>() {
             @Override
             protected void updateItem(Gear item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty || item == null ? null :
-                        item.getModel() + " (" + item.getType() + ")");
+                setText(empty || item == null ? null : item.getModel() + " (" + item.getType() + ")");
             }
         });
         gearBox.setButtonCell(gearBox.getCellFactory().call(null));
@@ -87,8 +85,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
             @Override
             protected void updateItem(RecreationalVehicle item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty || item == null ? null :
-                        item.getMake() + " " + item.getModel() + " (" + item.getType() + ")");
+                setText(empty || item == null ? null : item.getMake() + " " + item.getModel() + " (" + item.getType() + ")");
             }
         });
         vehicleBox.setButtonCell(vehicleBox.getCellFactory().call(null));
@@ -126,11 +123,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
 
         // Enable/disable button
         Button createButton = (Button) getDialogPane().lookupButton(createButtonType);
-        createButton.disableProperty().bind(
-                memberBox.valueProperty().isNull()
-                        .or(startDatePicker.valueProperty().isNull())
-                        .or(daysField.textProperty().isEmpty())
-        );
+        createButton.disableProperty().bind(memberBox.valueProperty().isNull().or(startDatePicker.valueProperty().isNull()).or(daysField.textProperty().isEmpty()));
 
         setResultConverter(dialogButton -> {
             if (dialogButton == createButtonType) {
@@ -143,15 +136,13 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 if (TYPE_GEAR.equals(type)) {
                     gear = gearBox.getValue();
                     if (gear == null) {
-                        UIUtil.showErrorAlert("Missing Item", "No Gear Selected",
-                                "Please select a gear item to rent.");
+                        UIUtil.showErrorAlert("Missing Item", "No Gear Selected", "Please select a gear item to rent.");
                         return null;
                     }
                 } else {
                     vehicle = vehicleBox.getValue();
                     if (vehicle == null) {
-                        UIUtil.showErrorAlert("Missing Item", "No Vehicle Selected",
-                                "Please select a vehicle to rent.");
+                        UIUtil.showErrorAlert("Missing Item", "No Vehicle Selected", "Please select a vehicle to rent.");
                         return null;
                     }
                 }
@@ -163,18 +154,11 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                         throw new NumberFormatException("days must be > 0");
                     }
                 } catch (NumberFormatException ex) {
-                    UIUtil.showErrorAlert("Invalid Days", "Input Error",
-                            "Please enter a positive whole number for days.");
+                    UIUtil.showErrorAlert("Invalid Days", "Input Error", "Please enter a positive whole number for days.");
                     return null;
                 }
 
-                return new NewRentalResult(
-                        member,
-                        gear,
-                        vehicle,
-                        startDatePicker.getValue(),
-                        days
-                );
+                return new NewRentalResult(member, gear, vehicle, startDatePicker.getValue(), days);
             }
             return null;
         });
@@ -200,14 +184,10 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
     }
 
     private void loadAvailableGear() {
-        gearBox.getItems().setAll(
-                Inventory.getInstance().getAvailableGearList()
-        );
+        gearBox.getItems().setAll(Inventory.getInstance().getAvailableGearList());
     }
 
     private void loadAvailableVehicles() {
-        vehicleBox.getItems().setAll(
-                Inventory.getInstance().getAvailableRecreationalVehicleList()
-        );
+        vehicleBox.getItems().setAll(Inventory.getInstance().getAvailableRecreationalVehicleList());
     }
 }

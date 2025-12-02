@@ -7,8 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -23,7 +24,7 @@ public class SideNavigation extends VBox {
     private final VBox inventorySubMenu;
     private FontIcon inventoryToggleIcon;
     private final Button btnInventory;
-
+    private FontIcon themeIcon;
 
     public SideNavigation(RootLayout rootLayout, Stage primaryStage, Runnable onLogout) {
         this.rootLayout = rootLayout;
@@ -142,7 +143,33 @@ public class SideNavigation extends VBox {
         inventorySubMenu.setVisible(false);
         inventorySubMenu.setManaged(false);
 
-        //TODO Add collapsible Rental Menu RENTAL > Show Rentals & Return Item
+        // ──────────────────────────────────────────────────────
+        // Spacer for Bottom Alignment
+        // ──────────────────────────────────────────────────────
+
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS); // This pushes everything below it to the bottom
+
+        // ──────────────────────────────────────────────────────
+        // Theme Toggle Button
+        // ──────────────────────────────────────────────────────
+
+        // Start in dark mode
+        this.themeIcon = new FontIcon(FontAwesome.SUN_O);
+        Button btnThemeToggle = createNavButton("Toggle Light-mode", this.themeIcon);
+
+        btnThemeToggle.setOnAction(e -> {
+            boolean isNowDark = rootLayout.toggleTheme();
+            if (isNowDark) {
+                // Dark mode
+                this.themeIcon.setIconLiteral(FontAwesome.SUN_O.getDescription());
+                btnThemeToggle.setText("Toggle Light-mode");
+            } else {
+                // Light mode
+                this.themeIcon.setIconLiteral(FontAwesome.MOON_O.getDescription());
+                btnThemeToggle.setText("Toggle Dark-mode");
+            }
+        });
 
         // Logout Button
         Button btnLogout = createNavButton("Logout", FontAwesome.SIGN_OUT);
@@ -152,16 +179,8 @@ public class SideNavigation extends VBox {
             onLogout.run();
         });
 
-        // Add components to the VBox
-        this.getChildren().addAll(
-                btnHome,
-                btnMembers,
-                btnInventory,
-                inventorySubMenu,
-                btnRentals,
-                btnProfits,
-                btnLogout
-        );
+        // Add to VBox
+        this.getChildren().addAll(btnHome, btnMembers, btnInventory, inventorySubMenu, btnRentals, btnProfits, spacer, btnThemeToggle, btnLogout);
 
         // Set initial active button
         setActiveButton(btnHome);
@@ -188,8 +207,26 @@ public class SideNavigation extends VBox {
         return btn;
     }
 
-    /** Helper to create the toggle button (Inventory).
+    // Overloaded helper to create a standard navigation button using an existing FontIcon instance
+    private Button createNavButton(String text, FontIcon icon) {
+        Button btn = new Button(text);
+
+        icon.setIconSize(20);
+        icon.getStyleClass().add("nav-icon");
+
+        btn.setGraphic(icon);
+
+        btn.getStyleClass().add("nav-button");
+        btn.setMaxWidth(Double.MAX_VALUE);
+        btn.setAlignment(Pos.CENTER_LEFT);
+        btn.setGraphicTextGap(10);
+        return btn;
+    }
+
+    /**
+     * Helper to create the toggle button (Inventory).
      * It combines the main icon with an arrow toggle indicator.
+     *
      * @param toggleIcon The FontIcon instance used for the angle indicator.
      */
     private Button createToggleNavButton(String text, Ikon mainIconCode, FontIcon toggleIcon) {

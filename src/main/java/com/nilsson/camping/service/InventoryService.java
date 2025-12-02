@@ -40,7 +40,6 @@ public class InventoryService {
         return null;
     }
 
-
     // Accept the Vehicle object from the View
     public void handleEditRecreationalVehicle(RecreationalVehicle selectedRecreationalVehicle) {
         if (selectedRecreationalVehicle == null) {

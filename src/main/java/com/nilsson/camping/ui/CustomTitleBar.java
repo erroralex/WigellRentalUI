@@ -20,8 +20,10 @@ public class CustomTitleBar extends HBox {
     public Label timeDisplayLabel = new Label("00:00:00");
     private Label prefixLabel = new Label("Session Timer: ");
     private HBox timerContainer;
+    private final Runnable onExitCleanup;
 
-    public CustomTitleBar(Stage primarystage) {
+    public CustomTitleBar(Stage primarystage, Runnable onExitCleanup) {
+        this.onExitCleanup = onExitCleanup;
 
         // Apply CSS class
         this.getStyleClass().add("custom-title-bar");
@@ -47,7 +49,6 @@ public class CustomTitleBar extends HBox {
         timerContainer.setVisible(false);
         timerContainer.setManaged(false);
 
-
         // HBox spacer to balance the layout and push window controls to the right
         HBox rightSpacer = new HBox();
         HBox.setHgrow(rightSpacer, Priority.ALWAYS);
@@ -59,7 +60,13 @@ public class CustomTitleBar extends HBox {
 
         Button closeBtn = new Button("✕");
         closeBtn.getStyleClass().addAll("window-button", "window-close");
-        closeBtn.setOnAction(e -> primarystage.close());
+        closeBtn.setOnAction(e -> {
+            // Execute the cleanup logic
+            if (this.onExitCleanup != null) {
+                this.onExitCleanup.run();
+            }
+            primarystage.close();
+        });
 
         // Add components: Title | Left Spacer | Timer Container (Centered) | Right Spacer | Controls
         this.getChildren().addAll(titleLabel, leftSpacer, timerContainer, rightSpacer, minimizeBtn, closeBtn);
@@ -79,10 +86,10 @@ public class CustomTitleBar extends HBox {
 
     /**
      * Toggles the visibility of the session timer container.
+     *
      * @param visible true to show the timer, false to hide it.
      */
     public void setTimerVisible(boolean visible) {
-        // Must be run on the JavaFX application thread
         javafx.application.Platform.runLater(() -> {
             timerContainer.setVisible(visible);
             timerContainer.setManaged(visible);

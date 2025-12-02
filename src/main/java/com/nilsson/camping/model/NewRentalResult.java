@@ -2,7 +2,6 @@ package com.nilsson.camping.model;
 
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.items.RecreationalVehicle;
-
 import java.time.LocalDate;
 
 public class NewRentalResult {
@@ -12,11 +11,7 @@ public class NewRentalResult {
     private final LocalDate startDate;
     private final int days;
 
-    public NewRentalResult(Member member,
-                           Gear gear,
-                           RecreationalVehicle vehicle,
-                           LocalDate startDate,
-                           int days) {
+    public NewRentalResult(Member member, Gear gear, RecreationalVehicle vehicle, LocalDate startDate, int days) {
         this.member = member;
         this.gear = gear;
         this.vehicle = vehicle;
@@ -30,4 +25,3 @@ public class NewRentalResult {
     public LocalDate getStartDate() { return startDate; }
     public int getDays() { return days; }
 }
-

@@ -4,6 +4,7 @@ import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
 import com.nilsson.camping.service.MemberService;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.HistoryDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+
 import java.util.List;
 
 public class MemberView extends VBox {
@@ -79,7 +81,6 @@ public class MemberView extends VBox {
         memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
-        // Wrap the master data in a FilteredList.
         filteredData = new FilteredList<>(masterMemberData, p -> true);
 
         // Set the filter predicate when the search field text changes.
@@ -128,8 +129,7 @@ public class MemberView extends VBox {
 
         // Check if an item is selected
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required",
-                    "Please select an item from the table to edit.");
+            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select an item from the table to edit.");
             return;
         }
         memberService.handleEditMember(selectedMember);
@@ -149,15 +149,12 @@ public class MemberView extends VBox {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("No Member Selected", "Selection Required",
-                    "Please select a member from the table to remove.");
+            UIUtil.showErrorAlert("No Member Selected", "Selection Required", "Please select a member from the table to remove.");
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal",
-                "Are you sure?",
-                "Do you want to permanently remove " + selectedMember.getFirstName() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedMember.getFirstName() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = memberService.removeMemberFromRegistry(selectedMember);
@@ -167,6 +164,20 @@ public class MemberView extends VBox {
                 UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The member could not be removed from the registry.");
             }
         }
+    }
+
+    private void handleShowHistory() {
+        Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
+
+        // 1. Check if a member is selected
+        if (selectedMember == null) {
+            UIUtil.showErrorAlert("No Member Selected", "Selection Required", "Please select a member from the table to view their history.");
+            return;
+        }
+
+        // 2. Instantiate and show the dedicated HistoryDialog
+        HistoryDialog historyDialog = new HistoryDialog(selectedMember);
+        historyDialog.showAndWait(); // Use showAndWait() to block the main view until closed
     }
 
     // Container for Add, Edit, and Remove buttons.
@@ -191,8 +202,12 @@ public class MemberView extends VBox {
         btnRemove.getStyleClass().add("action-button");
         btnRemove.setOnAction(actionEvent -> handleRemoveMember());
 
+        Button btnHistory = new Button("Member History");
+        btnHistory.getStyleClass().add("action-button");
+        btnHistory.setOnAction(actionEvent -> handleShowHistory());
+
         // Add to container
-        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove);
+        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove, btnHistory);
         buttonBar.setAlignment(Pos.CENTER_LEFT);
         return buttonBar;
     }

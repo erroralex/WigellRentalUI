@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 public class HomeView extends VBox {
 
     public static final String WELCOME_MESSAGE =
-                    "Welcome to Wigell Camping Admin Portal\n" +
+            "Welcome to Wigell Camping Admin Portal\n" +
                     "\n" +
                     "You are logged in as an Administrator.\n" +
                     "\n" +

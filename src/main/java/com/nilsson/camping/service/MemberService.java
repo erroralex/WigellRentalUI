@@ -6,7 +6,6 @@ import com.nilsson.camping.model.registries.MemberRegistry;
 import com.nilsson.camping.ui.UIUtil;
 import com.nilsson.camping.ui.dialogs.AddMemberDialog;
 import com.nilsson.camping.ui.dialogs.EditMemberDialog;
-
 import java.util.Optional;
 
 public class MemberService {
@@ -44,7 +43,6 @@ public class MemberService {
         // Cancel was clicked
         return null;
     }
-
 
     // Accept the Member object from the View
     public void handleEditMember(Member selectedMember) {

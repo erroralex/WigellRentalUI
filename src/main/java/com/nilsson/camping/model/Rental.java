@@ -3,10 +3,10 @@ package com.nilsson.camping.model;
 public class Rental {
 
     private int rentalId;
-    private String memberName;      // e.g. "Anna Svensson (ID: 1023)"
-    private String itemName;        // e.g. "California Ocean" or "Family Tent"
-    private String itemType;        // "Vehicle" or "Gear"
-    private String startDate;       // store as ISO string for now
+    private String memberName;
+    private String itemName;
+    private String itemType;
+    private String startDate;
     private int rentalDays;
 
     public Rental() {

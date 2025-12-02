@@ -1,6 +1,5 @@
 package com.nilsson.camping.ui.views;
 
-import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.service.InventoryService;
@@ -91,7 +90,6 @@ public class VehicleView extends VBox {
         //recreationalVehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
-        // Wrap the master data in a FilteredList.
         filteredData = new FilteredList<>(masterData, p -> true);
 
         // Set the filter predicate when the search field text changes.
@@ -152,8 +150,7 @@ public class VehicleView extends VBox {
 
         // Check if an item is selected
         if (selectedRecreationalVehicle == null) {
-            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required",
-                    "Please select a vehicle from the table to edit.");
+            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required", "Please select a vehicle from the table to edit.");
             return;
         }
         inventoryService.handleEditRecreationalVehicle(selectedRecreationalVehicle);
@@ -173,24 +170,19 @@ public class VehicleView extends VBox {
         RecreationalVehicle selectedRecreationalVehicle = recreationalVehicleTable.getSelectionModel().getSelectedItem();
 
         if (selectedRecreationalVehicle == null) {
-            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required",
-                    "Please select a vehicle from the table to remove.");
+            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required", "Please select a vehicle from the table to remove.");
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal",
-                "Are you sure?",
-                "Do you want to permanently remove " + selectedRecreationalVehicle.getMake() + " " +
-                        selectedRecreationalVehicle.getModel() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedRecreationalVehicle.getMake() + " " + selectedRecreationalVehicle.getModel() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveRecreationalVehicle(selectedRecreationalVehicle);
             if (wasRemovedFromRegistry) {
                 masterData.remove(selectedRecreationalVehicle);
             } else {
-                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The vehicle could not be " +
-                        "removed from the registry.");
+                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The vehicle could not be " + "removed from the registry.");
             }
         }
     }

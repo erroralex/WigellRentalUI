@@ -90,10 +90,10 @@
   "startDate" : "2025-12-06",
   "rentalDays" : 5
 }, {
-  "rentalId" : 1016,
+  "rentalId" : 1017,
   "memberName" : "Kurt Olsson (ID: 3761)",
   "itemName" : "Electric Scooter",
   "itemType" : "Gear",
-  "startDate" : "2025-12-02",
-  "rentalDays" : 3
+  "startDate" : "2025-12-07",
+  "rentalDays" : 10
 } ]

@@ -2,7 +2,6 @@ package com.nilsson.camping.model.registries;
 
 import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.Member;
-
 import java.util.*;
 
 public class MemberRegistry {

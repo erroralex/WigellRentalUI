@@ -89,14 +89,11 @@ public class RentalView extends VBox {
         daysCol.setCellValueFactory(new PropertyValueFactory<>("rentalDays"));
         daysCol.setPrefWidth(101);
 
-        rentalTable.getColumns().addAll(
-                idCol, memberCol, itemCol, typeCol, startDateCol, daysCol
-        );
+        rentalTable.getColumns().addAll(idCol, memberCol, itemCol, typeCol, startDateCol, daysCol);
 
         rentalTable.setItems(masterData);
-        //rentalTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Filtering using Streams (same pattern as other views)
+        // Filtering using Streams
         filteredData = new FilteredList<>(masterData, p -> true);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -109,17 +106,13 @@ public class RentalView extends VBox {
 
                 if (String.valueOf(rental.getRentalId()).contains(lowerCaseFilter)) {
                     return true;
-                } else if (rental.getMemberName() != null &&
-                        rental.getMemberName().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (rental.getMemberName() != null && rental.getMemberName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (rental.getItemName() != null &&
-                        rental.getItemName().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (rental.getItemName() != null && rental.getItemName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (rental.getItemType() != null &&
-                        rental.getItemType().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (rental.getItemType() != null && rental.getItemType().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (rental.getStartDate() != null &&
-                        rental.getStartDate().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (rental.getStartDate() != null && rental.getStartDate().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (String.valueOf(rental.getRentalDays()).contains(lowerCaseFilter)) {
                     return true;
@@ -157,23 +150,18 @@ public class RentalView extends VBox {
         Rental selectedRental = rentalTable.getSelectionModel().getSelectedItem();
 
         if (selectedRental == null) {
-            UIUtil.showErrorAlert("No Rental Selected", "Selection Required",
-                    "Please select a rental from the table to return.");
+            UIUtil.showErrorAlert("No Rental Selected", "Selection Required", "Please select a rental from the table to return.");
             return;
         }
 
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Return",
-                "Are you sure?",
-                "Do you want to return the selected item for member " +
-                        selectedRental.getMemberName() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Return", "Are you sure?", "Do you want to return the selected item for member " + selectedRental.getMemberName() + "?");
 
         if (confirmed) {
             boolean removed = rentalService.handleReturnRental(selectedRental);
             if (removed) {
                 masterData.remove(selectedRental);
             } else {
-                UIUtil.showErrorAlert("Return Failed", "Operation Error",
-                        "The rental could not be removed from the registry.");
+                UIUtil.showErrorAlert("Return Failed", "Operation Error", "The rental could not be removed from the registry.");
             }
         }
     }
@@ -205,7 +193,7 @@ public class RentalView extends VBox {
         btnReturn.getStyleClass().add("action-button");
         btnReturn.setOnAction(actionEvent -> handleReturnRental());
 
-        HBox buttonBar = new HBox(10, btnAdd,btnNewRental, btnReturn);
+        HBox buttonBar = new HBox(10, btnAdd, btnNewRental, btnReturn);
         buttonBar.setAlignment(Pos.CENTER_LEFT);
 
         return buttonBar;
