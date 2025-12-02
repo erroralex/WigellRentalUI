@@ -7,6 +7,7 @@ import com.nilsson.camping.model.items.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Inventory {
 
@@ -32,12 +33,22 @@ public class Inventory {
         private static final Inventory INSTANCE = new Inventory();
     }
 
+    public List<RecreationalVehicle> getAvailableRecreationalVehicleList() {
+        return recreationalVehicleList.stream().filter(rv -> !rv.isRented())
+                .collect(Collectors.toList());
+    }
+
     public List<RecreationalVehicle> getRecreationalVehicleList() {
         return recreationalVehicleList;
     }
 
     public List<Gear> getGearList() {
         return gearList;
+    }
+
+    public List<Gear> getAvailableGearList() {
+        return gearList.stream().filter(g -> !g.isRented())
+                .collect(Collectors.toList());
     }
 
     public void addRecreationalVehicle(RecreationalVehicle rv) {

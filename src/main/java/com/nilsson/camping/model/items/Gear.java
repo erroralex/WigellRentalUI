@@ -5,6 +5,7 @@ public class Gear extends Item {
     private String model;
     private String type;
     private String capacity;
+    private boolean rented;
 
     public Gear() {
 
@@ -39,5 +40,13 @@ public class Gear extends Item {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 }

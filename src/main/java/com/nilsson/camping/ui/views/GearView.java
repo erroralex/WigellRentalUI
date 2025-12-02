@@ -121,7 +121,7 @@ public class GearView extends VBox {
 
     // Load vehicle data from the registry into the ObservableList.
     private void loadMasterData() {
-        List<Gear> gearList = Inventory.getInstance().getGearList();
+        List<Gear> gearList = Inventory.getInstance().getAvailableGearList();
         masterData.addAll(gearList);
     }
 

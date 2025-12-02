@@ -1,0 +1,99 @@
+[ {
+  "rentalId" : 1001,
+  "memberName" : "Mikael Persbrandt (ID: 8519)",
+  "itemName" : "Adria Coral Motorhome",
+  "itemType" : "Vehicle",
+  "startDate" : "2025-11-20",
+  "rentalDays" : 7
+}, {
+  "rentalId" : 1002,
+  "memberName" : "Peter Forsberg (ID: 2640)",
+  "itemName" : "Family Tent 6P",
+  "itemType" : "Gear",
+  "startDate" : "2025-11-25",
+  "rentalDays" : 3
+}, {
+  "rentalId" : 1004,
+  "memberName" : "Mia Parnevik (ID: 5028)",
+  "itemName" : "California Ocean Campervan",
+  "itemType" : "Vehicle",
+  "startDate" : "2025-11-29",
+  "rentalDays" : 14
+}, {
+  "rentalId" : 1005,
+  "memberName" : "Kurt Olsson (ID: 3761)",
+  "itemName" : "Kayaking Kit Single",
+  "itemType" : "Gear",
+  "startDate" : "2025-11-30",
+  "rentalDays" : 5
+}, {
+  "rentalId" : 1006,
+  "memberName" : "Stellan Skarsgård (ID: 1495)",
+  "itemName" : "Mountain Bike Pro-X",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-01",
+  "rentalDays" : 2
+}, {
+  "rentalId" : 1007,
+  "memberName" : "Robyn Carlsson (ID: 4832)",
+  "itemName" : "Portable Power Station 1000W",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-01",
+  "rentalDays" : 7
+}, {
+  "rentalId" : 1008,
+  "memberName" : "Zlatan Ibrahimović (ID: 7306)",
+  "itemName" : "Tucson 2024 SUV",
+  "itemType" : "Vehicle",
+  "startDate" : "2025-12-02",
+  "rentalDays" : 30
+}, {
+  "rentalId" : 1009,
+  "memberName" : "Alicia Vikander (ID: 6924)",
+  "itemName" : "Sleeping Bag -10°C",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-03",
+  "rentalDays" : 4
+}, {
+  "rentalId" : 1010,
+  "memberName" : "Felix Kjellberg (ID: 1057)",
+  "itemName" : "Climbing Harness Deluxe",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-03",
+  "rentalDays" : 1
+}, {
+  "rentalId" : 1011,
+  "memberName" : "Mikael Persbrandt (ID: 8519)",
+  "itemName" : "Expedition Backpack 80L",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-04",
+  "rentalDays" : 3
+}, {
+  "rentalId" : 1012,
+  "memberName" : "Peter Forsberg (ID: 2640)",
+  "itemName" : "Portable Cooler Box",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-04",
+  "rentalDays" : 2
+}, {
+  "rentalId" : 1013,
+  "memberName" : "Zlatan Ibrahimović (ID: 7306)",
+  "itemName" : "Adria Coral Motorhome",
+  "itemType" : "Vehicle",
+  "startDate" : "2025-12-05",
+  "rentalDays" : 7
+}, {
+  "rentalId" : 1015,
+  "memberName" : "Robyn Carlsson (ID: 4832)",
+  "itemName" : "Camping Chair Comfort",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-06",
+  "rentalDays" : 5
+}, {
+  "rentalId" : 1016,
+  "memberName" : "Kurt Olsson (ID: 3761)",
+  "itemName" : "Electric Scooter",
+  "itemType" : "Gear",
+  "startDate" : "2025-12-02",
+  "rentalDays" : 3
+} ]

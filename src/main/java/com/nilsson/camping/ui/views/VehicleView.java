@@ -58,7 +58,7 @@ public class VehicleView extends VBox {
         // Make Column
         TableColumn<RecreationalVehicle, String> makeCol = new TableColumn<>("Make");
         makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
-        makeCol.setPrefWidth(200);
+        makeCol.setPrefWidth(150);
 
         // Model Column
         TableColumn<RecreationalVehicle, String> modelCol = new TableColumn<>("Model");
@@ -73,7 +73,7 @@ public class VehicleView extends VBox {
         // Capacity Column
         TableColumn<RecreationalVehicle, String> capacityCol = new TableColumn<>("Capacity");
         capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        capacityCol.setPrefWidth(100);
+        capacityCol.setPrefWidth(125);
 
         // Type Column
         TableColumn<RecreationalVehicle, String> typeCol = new TableColumn<>("Type");
@@ -83,12 +83,12 @@ public class VehicleView extends VBox {
         // Price Column
         TableColumn<RecreationalVehicle, Double> priceCol = new TableColumn<>("Daily Price (SEK)");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("dailyPrice"));
-        priceCol.setPrefWidth(100);
+        priceCol.setPrefWidth(125);
 
         // Add to table
         recreationalVehicleTable.getColumns().addAll(makeCol, modelCol, typeCol, yearCol, capacityCol, priceCol);
         recreationalVehicleTable.setItems(masterData);
-        recreationalVehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        //recreationalVehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
         // Wrap the master data in a FilteredList.
@@ -135,7 +135,7 @@ public class VehicleView extends VBox {
 
     // Load vehicle data from the registry into the ObservableList.
     private void loadMasterData() {
-        List<RecreationalVehicle> recreationalVehicles = Inventory.getInstance().getRecreationalVehicleList();
+        List<RecreationalVehicle> recreationalVehicles = Inventory.getInstance().getAvailableRecreationalVehicleList();
         masterData.addAll(recreationalVehicles);
     }
 

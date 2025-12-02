@@ -17,11 +17,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import java.util.List;
 
-//TODO - Add searchfield for filtering using streams for Members
 public class MemberView extends VBox {
 
     private final TableView<Member> memberTable = new TableView<>();
-    private final ObservableList<Member> masterData = FXCollections.observableArrayList();
+    private final ObservableList<Member> masterMemberData = FXCollections.observableArrayList();
     private final MemberService memberService = new MemberService();
     private final TextField searchField = new TextField();
     private FilteredList<Member> filteredData;
@@ -76,12 +75,12 @@ public class MemberView extends VBox {
 
         // Add to table
         memberTable.getColumns().addAll(idCol, firstNameCol, lastNameCol, membershipCol);
-        memberTable.setItems(masterData);
+        memberTable.setItems(masterMemberData);
         memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
         // Wrap the master data in a FilteredList.
-        filteredData = new FilteredList<>(masterData, p -> true);
+        filteredData = new FilteredList<>(masterMemberData, p -> true);
 
         // Set the filter predicate when the search field text changes.
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -121,7 +120,7 @@ public class MemberView extends VBox {
     // Loads member data from the registry into the ObservableList.
     private void loadMasterData() {
         List<Member> members = MemberRegistry.getInstance().getMembers();
-        masterData.addAll(members);
+        masterMemberData.addAll(members);
     }
 
     private void handleEditMember() {
@@ -163,7 +162,7 @@ public class MemberView extends VBox {
         if (confirmed) {
             boolean wasRemovedFromRegistry = memberService.removeMemberFromRegistry(selectedMember);
             if (wasRemovedFromRegistry) {
-                masterData.remove(selectedMember);
+                masterMemberData.remove(selectedMember);
             } else {
                 UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The member could not be removed from the registry.");
             }
@@ -180,7 +179,7 @@ public class MemberView extends VBox {
 
             // Check if the member was successfully created and added
             if (newMember != null) {
-                masterData.add(newMember);
+                masterMemberData.add(newMember);
             }
         });
 

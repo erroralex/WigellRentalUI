@@ -3,6 +3,7 @@ package com.nilsson.camping.data;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.nilsson.camping.model.Rental;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.RecreationalVehicle;
@@ -26,6 +27,9 @@ public class DataHandler {
 
     private static final String GEAR_PERSISTENCE_PATH =
             System.getProperty("user.dir") + "/src/main/resources/data/json/gear.json";
+
+    private static final String RENTALS_PERSISTENCE_PATH =
+            System.getProperty("user.dir") + "/src/main/resources/data/json/rentals.json";
 
     // ──────────────────────────────────────────────────────
     //                      Member Operations
@@ -143,6 +147,45 @@ public class DataHandler {
 
         } catch (IOException e) {
             System.err.println("FATAL ERROR: Could not save gear data to JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // ──────────────────────────────────────────────────────
+    //                      Rental Operations
+    // ──────────────────────────────────────────────────────
+
+    public static List<Rental> loadRentals() {
+        File file = new File(RENTALS_PERSISTENCE_PATH);
+        List<Rental> rentals = new ArrayList<>();
+
+        if (!file.exists() || file.length() == 0) {
+            System.out.println("INFO: Rentals file not found or is empty at " +
+                    RENTALS_PERSISTENCE_PATH + ". Starting with empty list.");
+            return rentals;
+        }
+
+        try {
+            rentals = MAPPER.readValue(file, new TypeReference<List<Rental>>() {
+            });
+            System.out.println("Successfully loaded " + rentals.size() +
+                    " rentals from " + RENTALS_PERSISTENCE_PATH);
+        } catch (IOException e) {
+            System.err.println("FATAL ERROR: Could not load rentals data from JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return rentals;
+    }
+
+    public static void saveRentals(List<Rental> rentals) {
+        try {
+            File file = new File(RENTALS_PERSISTENCE_PATH);
+            file.getParentFile().mkdirs();
+            MAPPER.writeValue(file, rentals);
+            System.out.println("Successfully saved " + rentals.size() +
+                    " rentals to " + RENTALS_PERSISTENCE_PATH);
+        } catch (IOException e) {
+            System.err.println("FATAL ERROR: Could not save rentals data to JSON: " + e.getMessage());
             e.printStackTrace();
         }
     }
