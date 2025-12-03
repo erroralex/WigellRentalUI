@@ -19,9 +19,9 @@ public class MainApp extends Application {
     private static final int HEIGHT = 800;
 
     private SessionTimerService sessionTimerService;
-    private RootLayout rootLayout; // KEEP THIS INSTANCE
-    private CustomTitleBar customTitleBar; // KEEP THIS INSTANCE
-    private Runnable onLogout; // KEEP THIS Runnable
+    private RootLayout rootLayout;
+    private CustomTitleBar customTitleBar;
+    private Runnable onLogout;
 
     @Override
     public void start(Stage primaryStage) {
@@ -36,20 +36,19 @@ public class MainApp extends Application {
             sessionTimerService = new SessionTimerService(customTitleBar);
             UserSession.initialize(customTitleBar);
 
-            // 1. Define the onLogout Runnable (for the nav bar button)
+            // Go back to Login View
             onLogout = () -> {
                 UserSession.logout();
                 showLoginView(primaryStage);
             };
 
-            // 2. Instantiate the single RootLayout
+            // Instantiate the single RootLayout
             rootLayout = new RootLayout(primaryStage, onLogout, customTitleBar);
 
-            // 3. Show the initial login view - THIS CREATES AND SETS THE SCENE
-            showLoginView(primaryStage); // Scene is created and set here!
+            // Show the initial login view
+            showLoginView(primaryStage);
 
-            // --- Initial Scene Setup ---
-            // FIX: GET THE SCENE THAT WAS JUST CREATED
+            // Initial Scene Setup
             Scene scene = primaryStage.getScene();
 
             // CSS for styling
@@ -59,7 +58,7 @@ public class MainApp extends Application {
             // Set the stage properties and show the application.
             primaryStage.setTitle("Wigell Camping - Login");
             primaryStage.getIcons().add(new javafx.scene.image.Image(getClass().getResource("/icon.png").toExternalForm()));
-            // primaryStage.setScene(scene); // Already set inside showLoginView
+
             primaryStage.show();
 
         } catch (Exception e) {
@@ -89,7 +88,7 @@ public class MainApp extends Application {
      * This method is called both on initial start and after a logout.
      */
     private void showLoginView(Stage primaryStage) {
-        // The LoginView MUST receive the original rootLayout instance
+
         LoginView newLoginView = new LoginView(primaryStage, rootLayout);
 
         BorderPane loginWrapper = new BorderPane();
@@ -97,18 +96,16 @@ public class MainApp extends Application {
         loginWrapper.setCenter(newLoginView);
         loginWrapper.getStyleClass().add("login-wrapper");
 
-        // Use setRoot() if the scene exists, otherwise set the root for the start() method
         if (primaryStage.getScene() != null) {
             primaryStage.getScene().setRoot(loginWrapper);
         } else {
-            // This case handles the initial setup in start() before primaryStage.setScene()
             primaryStage.setScene(new Scene(loginWrapper, WIDTH, HEIGHT));
         }
 
         primaryStage.setTitle("Wigell Camping - Login");
     }
 
-    // Helper to get the primaryStage reference (useful for the close handler)
+    // Helper to get the primaryStage reference
     private Stage getPrimaryStage() {
         return (Stage) customTitleBar.getScene().getWindow();
     }
