@@ -60,4 +60,14 @@ public class Member {
     public void setHistory(List<String> history) {
         this.history = history;
     }
+
+    // Checks if the member has a Student membership-level.
+    public boolean isStudent() {
+        return "Student".equalsIgnoreCase(this.membershipLevel);
+    }
+
+    // Checks if the member has a Premium membership-level.
+    public boolean isPremium() {
+        return "Premium".equalsIgnoreCase(this.membershipLevel);
+    }
 }

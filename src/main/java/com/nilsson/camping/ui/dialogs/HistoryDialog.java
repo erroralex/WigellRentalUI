@@ -11,6 +11,7 @@ import java.util.List;
 public class HistoryDialog extends Dialog<Void> {
 
     public HistoryDialog(Member member) {
+
         // Dialog setup
         setTitle("Member History");
         setHeaderText("History for: " + member.getFirstName() + " " + member.getLastName() + " (ID: " + member.getId() + ")");

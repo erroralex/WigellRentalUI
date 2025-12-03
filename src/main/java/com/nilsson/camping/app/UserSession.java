@@ -3,9 +3,7 @@ package com.nilsson.camping.app;
 import com.nilsson.camping.service.SessionTimerService;
 import com.nilsson.camping.ui.CustomTitleBar;
 
-/**
- * A static class to hold application-wide user session data.
- */
+// Application-wide user session data
 public class UserSession {
 
     private static String currentUsername = "Guest";
@@ -21,7 +19,7 @@ public class UserSession {
         }
     }
 
-    // Getter for the initialized CustomTitleBar instance
+    // Getter for the initialized CustomTitleBar
     public static CustomTitleBar getInitializedTitleBar() {
         return customTitleBarView;
     }

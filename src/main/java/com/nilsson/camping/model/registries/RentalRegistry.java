@@ -52,4 +52,9 @@ public class RentalRegistry {
     private void loadRentalsFromDataHandler() {
         this.rentals = DataHandler.loadRentals();
     }
+
+    // Saves the current list of all rentals to .json via the DataHandler.
+    public void saveRentals() {
+        DataHandler.saveRentals(this.rentals);
+    }
 }

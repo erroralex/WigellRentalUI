@@ -11,7 +11,7 @@ public class MemberRegistry {
     private Set<Integer> usedIDs = new HashSet<>();
 
     private MemberRegistry() {
-        // Load members from JSON file via DataHandler on instantiation
+        // Load members from JSON file via DataHandler
         loadMembersFromDataHandler();
     }
 
@@ -23,10 +23,7 @@ public class MemberRegistry {
         private static final MemberRegistry INSTANCE = new MemberRegistry();
     }
 
-    /**
-     * Generates a unique 4-digit ID between 1000 and 9999.
-     * @return A unique 4-digit integer ID.
-     */
+    // Generates a unique 4-digit ID between 1000 and 9999.
     public int getUniqueID() {
         Random random = new Random();
 
@@ -60,7 +57,7 @@ public class MemberRegistry {
         boolean wasRemoved = this.membersList.remove(member);
 
         if (wasRemoved) {
-            // Remove the ID from the usedIDs set, freeing it up for future use
+            // Remove the ID from the usedIDs set
             usedIDs.remove(member.getId());
 
             // Save Changes

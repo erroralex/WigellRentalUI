@@ -1,75 +1,90 @@
 package com.nilsson.camping.service;
 
-import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.NewRentalResult;
 import com.nilsson.camping.model.Rental;
-import com.nilsson.camping.model.items.Gear;
-import com.nilsson.camping.model.items.RecreationalVehicle;
-import com.nilsson.camping.model.registries.Inventory;
+import com.nilsson.camping.model.items.IRentable;
 import com.nilsson.camping.model.registries.RentalRegistry;
 import com.nilsson.camping.ui.UIUtil;
 import com.nilsson.camping.ui.dialogs.NewRentalDialog;
-import java.util.Optional;
 
 public class RentalService {
 
+    private final RentalRegistry rentalRegistry = RentalRegistry.getInstance();
+    private final InventoryService inventoryService = new InventoryService();
+    private final ProfitsService profitsService = new ProfitsService();
+
+    /**
+     * Handles the creation of a new rental through a dialog.
+     * Records the profit upon successful rental creation.
+     * @return The newly created Rental object, or null if cancelled or failed.
+     */
     public Rental handleNewRental() {
-
         NewRentalDialog dialog = new NewRentalDialog();
-        Optional<NewRentalResult> result = dialog.showAndWait();
-        if (!result.isPresent()) {
-            return null;
+
+        // Show the dialog and wait for the result
+        NewRentalResult result = dialog.showAndWait().orElse(null);
+
+        if (result != null) {
+
+            IRentable item;
+            if (result.getSelectedVehicle() != null) {
+                item = result.getSelectedVehicle();
+            } else if (result.getSelectedGear() != null) {
+                item = result.getSelectedGear();
+            } else {
+                UIUtil.showErrorAlert("Error", "No Item Selected", "A rental must include a vehicle or gear item.");
+                return null;
+            }
+
+            // Create the Rental object
+            Rental newRental = new Rental(
+                    rentalRegistry.getNextId(),
+                    result.getSelectedMember(),
+                    item,
+                    result.getStartDate(),
+                    result.getDays()
+            );
+
+            // Add rental to registry and mark item as rented
+            rentalRegistry.addRental(newRental);
+            item.setRented(true);
+
+            // Saves changes to Inventory
+            inventoryService.saveAllInventory();
+
+            // Record the profit for the rental period
+            profitsService.recordNewRentalProfit(result);
+
+            return newRental;
         }
-
-        NewRentalResult data = result.get();
-
-        // Mark item as rented
-        if (data.getSelectedVehicle() != null) {
-            RecreationalVehicle rv = data.getSelectedVehicle();
-            rv.setRented(true);
-            DataHandler.saveRecreationalVehicle(Inventory.getInstance().getRecreationalVehicleList());
-        } else if (data.getSelectedGear() != null) {
-            Gear gear = data.getSelectedGear();
-            gear.setRented(true);
-            DataHandler.saveGear(Inventory.getInstance().getGearList());
-        }
-
-        // Create Rental and persist
-        int newId = RentalRegistry.getInstance().getNextId();
-
-        Rental newRental = new Rental(newId, data.getSelectedMember().getFirstName() + " " +
-                data.getSelectedMember().getLastName() + " (ID: " + data.getSelectedMember().getId() +
-                ")", data.getSelectedVehicle() != null ? data.getSelectedVehicle().getModel() : data.getSelectedGear().getModel(),
-                data.getSelectedVehicle() != null ? "Vehicle" : "Gear", data.getStartDate().toString(), data.getDays());
-
-        RentalRegistry.getInstance().addRental(newRental);
-
-        UIUtil.showInfoAlert("Rental Created", "Success", "The item has been successfully rented out.");
-
-        return newRental;
+        return null;
     }
 
-    public boolean handleReturnRental(Rental selectedRental) {
-        // TODO: optional: update history, free item, etc.
-        if (selectedRental == null) {
+    /**
+     * Handles the return of a rental item.
+     * @param rental The rental to be processed for return.
+     * @return true if the rental was successfully removed and item was marked available.
+     */
+    public boolean handleReturnRental(Rental rental) {
+
+        // Find the rentable item to mark it as available
+        IRentable item = inventoryService.findRentableItem(rental.getItemType(), rental.getItemName());
+
+        if (item == null) {
+            UIUtil.showErrorAlert("Item Not Found", "Data Mismatch", "The rented item could not be found in inventory.");
             return false;
         }
-        // Try to match by name and type
-        Inventory inventory = Inventory.getInstance();
 
-        if ("Vehicle".equalsIgnoreCase(selectedRental.getItemType())) {
-            inventory.getRecreationalVehicleList().stream().filter(rv -> rv.getModel().equals(selectedRental.getItemName())).findFirst().ifPresent(rv -> rv.setRented(false));
-            DataHandler.saveRecreationalVehicle(inventory.getRecreationalVehicleList());
-        } else if ("Gear".equalsIgnoreCase(selectedRental.getItemType())) {
-            inventory.getGearList().stream().filter(g -> g.getModel().equals(selectedRental.getItemName())).findFirst().ifPresent(g -> g.setRented(false));
-            DataHandler.saveGear(inventory.getGearList());
-        }
+        // Mark the item as available
+        item.setRented(false);
 
-        // Remove rental from registry + JSON
-        boolean removed = RentalRegistry.getInstance().removeRental(selectedRental);
+        // Remove the rental record
+        boolean removed = rentalRegistry.removeRental(rental);
 
         if (removed) {
-            UIUtil.showInfoAlert("Item Returned", "Success", "The item has been successfully returned.");
+            // Saves the changes to Inventory and Rental Registry
+            inventoryService.saveAllInventory();
+            rentalRegistry.saveRentals();
         }
 
         return removed;

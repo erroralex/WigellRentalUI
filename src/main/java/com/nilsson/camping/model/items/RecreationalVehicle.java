@@ -1,6 +1,6 @@
 package com.nilsson.camping.model.items;
 
-public class RecreationalVehicle extends Vehicle {
+public class RecreationalVehicle extends Vehicle implements IRentable {
 
     private String capacity;
     private String type;
@@ -38,5 +38,27 @@ public class RecreationalVehicle extends Vehicle {
 
     public void setRented(boolean rented) {
         this.rented = rented;
+    }
+
+    @Override
+    public String toString() {
+        String status = this.isRented() ? " (Rented)" : " (Available)";
+        return String.format("%s %s (%s, %s) - Daily Price: %.2f SEK%s",
+                this.getMake(),
+                this.getModel(),
+                this.getType(),
+                this.getYear(),
+                this.getDailyPrice(),
+                status);
+    }
+
+    @Override
+    public String getItemType() {
+        return getType();
+    }
+
+    @Override
+    public String getItemName() {
+        return getMake() + " " + getModel();
     }
 }

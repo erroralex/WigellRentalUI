@@ -61,7 +61,7 @@ public class CustomTitleBar extends HBox {
         Button closeBtn = new Button("✕");
         closeBtn.getStyleClass().addAll("window-button", "window-close");
         closeBtn.setOnAction(e -> {
-            // Execute the cleanup logic
+            // Execute the cleanup logic on close
             if (this.onExitCleanup != null) {
                 this.onExitCleanup.run();
             }
@@ -84,11 +84,7 @@ public class CustomTitleBar extends HBox {
         });
     }
 
-    /**
-     * Toggles the visibility of the session timer container.
-     *
-     * @param visible true to show the timer, false to hide it.
-     */
+    // Toggles the visibility of the session timer container.
     public void setTimerVisible(boolean visible) {
         javafx.application.Platform.runLater(() -> {
             timerContainer.setVisible(visible);

@@ -78,7 +78,6 @@ public class UIUtil {
 
     /**
      * Shows a standard error alert dialog to the user.
-     * *
      *
      * @param title   The title of the alert window.
      * @param header  The header text (main message).
@@ -111,10 +110,10 @@ public class UIUtil {
         applyTheme(alert);
 
         // Create expandable Exception details
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        throwable.printStackTrace(pw);
-        String exceptionText = sw.toString();
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        throwable.printStackTrace(printWriter);
+        String exceptionText = stringWriter.toString();
 
         Label label = new Label("The exception stacktrace was:");
         label.getStyleClass().add("label");
@@ -182,7 +181,7 @@ public class UIUtil {
     }
 
     /**
-     * Creates an HBox layout that pushes the main graphic (like a FontIcon) and the toggle icon
+     * Creates an HBox layout that pushes the main graphic and the toggle icon
      * to the opposite sides of the button text space.
      *
      * @param mainGraphic   The main icon.
@@ -190,7 +189,7 @@ public class UIUtil {
      * @return An HBox containing the graphics with a spacer in between.
      */
     public static HBox createIconWithSpacer(Node mainGraphic, Node toggleGraphic) {
-        // A Region node acts as a spacer that consumes all available space
+        // Spacer that consumes all available space
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 

@@ -7,7 +7,6 @@ import com.nilsson.camping.model.Rental;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.items.RecreationalVehicle;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -155,6 +154,7 @@ public class DataHandler {
     //                      Rental Operations
     // ──────────────────────────────────────────────────────
 
+    // Load Rentals
     public static List<Rental> loadRentals() {
         File file = new File(RENTALS_PERSISTENCE_PATH);
         List<Rental> rentals = new ArrayList<>();
@@ -177,6 +177,7 @@ public class DataHandler {
         return rentals;
     }
 
+    // Save Rentals
     public static void saveRentals(List<Rental> rentals) {
         try {
             File file = new File(RENTALS_PERSISTENCE_PATH);

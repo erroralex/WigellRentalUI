@@ -25,6 +25,7 @@ public class AddVehicleDialog extends Dialog<RecreationalVehicle> {
     private static final String CAMPERVAN = "Campervan";
 
     public AddVehicleDialog() {
+
         setTitle("Add New Recreational Vehicle");
         setHeaderText("Enter the details for the new vehicle.");
 

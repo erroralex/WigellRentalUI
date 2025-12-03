@@ -8,7 +8,7 @@ import com.nilsson.camping.ui.dialogs.AddMemberDialog;
 import com.nilsson.camping.ui.dialogs.EditMemberDialog;
 import java.util.Optional;
 
-public class MemberService {
+public class MembershipService {
 
     public Member handleAddMember() {
 

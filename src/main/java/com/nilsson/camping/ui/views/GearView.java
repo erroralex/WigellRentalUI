@@ -4,6 +4,7 @@ import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.service.InventoryService;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.ShowAllGearDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -35,7 +36,7 @@ public class GearView extends VBox {
         this.setAlignment(Pos.TOP_LEFT);
         VBox.setVgrow(gearTable, Priority.ALWAYS);
 
-        Label title = new Label("Gear Management");
+        Label title = new Label("Available Gear");
         title.getStyleClass().add("content-title");
 
         // Search Field Setup
@@ -174,7 +175,12 @@ public class GearView extends VBox {
         }
     }
 
-    // Create a container for Add, Edit, and Remove buttons
+    private void handleShowAllGear() {
+        ShowAllGearDialog dialog = new ShowAllGearDialog();
+        dialog.showAndWait();
+    }
+
+    // Create a container for Add, Edit, Remove and Show All buttons
     private HBox createButtonBar() {
 
         Button btnAdd = new Button("Add Gear");
@@ -189,7 +195,11 @@ public class GearView extends VBox {
         btnRemove.getStyleClass().add("action-button");
         btnRemove.setOnAction(actionEvent -> handleRemoveGear());
 
-        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove);
+        Button btnShowAll = new Button("Show All Gear");
+        btnShowAll.getStyleClass().add("action-button");
+        btnShowAll.setOnAction(actionEvent -> handleShowAllGear());
+
+        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove, btnShowAll);
         buttonBar.setAlignment(Pos.CENTER_LEFT);
         return buttonBar;
     }

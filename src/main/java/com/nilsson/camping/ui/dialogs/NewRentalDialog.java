@@ -57,6 +57,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 }
             }
         });
+
         memberBox.setButtonCell(memberBox.getCellFactory().call(null));
 
         // Item type
@@ -79,6 +80,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 setText(empty || item == null ? null : item.getModel() + " (" + item.getType() + ")");
             }
         });
+
         gearBox.setButtonCell(gearBox.getCellFactory().call(null));
 
         vehicleBox.setCellFactory(cb -> new ListCell<RecreationalVehicle>() {
@@ -88,6 +90,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 setText(empty || item == null ? null : item.getMake() + " " + item.getModel() + " (" + item.getType() + ")");
             }
         });
+
         vehicleBox.setButtonCell(vehicleBox.getCellFactory().call(null));
 
         // Days
@@ -123,7 +126,10 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
 
         // Enable/disable button
         Button createButton = (Button) getDialogPane().lookupButton(createButtonType);
-        createButton.disableProperty().bind(memberBox.valueProperty().isNull().or(startDatePicker.valueProperty().isNull()).or(daysField.textProperty().isEmpty()));
+        createButton.disableProperty().bind
+                (memberBox.valueProperty().isNull().or
+                (startDatePicker.valueProperty().isNull()).or
+                (daysField.textProperty().isEmpty()));
 
         setResultConverter(dialogButton -> {
             if (dialogButton == createButtonType) {

@@ -2,7 +2,7 @@ package com.nilsson.camping.ui.views;
 
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
-import com.nilsson.camping.service.MemberService;
+import com.nilsson.camping.service.MembershipService;
 import com.nilsson.camping.ui.UIUtil;
 import com.nilsson.camping.ui.dialogs.HistoryDialog;
 import javafx.collections.FXCollections;
@@ -16,14 +16,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
 import java.util.List;
 
 public class MemberView extends VBox {
 
     private final TableView<Member> memberTable = new TableView<>();
     private final ObservableList<Member> masterMemberData = FXCollections.observableArrayList();
-    private final MemberService memberService = new MemberService();
+    private final MembershipService membershipService = new MembershipService();
     private final TextField searchField = new TextField();
     private FilteredList<Member> filteredData;
 
@@ -55,6 +54,7 @@ public class MemberView extends VBox {
 
     @SuppressWarnings("unchecked")
     private void initializeTable() {
+
         // ID Column
         TableColumn<Member, Integer> idCol = new TableColumn<>("ID");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -132,7 +132,7 @@ public class MemberView extends VBox {
             UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select an item from the table to edit.");
             return;
         }
-        memberService.handleEditMember(selectedMember);
+        membershipService.handleEditMember(selectedMember);
 
         // Refresh the TableView.
         refreshTable();
@@ -144,7 +144,7 @@ public class MemberView extends VBox {
         memberTable.getColumns().get(0).setVisible(true);
     }
 
-    // Removing a member, involving both the Service and the View (UI update).
+    // Removing a member, involving both the Service and UI update.
     private void handleRemoveMember() {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
@@ -157,7 +157,7 @@ public class MemberView extends VBox {
         boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedMember.getFirstName() + "?");
 
         if (confirmed) {
-            boolean wasRemovedFromRegistry = memberService.removeMemberFromRegistry(selectedMember);
+            boolean wasRemovedFromRegistry = membershipService.removeMemberFromRegistry(selectedMember);
             if (wasRemovedFromRegistry) {
                 masterMemberData.remove(selectedMember);
             } else {
@@ -169,24 +169,24 @@ public class MemberView extends VBox {
     private void handleShowHistory() {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
-        // 1. Check if a member is selected
+        // Check if a member is selected
         if (selectedMember == null) {
             UIUtil.showErrorAlert("No Member Selected", "Selection Required", "Please select a member from the table to view their history.");
             return;
         }
 
-        // 2. Instantiate and show the dedicated HistoryDialog
+        // Instantiate and show the HistoryDialog
         HistoryDialog historyDialog = new HistoryDialog(selectedMember);
-        historyDialog.showAndWait(); // Use showAndWait() to block the main view until closed
+        historyDialog.showAndWait();
     }
 
-    // Container for Add, Edit, and Remove buttons.
+    // Container for Add, Edit, Remove and History buttons.
     private HBox createButtonBar() {
 
         Button btnAdd = new Button("Add Member");
         btnAdd.getStyleClass().add("action-button");
         btnAdd.setOnAction(actionEvent -> {
-            Member newMember = memberService.handleAddMember();
+            Member newMember = membershipService.handleAddMember();
 
             // Check if the member was successfully created and added
             if (newMember != null) {

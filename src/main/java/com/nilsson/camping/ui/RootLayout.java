@@ -16,14 +16,10 @@ public class RootLayout extends BorderPane {
     private static final String DARK_THEME_CSS = "/dark-theme.css";
     private static final String LIGHT_THEME_CSS = "/light-theme.css";
 
-    // Static variable to track the currently active theme URL globally
+    // Static variable to track the currently active theme URL
     private static String currentThemeUrl;
 
-    /**
-     * Public getter to allow UIUtil to apply the active theme to new windows (like Dialogs/Alerts).
-     *
-     * @return The absolute path URL string of the currently active stylesheet.
-     */
+    // Public getter to allow UIUtil to apply the active theme to new windows (like Dialogs/Alerts).
     public static String getCurrentThemeUrl() {
         return currentThemeUrl;
     }
@@ -31,46 +27,33 @@ public class RootLayout extends BorderPane {
     // Instance variable to track the theme state
     private boolean isDarkTheme = true;
 
-    /**
-     * Constructor requires the main Stage reference, a logout callback, and the pre-initialized CustomTitleBar.
-     *
-     * @param stage    The main application Stage.
-     * @param onLogout The Runnable to execute to switch back to the login screen.
-     * @param titleBar The single, initialized CustomTitleBar instance.
-     */
+    // The Root Layout
     public RootLayout(Stage stage, Runnable onLogout, CustomTitleBar titleBar) {
+
         // Apply the CSS class
         this.getStyleClass().add("root-layout");
 
-        // Initialize the global theme tracker (This assumes MainApp loaded the dark theme initially)
+        // Initialize the global theme tracker, start in Dark-mode
         currentThemeUrl = getClass().getResource(DARK_THEME_CSS).toExternalForm();
 
-        // Side Navigation (LEFT)
+        // Side Navigation (Left)
         SideNavigation sideNav = new SideNavigation(this, stage, onLogout);
         this.setLeft(sideNav);
 
-        // Styling for the navigation width
+        // Set side navigation width
         sideNav.setPrefWidth(250);
 
-        // Default View (CENTER)
+        // Default View (Center)
         setContent(new HomeView());
     }
 
-    /**
-     * Public method to swap the main content view.
-     *
-     * @param view The JavaFX Node to display.
-     */
+    // Public method to swap the main content view.
     public void setContent(Node view) {
         this.setCenter(view);
     }
 
-    /**
-     * Toggles the application stylesheet between dark-theme.css and light-theme.css.
-     * Updates the global currentThemeUrl, and swaps the stylesheet on the Scene.
-     *
-     * @return true if the application is now using the Dark Theme, false otherwise.
-     */
+    // Toggles the application stylesheet between dark-theme.css and light-theme.css.
+    // Updates the currentThemeUrl, and swaps the stylesheet on the Scene.
     public boolean toggleTheme() {
         if (this.getScene() == null) {
             System.err.println("Cannot toggle theme: Scene is null.");
@@ -100,7 +83,7 @@ public class RootLayout extends BorderPane {
             this.getScene().getStylesheets().add(newTheme);
         }
 
-        // Update the global tracker for dialogs/alerts
+        // Update the tracker for dialogs/alerts
         currentThemeUrl = newTheme;
 
         return isDarkTheme;

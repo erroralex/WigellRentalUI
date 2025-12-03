@@ -3,7 +3,7 @@ package com.nilsson.camping.ui.views;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.Rental;
 import com.nilsson.camping.model.registries.RentalRegistry;
-import com.nilsson.camping.service.MemberService;
+import com.nilsson.camping.service.MembershipService;
 import com.nilsson.camping.service.RentalService;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
 import java.util.List;
 
 public class RentalView extends VBox {
@@ -26,7 +25,7 @@ public class RentalView extends VBox {
     private final ObservableList<Member> masterMemberData = FXCollections.observableArrayList();
     private final ObservableList<Rental> masterData = FXCollections.observableArrayList();
     private final RentalService rentalService = new RentalService();
-    private final MemberService memberService = new MemberService();
+    private final MembershipService membershipService = new MembershipService();
     private final TextField searchField = new TextField();
     private FilteredList<Rental> filteredData;
 
@@ -60,7 +59,7 @@ public class RentalView extends VBox {
     private void initializeTable() {
 
         // Rental ID Column
-        TableColumn<Rental, Integer> idCol = new TableColumn<>("ID");
+        TableColumn<Rental, Integer> idCol = new TableColumn<>("Rental #");
         idCol.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
         idCol.setPrefWidth(100);
 
@@ -166,13 +165,13 @@ public class RentalView extends VBox {
         }
     }
 
-    // Create a container for New Rental and Return Item buttons
+    // Create a container for Add Member, New Rental and Return Item buttons
     private HBox createButtonBar() {
 
         Button btnAdd = new Button("Add Member");
         btnAdd.getStyleClass().add("action-button");
         btnAdd.setOnAction(actionEvent -> {
-            Member newMember = memberService.handleAddMember();
+            Member newMember = membershipService.handleAddMember();
 
             // Check if the member was successfully created and added
             if (newMember != null) {

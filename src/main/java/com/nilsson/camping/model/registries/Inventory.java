@@ -4,7 +4,6 @@ import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.items.Vehicle;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ public class Inventory {
     private List<Gear> gearList = new ArrayList<>();
 
     private Inventory() {
-        // Load data from JSON files on initialization
+        // Load data from JSON files
         loadGearFromDataHandler();
         loadRecreationalVehiclesFromDataHandler();
     }
@@ -70,6 +69,7 @@ public class Inventory {
         this.recreationalVehicleList = DataHandler.loadRecreationalVehicles();
     }
 
+    // Loads gear using the DataHandler and populates the gear list.
     private void loadGearFromDataHandler() {
         List<Gear> loadedGear = DataHandler.loadGear();
         this.gearList = new ArrayList<>(loadedGear);

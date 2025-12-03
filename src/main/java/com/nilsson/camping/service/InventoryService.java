@@ -2,6 +2,7 @@ package com.nilsson.camping.service;
 
 import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.items.Gear;
+import com.nilsson.camping.model.items.IRentable;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.ui.UIUtil;
@@ -9,7 +10,7 @@ import com.nilsson.camping.ui.dialogs.AddGearDialog;
 import com.nilsson.camping.ui.dialogs.EditGearDialog;
 import com.nilsson.camping.ui.dialogs.EditVehicleDialog;
 import com.nilsson.camping.ui.dialogs.AddVehicleDialog;
-
+import java.util.List;
 import java.util.Optional;
 
 public class InventoryService {
@@ -66,7 +67,8 @@ public class InventoryService {
         }
 
         Inventory.getInstance().removeRecreationalVehicle(selectedRecreationalVehicle);
-        UIUtil.showInfoAlert("Recreational Vehicle Removed", "Success", selectedRecreationalVehicle.getMake() + " " + selectedRecreationalVehicle.getModel() + " has been removed.");
+        UIUtil.showInfoAlert("Recreational Vehicle Removed", "Success", selectedRecreationalVehicle.getMake()
+                + " " + selectedRecreationalVehicle.getModel() + " has been removed.");
         return true;
     }
 
@@ -129,5 +131,49 @@ public class InventoryService {
             UIUtil.showErrorAlert("Removal Error", "Registry Mismatch", "Could not find the selected gear in the inventory registry.");
         }
         return wasRemoved;
+    }
+
+    // ──────────────────────────────────────────────────────
+    //                  Data Persistence
+    // ──────────────────────────────────────────────────────
+
+    public IRentable findRentableItem(String itemType, String itemName) {
+
+        Inventory inventory = Inventory.getInstance();
+
+        // Search Recreational Vehicles
+        List<RecreationalVehicle> vehicles = inventory.getAvailableRecreationalVehicleList();
+
+        for (RecreationalVehicle vehicle : vehicles) {
+            // Check if both type and name match
+            if (vehicle.getItemType().equals(itemType) && vehicle.getItemName().equals(itemName)) {
+                return vehicle;
+            }
+        }
+
+        // Search Gear Items
+        List<Gear> gearItems = inventory.getAvailableGearList();
+
+        for (Gear gear : gearItems) {
+            // Check if both type and name match
+            if (gear.getItemType().equals(itemType) && gear.getItemName().equals(itemName)) {
+                return gear;
+            }
+        }
+
+        // Item not found
+        return null;
+    }
+
+    // Saves both the Recreational Vehicles list and the Gear list by calling the DataHandler methods.
+    public void saveAllInventory() {
+
+        Inventory inventory = Inventory.getInstance();
+
+        // Save Vehicles
+        DataHandler.saveRecreationalVehicle(inventory.getAvailableRecreationalVehicleList());
+
+        // Save Gear
+        DataHandler.saveGear(inventory.getAvailableGearList());
     }
 }

@@ -91,7 +91,7 @@ public class SideNavigation extends VBox {
         });
 
         // ──────────────────────────────────────────────────────
-        // Inventory Parent Toggle Button (Collapsible)
+        // Inventory Toggle Button (Collapsible)
         // ──────────────────────────────────────────────────────
 
         // Initialize and store the arrow icon
@@ -103,7 +103,7 @@ public class SideNavigation extends VBox {
 
         // Toggle Action
         btnInventory.setOnAction(e -> {
-            // Toggle visibility of the sub-menu container
+            // Toggle visibility of the sub-menu
             boolean isVisible = inventorySubMenu.isVisible();
             inventorySubMenu.setVisible(!isVisible);
             inventorySubMenu.setManaged(!isVisible);
@@ -123,14 +123,14 @@ public class SideNavigation extends VBox {
         // ──────────────────────────────────────────────────────
 
         // Vehicle Sub-Button
-        Button btnVehicle = createSubNavButton("Vehicles", FontAwesome.TRUCK);
+        Button btnVehicle = createSubNavButton("Vehicles", FontAwesome.CAR);
         btnVehicle.setOnAction(e -> {
             rootLayout.setContent(new VehicleView());
             setActiveButton(btnVehicle);
         });
 
         // Gear Sub-Button
-        Button btnGear = createSubNavButton("Gear", FontAwesome.GEAR);
+        Button btnGear = createSubNavButton("Gear", FontAwesome.FREE_CODE_CAMP);
         btnGear.setOnAction(e -> {
             rootLayout.setContent(new GearView());
             setActiveButton(btnGear);
@@ -148,7 +148,7 @@ public class SideNavigation extends VBox {
         // ──────────────────────────────────────────────────────
 
         Region spacer = new Region();
-        VBox.setVgrow(spacer, Priority.ALWAYS); // This pushes everything below it to the bottom
+        VBox.setVgrow(spacer, Priority.ALWAYS);
 
         // ──────────────────────────────────────────────────────
         // Theme Toggle Button
@@ -207,7 +207,7 @@ public class SideNavigation extends VBox {
         return btn;
     }
 
-    // Overloaded helper to create a standard navigation button using an existing FontIcon instance
+    // Overloaded helper to create a standard navigation button using an existing FontIcon
     private Button createNavButton(String text, FontIcon icon) {
         Button btn = new Button(text);
 
@@ -223,12 +223,7 @@ public class SideNavigation extends VBox {
         return btn;
     }
 
-    /**
-     * Helper to create the toggle button (Inventory).
-     * It combines the main icon with an arrow toggle indicator.
-     *
-     * @param toggleIcon The FontIcon instance used for the angle indicator.
-     */
+    // Helper to create the toggle button (Inventory). It combines the main icon with an arrow toggle indicator.
     private Button createToggleNavButton(String text, Ikon mainIconCode, FontIcon toggleIcon) {
         Button btn = new Button(text);
 

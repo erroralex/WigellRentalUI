@@ -4,6 +4,7 @@ import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.service.InventoryService;
 import com.nilsson.camping.ui.UIUtil;
+import com.nilsson.camping.ui.dialogs.ShowAllVehiclesDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -35,7 +36,7 @@ public class VehicleView extends VBox {
         this.setAlignment(Pos.TOP_LEFT);
         VBox.setVgrow(recreationalVehicleTable, Priority.ALWAYS);
 
-        Label title = new Label("Vehicle Management");
+        Label title = new Label("Available Vehicles");
         title.getStyleClass().add("content-title");
 
         // Search Field Setup
@@ -87,7 +88,6 @@ public class VehicleView extends VBox {
         // Add to table
         recreationalVehicleTable.getColumns().addAll(makeCol, modelCol, typeCol, yearCol, capacityCol, priceCol);
         recreationalVehicleTable.setItems(masterData);
-        //recreationalVehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Filtering using Streams
         filteredData = new FilteredList<>(masterData, p -> true);
@@ -187,7 +187,12 @@ public class VehicleView extends VBox {
         }
     }
 
-    // Create a container for Add, Edit, and Remove buttons
+    private void handleShowAllVehicles() {
+        ShowAllVehiclesDialog dialog = new ShowAllVehiclesDialog();
+        dialog.showAndWait();
+    }
+
+    // Create a container for Add, Edit, Remove and Show All buttons
     private HBox createButtonBar() {
 
         Button btnAdd = new Button("Add Vehicle");
@@ -207,7 +212,11 @@ public class VehicleView extends VBox {
         btnRemove.getStyleClass().add("action-button");
         btnRemove.setOnAction(actionEvent -> handleRemoveRecreationalVehicle());
 
-        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove);
+        Button btnShowAll = new Button("Show All Vehicles");
+        btnShowAll.getStyleClass().add("action-button");
+        btnShowAll.setOnAction(actionEvent -> handleShowAllVehicles());
+
+        HBox buttonBar = new HBox(10, btnAdd, btnEdit, btnRemove, btnShowAll);
         buttonBar.setAlignment(Pos.CENTER_LEFT);
         return buttonBar;
     }

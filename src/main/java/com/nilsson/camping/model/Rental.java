@@ -1,5 +1,8 @@
 package com.nilsson.camping.model;
 
+import com.nilsson.camping.model.items.IRentable;
+import java.time.LocalDate;
+
 public class Rental {
 
     private int rentalId;
@@ -18,6 +21,15 @@ public class Rental {
         this.itemName = itemName;
         this.itemType = itemType;
         this.startDate = startDate;
+        this.rentalDays = rentalDays;
+    }
+
+    public Rental(int rentalId, Member member, IRentable item, LocalDate startDate, int rentalDays) {
+        this.rentalId = rentalId;
+        this.memberName = member.getFirstName() + " " + member.getLastName();
+        this.itemName = item.getItemName();
+        this.itemType = item.getItemType();
+        this.startDate = startDate.toString();
         this.rentalDays = rentalDays;
     }
 

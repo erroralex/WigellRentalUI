@@ -1,6 +1,6 @@
 package com.nilsson.camping.model.items;
 
-public class Gear extends Item {
+public class Gear extends Item implements IRentable {
 
     private String model;
     private String type;
@@ -48,5 +48,25 @@ public class Gear extends Item {
 
     public void setRented(boolean rented) {
         this.rented = rented;
+    }
+
+    @Override
+    public String toString() {
+        String status = this.isRented() ? " (Rented)" : " (Available)";
+        return String.format("%s (%s) - Daily Price: %.2f SEK%s",
+                this.getModel(),
+                this.getType(),
+                this.getDailyPrice(),
+                status);
+    }
+
+    @Override
+    public String getItemType() {
+        return getType();
+    }
+
+    @Override
+    public String getItemName() {
+        return getModel();
     }
 }
