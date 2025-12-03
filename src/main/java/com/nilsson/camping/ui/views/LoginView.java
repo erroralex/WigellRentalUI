@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.views;
 
+import com.nilsson.camping.ui.UIUtil;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -152,12 +153,9 @@ public class LoginView extends VBox {
                     primaryStage.setTitle("Wigell Camping - Home");
                 }
             } else {
-                // Show alert for incorrect password
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login Failed");
-                alert.setHeaderText(null);
-                alert.setContentText("Incorrect password. Please use '0000'.");
-                alert.showAndWait();
+                // Alert for incorrect password
+                UIUtil.showErrorAlert("Login Failed",null, "Incorrect password. Please use '0000'."
+                );
             }
         });
     }
