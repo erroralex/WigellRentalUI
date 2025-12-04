@@ -2,14 +2,20 @@ package com.nilsson.camping.ui.views;
 
 import com.nilsson.camping.model.DailyProfit;
 import com.nilsson.camping.service.ProfitsService;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
@@ -20,6 +26,7 @@ public class ProfitsView extends VBox {
     private final ProfitsService profitsService = new ProfitsService();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd");
     private final Label incomeTodayValueLabel = new Label();
+    private final XYChart.Series<String, Number> profitSeries = new XYChart.Series<>();
 
     public ProfitsView() {
 
@@ -40,7 +47,6 @@ public class ProfitsView extends VBox {
                 .mapToDouble(DailyProfit::getIncome)
                 .sum();
 
-        // Create an HBox for the Total Recorded Income label.
         Label totalLabelDesc = new Label("Total Recorded Income:");
         totalLabelDesc.getStyleClass().add("income-stat-label");
 
@@ -51,29 +57,73 @@ public class ProfitsView extends VBox {
         totalIncomeBox.setAlignment(Pos.CENTER_LEFT);
         totalIncomeBox.getStyleClass().add("income-stats-box");
 
+        // Create Bar Chart with dynamic Y-axis
         BarChart<String, Number> incomeChart = createIncomeBarChart();
+        incomeChart.getData().add(profitSeries);
 
-        this.getChildren().addAll(title, incomeTodayBox, totalIncomeBox, incomeChart);
+        // Auto-recalculate on load and populate chart data
+        profitsService.recalculateProfitsFromRentals();
+        updateChartData();
+
+        // Live binding for Today's Income
+        incomeTodayValueLabel.textProperty().bind(
+                Bindings.createStringBinding(() ->
+                                String.format("%.2f SEK", profitsService.getIncomeToday()),
+                        profitsService.getObservableDailyProfits()
+                )
+        );
+
+        // Refresh button
+        Button refreshBtn = new Button("Refresh Profits");
+        refreshBtn.setOnAction(e -> {
+            profitsService.recalculateProfitsFromRentals();
+            updateChartData();
+        });
+        refreshBtn.getStyleClass().add("action-button");
+
+        // Add all to layout
+        this.getChildren().addAll(title, incomeTodayBox, totalIncomeBox, refreshBtn, incomeChart);
     }
 
-    // Creates the HBox for the Income Today label.
+    private void updateChartData() {
+        LocalDate today = LocalDate.now();
+        LocalDate fourteenDaysAgo = today.minusDays(14);
+
+        List<DailyProfit> recentProfits = profitsService.getDailyProfits().stream()
+                .filter(p -> !p.getDate().isBefore(fourteenDaysAgo))
+                .sorted(Comparator.comparing(DailyProfit::getDate))
+                .collect(Collectors.toList());
+
+        ObservableList<XYChart.Data<String, Number>> newData = FXCollections.observableArrayList();
+        for (DailyProfit profit : recentProfits) {
+            newData.add(new XYChart.Data<>(
+                    profit.getDate().format(DATE_FORMATTER),
+                    profit.getIncome()));
+        }
+        profitSeries.getData().setAll(newData);
+
+        // Dynamic Y-axis
+        if (!newData.isEmpty()) {
+            double maxIncome = newData.stream()
+                    .mapToDouble(data -> data.getYValue().doubleValue())
+                    .max()
+                    .orElse(0.0);
+
+            // Scale to 120% of max
+            double upperBound = Math.ceil(maxIncome * 1.2 / 1000.0) * 1000.0;
+            NumberAxis yAxis = (NumberAxis) profitSeries.getChart().getYAxis();
+            yAxis.setUpperBound(upperBound);
+            yAxis.setTickUnit(upperBound / 5);
+            yAxis.setAutoRanging(false);
+        }
+    }
+
     private HBox createIncomeTodayBox() {
-
-        // Retrieve data
-        double incomeToday = profitsService.getIncomeToday();
-
-        // Format the income string
-        String formattedIncome = String.format("%,.2f SEK", incomeToday);
-
-        // Description Label
         Label incomeTodayLabel = new Label("Income Today:");
         incomeTodayLabel.getStyleClass().add("income-stat-label");
 
-        // Value Label
-        incomeTodayValueLabel.setText(formattedIncome);
         incomeTodayValueLabel.getStyleClass().add("income-stat-value");
 
-        // Add to Container
         HBox box = new HBox(10, incomeTodayLabel, incomeTodayValueLabel);
         box.setAlignment(Pos.CENTER_LEFT);
         box.getStyleClass().add("income-stats-box");
@@ -81,36 +131,21 @@ public class ProfitsView extends VBox {
         return box;
     }
 
-    // Bar Chart
     private BarChart<String, Number> createIncomeBarChart() {
-        // Get and sort data by date
-        List<DailyProfit> sortedProfits = profitsService.getDailyProfits().stream()
-                .sorted(Comparator.comparing(DailyProfit::getDate))
-                .collect(Collectors.toList());
-
-        // Setup the chart X & Y
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
+
+        // Enable auto-ranging
+        yAxis.setAutoRanging(true);
+        yAxis.setForceZeroInRange(false);
+
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
-        barChart.setTitle("Daily Income Over Time (SEK)");
+        barChart.setTitle("Daily Income - Last 14 Days (SEK)");
         xAxis.setLabel("Date");
         yAxis.setLabel("Income (SEK)");
         barChart.setLegendVisible(false);
 
-        // Data
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-        for (DailyProfit profit : sortedProfits) {
-            series.getData().add(new XYChart.Data<>(
-                    profit.getDate().format(DATE_FORMATTER),
-                    profit.getIncome()));
-        }
-
-        ObservableList<XYChart.Series<String, Number>> data = FXCollections.observableArrayList(series);
-        barChart.setData(data);
-
-        // CSS
         barChart.getStyleClass().add("profit-chart");
 
         return barChart;
