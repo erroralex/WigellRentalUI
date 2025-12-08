@@ -1,182 +1,161 @@
-[
-  {
-    "dailyPrice": 1223.0,
-    "make": "Ford",
-    "model": "E-Series RV",
-    "year": "2019",
-    "capacity": "8 people",
-    "type": "Motorhome",
-    "rented": false
-  },
-  {
-    "dailyPrice": 752.0,
-    "make": "Hobby",
-    "model": "De Luxe 545",
-    "year": "2020",
-    "capacity": "4 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1500.0,
-    "make": "Mercedes-Benz",
-    "model": "Sprinter Van Conversion",
-    "year": "2022",
-    "capacity": "2 people",
-    "type": "Campervan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 600.0,
-    "make": "Kabe",
-    "model": "Estate 630",
-    "year": "2019",
-    "capacity": "3 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1350.0,
-    "make": "Fiat",
-    "model": "Ducato 4x4 Camper",
-    "year": "2021",
-    "capacity": "4 people",
-    "type": "Campervan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1300.0,
-    "make": "Adria",
-    "model": "Coral Motorhome",
-    "year": "2023",
-    "capacity": "5 people",
-    "type": "Motorhome",
-    "rented": true
-  },
-  {
-    "dailyPrice": 1050.0,
-    "make": "Citroën",
-    "model": "Jumper RV",
-    "year": "2017",
-    "capacity": "4 people",
-    "type": "Motorhome",
-    "rented": false
-  },
-  {
-    "dailyPrice": 820.0,
-    "make": "Polar",
-    "model": "Edition 590",
-    "year": "2019",
-    "capacity": "5 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1100.0,
-    "make": "Volkswagen",
-    "model": "California Ocean Campervan",
-    "year": "2024",
-    "capacity": "2 people",
-    "type": "Campervan",
-    "rented": true
-  },
-  {
-    "dailyPrice": 550.0,
-    "make": "Polar",
-    "model": "Mini Caravan",
-    "year": "2020",
-    "capacity": "2 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1800.0,
-    "make": "Hymer",
-    "model": "Adria Coral Motorhome",
-    "year": "2023",
-    "capacity": "5 people",
-    "type": "Motorhome",
-    "rented": true
-  },
-  {
-    "dailyPrice": 950.0,
-    "make": "Fendt",
-    "model": "Opal 560",
-    "year": "2022",
-    "capacity": "5 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 2100.0,
-    "make": "Dethleffs",
-    "model": "Globetrotter",
-    "year": "2024",
-    "capacity": "6 people",
-    "type": "Motorhome",
-    "rented": false
-  },
-  {
-    "dailyPrice": 700.0,
-    "make": "Eriba",
-    "model": "Touring 310",
-    "year": "2021",
-    "capacity": "3 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1150.0,
-    "make": "Peugeot",
-    "model": "Boxer Vanlife",
-    "year": "2020",
-    "capacity": "2 people",
-    "type": "Campervan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1650.0,
-    "make": "Chausson",
-    "model": "Welcome 747",
-    "year": "2018",
-    "capacity": "7 people",
-    "type": "Motorhome",
-    "rented": false
-  },
-  {
-    "dailyPrice": 650.0,
-    "make": "Bürstner",
-    "model": "Premio Life 420",
-    "year": "2023",
-    "capacity": "4 people",
-    "type": "Caravan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 980.0,
-    "make": "Renault",
-    "model": "Master Camper",
-    "year": "2019",
-    "capacity": "3 people",
-    "type": "Campervan",
-    "rented": false
-  },
-  {
-    "dailyPrice": 2500.0,
-    "make": "Niesmann+Bischoff",
-    "model": "Arto 77E",
-    "year": "2024",
-    "capacity": "4 people",
-    "type": "Motorhome",
-    "rented": false
-  },
-  {
-    "dailyPrice": 1400.0,
-    "make": "Hyundai",
-    "model": "Tucson 2024 SUV",
-    "year": "2024",
-    "capacity": "5 people",
-    "type": "Vehicle",
-    "rented": true
-  }
-]
+[ {
+  "dailyPrice" : 1223.0,
+  "make" : "Ford",
+  "model" : "E-Series RV",
+  "year" : "2019",
+  "capacity" : "8 people",
+  "type" : "Motorhome",
+  "rented" : false,
+  "itemName" : "Ford E-Series RV",
+  "itemType" : "Motorhome"
+}, {
+  "dailyPrice" : 752.0,
+  "make" : "Hobby",
+  "model" : "De Luxe 545",
+  "year" : "2020",
+  "capacity" : "4 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Hobby De Luxe 545",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 1500.0,
+  "make" : "Mercedes-Benz",
+  "model" : "Sprinter Van Conversion",
+  "year" : "2022",
+  "capacity" : "2 people",
+  "type" : "Campervan",
+  "rented" : false,
+  "itemName" : "Mercedes-Benz Sprinter Van Conversion",
+  "itemType" : "Campervan"
+}, {
+  "dailyPrice" : 600.0,
+  "make" : "Kabe",
+  "model" : "Estate 630",
+  "year" : "2019",
+  "capacity" : "3 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Kabe Estate 630",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 1350.0,
+  "make" : "Fiat",
+  "model" : "Ducato 4x4 Camper",
+  "year" : "2021",
+  "capacity" : "4 people",
+  "type" : "Campervan",
+  "rented" : false,
+  "itemName" : "Fiat Ducato 4x4 Camper",
+  "itemType" : "Campervan"
+}, {
+  "dailyPrice" : 1050.0,
+  "make" : "Citroën",
+  "model" : "Jumper RV",
+  "year" : "2017",
+  "capacity" : "4 people",
+  "type" : "Motorhome",
+  "rented" : false,
+  "itemName" : "Citroën Jumper RV",
+  "itemType" : "Motorhome"
+}, {
+  "dailyPrice" : 820.0,
+  "make" : "Polar",
+  "model" : "Edition 590",
+  "year" : "2019",
+  "capacity" : "5 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Polar Edition 590",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 550.0,
+  "make" : "Polar",
+  "model" : "Mini Caravan",
+  "year" : "2020",
+  "capacity" : "2 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Polar Mini Caravan",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 950.0,
+  "make" : "Fendt",
+  "model" : "Opal 560",
+  "year" : "2022",
+  "capacity" : "5 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Fendt Opal 560",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 2100.0,
+  "make" : "Dethleffs",
+  "model" : "Globetrotter",
+  "year" : "2024",
+  "capacity" : "6 people",
+  "type" : "Motorhome",
+  "rented" : false,
+  "itemName" : "Dethleffs Globetrotter",
+  "itemType" : "Motorhome"
+}, {
+  "dailyPrice" : 700.0,
+  "make" : "Eriba",
+  "model" : "Touring 310",
+  "year" : "2021",
+  "capacity" : "3 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Eriba Touring 310",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 1150.0,
+  "make" : "Peugeot",
+  "model" : "Boxer Vanlife",
+  "year" : "2020",
+  "capacity" : "2 people",
+  "type" : "Campervan",
+  "rented" : false,
+  "itemName" : "Peugeot Boxer Vanlife",
+  "itemType" : "Campervan"
+}, {
+  "dailyPrice" : 1650.0,
+  "make" : "Chausson",
+  "model" : "Welcome 747",
+  "year" : "2018",
+  "capacity" : "7 people",
+  "type" : "Motorhome",
+  "rented" : false,
+  "itemName" : "Chausson Welcome 747",
+  "itemType" : "Motorhome"
+}, {
+  "dailyPrice" : 650.0,
+  "make" : "Bürstner",
+  "model" : "Premio Life 420",
+  "year" : "2023",
+  "capacity" : "4 people",
+  "type" : "Caravan",
+  "rented" : false,
+  "itemName" : "Bürstner Premio Life 420",
+  "itemType" : "Caravan"
+}, {
+  "dailyPrice" : 980.0,
+  "make" : "Renault",
+  "model" : "Master Camper",
+  "year" : "2019",
+  "capacity" : "3 people",
+  "type" : "Campervan",
+  "rented" : false,
+  "itemName" : "Renault Master Camper",
+  "itemType" : "Campervan"
+}, {
+  "dailyPrice" : 2500.0,
+  "make" : "Niesmann+Bischoff",
+  "model" : "Arto 77E",
+  "year" : "2024",
+  "capacity" : "4 people",
+  "type" : "Motorhome",
+  "rented" : false,
+  "itemName" : "Niesmann+Bischoff Arto 77E",
+  "itemType" : "Motorhome"
+} ]

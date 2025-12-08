@@ -96,4 +96,11 @@
   "itemType" : "Gear",
   "startDate" : "2025-12-07",
   "rentalDays" : 10
+}, {
+  "rentalId" : 1018,
+  "memberName" : "Tomas Wigell",
+  "itemName" : "Camp Chair Deluxe",
+  "itemType" : "Other Gear",
+  "startDate" : "2025-12-02",
+  "rentalDays" : 33
 } ]

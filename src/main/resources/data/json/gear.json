@@ -1,121 +1,73 @@
 [ {
-  "dailyPrice" : 222.0,
-  "model" : "Family Tent 6P",
-  "type" : "Tent",
-  "capacity" : "6 people",
-  "rented" : true
-}, {
-  "dailyPrice" : 150.0,
-  "model" : "Expedition Backpack 80L",
-  "type" : "Backpack",
-  "capacity" : "80L",
-  "rented" : true
-}, {
-  "dailyPrice" : 200.0,
-  "model" : "Sleeping Bag -10°C",
-  "type" : "Other Gear",
-  "capacity" : "1 person",
-  "rented" : true
-}, {
-  "dailyPrice" : 120.0,
-  "model" : "Portable Power Station 1000W",
-  "type" : "Other Gear",
-  "capacity" : "N/A",
-  "rented" : true
-}, {
-  "dailyPrice" : 350.0,
-  "model" : "Climbing Harness Deluxe",
-  "type" : "Other Gear",
-  "capacity" : "N/A",
-  "rented" : true
-}, {
-  "dailyPrice" : 80.0,
-  "model" : "Kayaking Kit Single",
-  "type" : "Other Gear",
-  "capacity" : "N/A",
-  "rented" : true
-}, {
-  "dailyPrice" : 55.0,
-  "model" : "Mountain Bike Pro-X",
-  "type" : "Other Gear",
-  "capacity" : "N/A",
-  "rented" : true
-}, {
   "dailyPrice" : 110.0,
   "model" : "Outdoor Grill Set Deluxe",
   "type" : "Other Gear",
   "capacity" : "N/A",
-  "rented" : false
-}, {
-  "dailyPrice" : 40.0,
-  "model" : "Portable Cooler Box",
-  "type" : "Other Gear",
-  "capacity" : "N/A",
-  "rented" : true
-}, {
-  "dailyPrice" : 130.0,
-  "model" : "Electric Scooter",
-  "type" : "Other Gear",
-  "capacity" : "1 person",
-  "rented" : true
-}, {
-  "dailyPrice" : 280.0,
-  "model" : "Camping Chair Comfort",
-  "type" : "Other Gear",
-  "capacity" : "1 person",
-  "rented" : true
+  "rented" : false,
+  "itemName" : "Outdoor Grill Set Deluxe",
+  "itemType" : "Other Gear"
 }, {
   "dailyPrice" : 450.0,
   "model" : "Arctic Shield 4S",
   "type" : "Tent",
   "capacity" : "2 people",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Arctic Shield 4S",
+  "itemType" : "Tent"
 }, {
   "dailyPrice" : 33.0,
   "model" : "Junior Hiker 15L",
   "type" : "Backpack",
   "capacity" : "15L",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Junior Hiker 15L",
+  "itemType" : "Backpack"
 }, {
   "dailyPrice" : 150.0,
   "model" : "Expedition 110L",
   "type" : "Backpack",
   "capacity" : "110L",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Expedition 110L",
+  "itemType" : "Backpack"
 }, {
   "dailyPrice" : 25.0,
   "model" : "Portable Gas Stove",
   "type" : "Other Gear",
   "capacity" : "N/A",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Portable Gas Stove",
+  "itemType" : "Other Gear"
 }, {
   "dailyPrice" : 45.0,
   "model" : "Double Hammock Pro",
   "type" : "Other Gear",
   "capacity" : "2 people",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Double Hammock Pro",
+  "itemType" : "Other Gear"
 }, {
   "dailyPrice" : 15.0,
   "model" : "Solar Powered Lantern",
   "type" : "Other Gear",
   "capacity" : "N/A",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Solar Powered Lantern",
+  "itemType" : "Other Gear"
 }, {
   "dailyPrice" : 35.0,
   "model" : "Water Filter System",
   "type" : "Other Gear",
   "capacity" : "N/A",
-  "rented" : false
-}, {
-  "dailyPrice" : 10.0,
-  "model" : "Camp Chair Deluxe",
-  "type" : "Other Gear",
-  "capacity" : "1 person",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Water Filter System",
+  "itemType" : "Other Gear"
 }, {
   "dailyPrice" : 60.0,
   "model" : "Sleeping Bag -20C",
   "type" : "Other Gear",
   "capacity" : "1 person",
-  "rented" : false
+  "rented" : false,
+  "itemName" : "Sleeping Bag -20C",
+  "itemType" : "Other Gear"
 } ]

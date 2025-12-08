@@ -36,7 +36,7 @@ public class MainApp extends Application {
             sessionTimerService = new SessionTimerService(customTitleBar);
             UserSession.initialize(customTitleBar);
 
-            // Go back to Login View
+            // Go back to the Login View
             onLogout = () -> {
                 UserSession.logout();
                 showLoginView(primaryStage);
@@ -67,9 +67,7 @@ public class MainApp extends Application {
         }
     }
 
-    /**
-     * Handles the clean shutdown logic when the user presses the 'X' button.
-     */
+    // Handles the clean shutdown logic when pressing the 'X' button.
     private void handleCloseOrLogout() {
         // Stop the Timer Thread
         if (sessionTimerService != null) {

@@ -4,7 +4,8 @@
 
 ## Bakgrund
 
-Du har fått en provanställning på Wigellkoncernen och som andra uppdrag ska du bygga en Java-applikation med grafiskt gränssnitt som modellerar en medlemsklubb med uthyrning av utrustning (t.ex. fordon, verktyg, sportprylar eller liknande beroende på ditt val av applikation).
+Du har fått en provanställning på Wigellkoncernen och som andra uppdrag ska du bygga en Java-applikation med grafiskt gränssnitt som modellerar en medlemsklubb 
+med uthyrning av utrustning (t.ex. fordon, verktyg, sportprylar eller liknande beroende på ditt val av applikation).
 
 ***
 
@@ -15,7 +16,8 @@ Du har fått en provanställning på Wigellkoncernen och som andra uppdrag ska d
 Klasser som ska finnas i applikationen:
 
 * **Member** (id, namn, status/level, historik)
-* **Item** (abstract) $\rightarrow$ Subklasser som ex. Vehicle, Tool, SportGear eller liknande beroende på ditt val av applikation. Var och en av klasserna ska innehålla sina unika attribut och metoder.
+* **Item** (abstract) -> Subklasser som ex. Vehicle, Tool, SportGear eller liknande beroende på ditt val av applikation. 
+* Var och en av klasserna ska innehålla sina unika attribut och metoder.
 * **Rental** (kopplar member och item för en viss tidsperiod)
 * **PricePolicy** (interface) + konkreta strategier, ex. standard, student, premium.
 * **Inventory** och **MemberRegistry**

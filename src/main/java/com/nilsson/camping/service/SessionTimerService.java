@@ -24,12 +24,12 @@ public class SessionTimerService implements Runnable {
             totalMillis = System.currentTimeMillis() - startTime;
 
             // Calculate time
+            long hours = (totalMillis / 3600000) % 60;
             long minutes = (totalMillis / 60000) % 60;
             long seconds = (totalMillis / 1000) % 60;
-            long millis = (totalMillis % 1000) / 10;
 
             // Update UI on the JavaFX Application Thread
-            String timeString = String.format("%02d:%02d:%02d", minutes, seconds, millis);
+            String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
             Platform.runLater(() -> view.timeDisplayLabel.setText(timeString));
 
             try {
