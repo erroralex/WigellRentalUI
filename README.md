@@ -45,7 +45,7 @@ This project follows a strict **Model-View-Service** architecture to ensure sepa
 * **Observer Pattern:** Utilized via JavaFX Observables to update the UI (Charts, Tables) instantly when underlying data changes.
 
 ### Technology Stack
-* **Language:** Java 17+
+* **Language:** Java 8+
 * **GUI Framework:** JavaFX (Controls, Charts, Graphics)
 * **Build Tool:** Maven
 * **Persistence:** JSON (via Jackson Library) for saving/loading data.
