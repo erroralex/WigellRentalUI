@@ -8,13 +8,13 @@ public class Rental {
     private int rentalId;
     private int memberId;
     private int itemId;
-    private String startDate;
+    private LocalDate startDate;
     private int rentalDays;
 
     public Rental() { }
 
 
-    public Rental(int rentalId, String memberName, String itemName, String itemType, String startDate, int rentalDays) {
+    public Rental(int rentalId, String memberName, String itemName, String itemType, LocalDate startDate, int rentalDays) {
         this.rentalId = rentalId;
         this.startDate = startDate;
         this.rentalDays = rentalDays;
@@ -24,7 +24,7 @@ public class Rental {
         this.rentalId = rentalId;
         this.memberId = member.getId();
         this.itemId = item.getItemId();
-        this.startDate = startDate.toString();
+        this.startDate = startDate;
         this.rentalDays = rentalDays;
     }
 
@@ -37,8 +37,8 @@ public class Rental {
     public int getItemId() { return itemId; }
     public void setItemId(int itemId) { this.itemId = itemId; }
 
-    public String getStartDate() { return startDate; }
-    public void setStartDate(String startDate) { this.startDate = startDate; }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
     public int getRentalDays() { return rentalDays; }
     public void setRentalDays(int rentalDays) { this.rentalDays = rentalDays; }

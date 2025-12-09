@@ -7,8 +7,8 @@
   "capacity" : "8 people",
   "type" : "Motorhome",
   "rented" : false,
-  "itemName" : "Ford E-Series RV",
-  "itemType" : "Motorhome"
+  "itemType" : "Motorhome",
+  "itemName" : "Ford E-Series RV"
 }, {
   "itemId" : 10002,
   "dailyPrice" : 752.0,
@@ -18,8 +18,8 @@
   "capacity" : "4 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Hobby De Luxe 545",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Hobby De Luxe 545"
 }, {
   "itemId" : 10003,
   "dailyPrice" : 1500.0,
@@ -29,8 +29,8 @@
   "capacity" : "2 people",
   "type" : "Campervan",
   "rented" : false,
-  "itemName" : "Mercedes-Benz Sprinter Van Conversion",
-  "itemType" : "Campervan"
+  "itemType" : "Campervan",
+  "itemName" : "Mercedes-Benz Sprinter Van Conversion"
 }, {
   "itemId" : 10004,
   "dailyPrice" : 600.0,
@@ -40,8 +40,8 @@
   "capacity" : "3 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Kabe Estate 630",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Kabe Estate 630"
 }, {
   "itemId" : 10005,
   "dailyPrice" : 1350.0,
@@ -51,8 +51,8 @@
   "capacity" : "4 people",
   "type" : "Campervan",
   "rented" : false,
-  "itemName" : "Fiat Ducato 4x4 Camper",
-  "itemType" : "Campervan"
+  "itemType" : "Campervan",
+  "itemName" : "Fiat Ducato 4x4 Camper"
 }, {
   "itemId" : 10006,
   "dailyPrice" : 1050.0,
@@ -62,8 +62,8 @@
   "capacity" : "4 people",
   "type" : "Motorhome",
   "rented" : false,
-  "itemName" : "Citroën Jumper RV",
-  "itemType" : "Motorhome"
+  "itemType" : "Motorhome",
+  "itemName" : "Citroën Jumper RV"
 }, {
   "itemId" : 10007,
   "dailyPrice" : 820.0,
@@ -73,8 +73,8 @@
   "capacity" : "5 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Polar Edition 590",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Polar Edition 590"
 }, {
   "itemId" : 10008,
   "dailyPrice" : 550.0,
@@ -84,8 +84,8 @@
   "capacity" : "2 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Polar Mini Caravan",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Polar Mini Caravan"
 }, {
   "itemId" : 10009,
   "dailyPrice" : 950.0,
@@ -95,8 +95,8 @@
   "capacity" : "5 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Fendt Opal 560",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Fendt Opal 560"
 }, {
   "itemId" : 10010,
   "dailyPrice" : 2100.0,
@@ -106,8 +106,8 @@
   "capacity" : "6 people",
   "type" : "Motorhome",
   "rented" : false,
-  "itemName" : "Dethleffs Globetrotter",
-  "itemType" : "Motorhome"
+  "itemType" : "Motorhome",
+  "itemName" : "Dethleffs Globetrotter"
 }, {
   "itemId" : 10011,
   "dailyPrice" : 700.0,
@@ -117,8 +117,8 @@
   "capacity" : "3 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Eriba Touring 310",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Eriba Touring 310"
 }, {
   "itemId" : 10012,
   "dailyPrice" : 1150.0,
@@ -128,8 +128,8 @@
   "capacity" : "2 people",
   "type" : "Campervan",
   "rented" : false,
-  "itemName" : "Peugeot Boxer Vanlife",
-  "itemType" : "Campervan"
+  "itemType" : "Campervan",
+  "itemName" : "Peugeot Boxer Vanlife"
 }, {
   "itemId" : 10013,
   "dailyPrice" : 1650.0,
@@ -139,8 +139,8 @@
   "capacity" : "7 people",
   "type" : "Motorhome",
   "rented" : false,
-  "itemName" : "Chausson Welcome 747",
-  "itemType" : "Motorhome"
+  "itemType" : "Motorhome",
+  "itemName" : "Chausson Welcome 747"
 }, {
   "itemId" : 10014,
   "dailyPrice" : 650.0,
@@ -150,8 +150,8 @@
   "capacity" : "4 people",
   "type" : "Caravan",
   "rented" : false,
-  "itemName" : "Bürstner Premio Life 420",
-  "itemType" : "Caravan"
+  "itemType" : "Caravan",
+  "itemName" : "Bürstner Premio Life 420"
 }, {
   "itemId" : 10015,
   "dailyPrice" : 980.0,
@@ -161,8 +161,8 @@
   "capacity" : "3 people",
   "type" : "Campervan",
   "rented" : false,
-  "itemName" : "Renault Master Camper",
-  "itemType" : "Campervan"
+  "itemType" : "Campervan",
+  "itemName" : "Renault Master Camper"
 }, {
   "itemId" : 10016,
   "dailyPrice" : 2500.0,
@@ -172,6 +172,6 @@
   "capacity" : "4 people",
   "type" : "Motorhome",
   "rented" : false,
-  "itemName" : "Niesmann+Bischoff Arto 77E",
-  "itemType" : "Motorhome"
+  "itemType" : "Motorhome",
+  "itemName" : "Niesmann+Bischoff Arto 77E"
 } ]

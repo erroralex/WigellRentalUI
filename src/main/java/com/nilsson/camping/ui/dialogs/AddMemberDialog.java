@@ -53,6 +53,22 @@ public class AddMemberDialog extends Dialog<Member> {
         grid.add(new Label("Membership Level"), 0, 2);
         grid.add(levelBox, 1, 2);
 
+        // Membership level descriptions
+        Label descriptionLabel = new Label(
+                "• Student: 20% Discount on rentals.\n" +
+                        "• Standard: Regular base rates.\n" +
+                        "• Premium: 20% Surcharge (Includes 24/7 Support)."
+        );
+
+        // Text wrapping and width
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setMaxWidth(300);
+
+        // Styling to look smaller
+        descriptionLabel.setStyle("-fx-font-size: 0.85em; -fx-opacity: 0.7;");
+
+        grid.add(descriptionLabel, 1, 3);
+
         getDialogPane().setContent(grid);
 
         // Focus

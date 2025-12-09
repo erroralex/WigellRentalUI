@@ -5,17 +5,17 @@
   "type" : "Other Gear",
   "capacity" : "N/A",
   "rented" : false,
-  "itemName" : "Outdoor Grill Set Deluxe",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Outdoor Grill Set Deluxe"
 }, {
   "itemId" : 11002,
   "dailyPrice" : 450.0,
   "model" : "Arctic Shield 4S",
   "type" : "Tent",
   "capacity" : "2 people",
-  "rented" : false,
-  "itemName" : "Arctic Shield 4S",
-  "itemType" : "Tent"
+  "rented" : true,
+  "itemType" : "Tent",
+  "itemName" : "Arctic Shield 4S"
 }, {
   "itemId" : 11003,
   "dailyPrice" : 33.0,
@@ -23,8 +23,8 @@
   "type" : "Backpack",
   "capacity" : "15L",
   "rented" : false,
-  "itemName" : "Junior Hiker 15L",
-  "itemType" : "Backpack"
+  "itemType" : "Backpack",
+  "itemName" : "Junior Hiker 15L"
 }, {
   "itemId" : 11004,
   "dailyPrice" : 150.0,
@@ -32,8 +32,8 @@
   "type" : "Backpack",
   "capacity" : "110L",
   "rented" : false,
-  "itemName" : "Expedition 110L",
-  "itemType" : "Backpack"
+  "itemType" : "Backpack",
+  "itemName" : "Expedition 110L"
 }, {
   "itemId" : 11005,
   "dailyPrice" : 25.0,
@@ -41,8 +41,8 @@
   "type" : "Other Gear",
   "capacity" : "N/A",
   "rented" : false,
-  "itemName" : "Portable Gas Stove",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Portable Gas Stove"
 }, {
   "itemId" : 11006,
   "dailyPrice" : 45.0,
@@ -50,8 +50,8 @@
   "type" : "Other Gear",
   "capacity" : "2 people",
   "rented" : false,
-  "itemName" : "Double Hammock Pro",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Double Hammock Pro"
 }, {
   "itemId" : 11007,
   "dailyPrice" : 15.0,
@@ -59,8 +59,8 @@
   "type" : "Other Gear",
   "capacity" : "N/A",
   "rented" : false,
-  "itemName" : "Solar Powered Lantern",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Solar Powered Lantern"
 }, {
   "itemId" : 11008,
   "dailyPrice" : 35.0,
@@ -68,8 +68,8 @@
   "type" : "Other Gear",
   "capacity" : "N/A",
   "rented" : false,
-  "itemName" : "Water Filter System",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Water Filter System"
 }, {
   "itemId" : 11009,
   "dailyPrice" : 60.0,
@@ -77,8 +77,8 @@
   "type" : "Other Gear",
   "capacity" : "1 person",
   "rented" : false,
-  "itemName" : "Sleeping Bag -20C",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Sleeping Bag -20C"
 }, {
   "itemId" : 11010,
   "dailyPrice" : 25.0,
@@ -86,6 +86,6 @@
   "type" : "Other Gear",
   "capacity" : "3L",
   "rented" : true,
-  "itemName" : "Camelback 3000",
-  "itemType" : "Other Gear"
+  "itemType" : "Other Gear",
+  "itemName" : "Camelback 3000"
 } ]

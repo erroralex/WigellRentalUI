@@ -2,90 +2,96 @@
   "rentalId" : 1001,
   "memberId" : 8519,
   "itemId" : 10001,
-  "startDate" : "2025-11-20",
+  "startDate" : [ 2025, 11, 20 ],
   "rentalDays" : 7
 }, {
   "rentalId" : 1002,
   "memberId" : 2640,
   "itemId" : 11002,
-  "startDate" : "2025-11-25",
+  "startDate" : [ 2025, 11, 25 ],
   "rentalDays" : 3
 }, {
   "rentalId" : 1004,
   "memberId" : 5028,
   "itemId" : 10003,
-  "startDate" : "2025-11-29",
+  "startDate" : [ 2025, 11, 29 ],
   "rentalDays" : 14
 }, {
   "rentalId" : 1005,
   "memberId" : 3761,
   "itemId" : 11006,
-  "startDate" : "2025-11-30",
+  "startDate" : [ 2025, 11, 30 ],
   "rentalDays" : 5
 }, {
   "rentalId" : 1006,
   "memberId" : 1495,
   "itemId" : 11005,
-  "startDate" : "2025-12-01",
+  "startDate" : [ 2025, 12, 1 ],
   "rentalDays" : 2
 }, {
   "rentalId" : 1007,
   "memberId" : 4832,
   "itemId" : 11007,
-  "startDate" : "2025-12-01",
+  "startDate" : [ 2025, 12, 1 ],
   "rentalDays" : 7
 }, {
   "rentalId" : 1008,
   "memberId" : 7306,
   "itemId" : 10016,
-  "startDate" : "2025-12-02",
+  "startDate" : [ 2025, 12, 2 ],
   "rentalDays" : 30
 }, {
   "rentalId" : 1009,
   "memberId" : 6924,
   "itemId" : 11009,
-  "startDate" : "2025-12-03",
+  "startDate" : [ 2025, 12, 3 ],
   "rentalDays" : 4
 }, {
   "rentalId" : 1010,
   "memberId" : 1057,
   "itemId" : 11008,
-  "startDate" : "2025-12-03",
+  "startDate" : [ 2025, 12, 3 ],
   "rentalDays" : 1
 }, {
   "rentalId" : 1011,
   "memberId" : 8519,
   "itemId" : 11004,
-  "startDate" : "2025-12-04",
+  "startDate" : [ 2025, 12, 4 ],
   "rentalDays" : 3
 }, {
   "rentalId" : 1012,
   "memberId" : 2640,
   "itemId" : 11001,
-  "startDate" : "2025-12-04",
+  "startDate" : [ 2025, 12, 4 ],
   "rentalDays" : 2
 }, {
   "rentalId" : 1013,
   "memberId" : 7306,
   "itemId" : 10001,
-  "startDate" : "2025-12-05",
+  "startDate" : [ 2025, 12, 5 ],
   "rentalDays" : 7
 }, {
   "rentalId" : 1015,
   "memberId" : 4832,
   "itemId" : 11006,
-  "startDate" : "2025-12-06",
+  "startDate" : [ 2025, 12, 6 ],
   "rentalDays" : 5
 }, {
   "rentalId" : 1017,
   "memberId" : 3761,
   "itemId" : 11005,
-  "startDate" : "2025-12-07",
+  "startDate" : [ 2025, 12, 7 ],
   "rentalDays" : 10
 }, {
   "rentalId" : 1019,
   "memberId" : 1768,
   "itemId" : 11010,
-  "startDate" : "2025-12-02",
+  "startDate" : [ 2025, 12, 2 ],
   "rentalDays" : 10
+}, {
+  "rentalId" : 1020,
+  "memberId" : 9846,
+  "itemId" : 11002,
+  "startDate" : [ 2025, 12, 8 ],
+  "rentalDays" : 7
 } ]

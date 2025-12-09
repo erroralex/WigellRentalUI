@@ -67,7 +67,7 @@ public class ProfitsService {
             }
 
             double dailyPrice = item.getDailyPrice();
-            LocalDate startDate = LocalDate.parse(rental.getStartDate());
+            LocalDate startDate = rental.getStartDate();
             LocalDate endDate = startDate.plusDays(rental.getRentalDays() - 1);
 
             // Iterate through every day of the rental.

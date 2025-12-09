@@ -20,6 +20,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class RentalView extends VBox {
@@ -101,7 +103,7 @@ public class RentalView extends VBox {
         // Start date
         TableColumn<Rental, String> startDateCol = new TableColumn<>("Start Date");
         startDateCol.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getStartDate())
+                new SimpleStringProperty(c.getValue().getStartDate().toString())
         );
 
         // Days
@@ -149,7 +151,7 @@ public class RentalView extends VBox {
                 }
 
                 // Search by Start Date
-                if (rental.getStartDate() != null && rental.getStartDate().toLowerCase().contains(lowerCaseFilter)) {
+                if (rental.getStartDate() != null && rental.getStartDate().toString().contains(lowerCaseFilter)) {
                     return true;
                 }
 
