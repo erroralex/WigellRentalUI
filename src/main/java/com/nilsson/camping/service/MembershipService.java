@@ -1,5 +1,6 @@
 package com.nilsson.camping.service;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.registries.MemberRegistry;
@@ -36,8 +37,11 @@ public class MembershipService {
             registry.addMember(newMember);
 
             // Show success confirmation
-            UIUtil.showInfoAlert("Member Added", "Success",
-                    newMember.getFirstName() + " " + newMember.getLastName() + " (ID: " + newMember.getId() + ") has been successfully added.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.memberAdded"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    newMember.getFirstName() + " " + newMember.getLastName() + " (ID: " + newMember.getId() + ")" +
+                            LanguageManager.getInstance().getString("msg.addedSuccess"));
             return newMember;
         }
         // Cancel was clicked
@@ -47,7 +51,10 @@ public class MembershipService {
     // Accept the Member object from the View
     public void handleEditMember(Member selectedMember) {
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("Edit Error", "No Member Selected", "Please select a member to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.editError"),
+                    LanguageManager.getInstance().getString("error.missingMember"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditMember"));
             return;
         }
 
@@ -59,8 +66,11 @@ public class MembershipService {
 
             DataHandler.saveMembers(MemberRegistry.getInstance().getMembers());
 
-            UIUtil.showInfoAlert("Member Updated", "Success",
-                    updatedMember.getFirstName() + " " + updatedMember.getLastName() + " has been successfully updated.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.memberUpdated"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    updatedMember.getFirstName() + " " + updatedMember.getLastName() +
+                            LanguageManager.getInstance().getString("msg.updateSuccess"));
         }
     }
 
@@ -78,10 +88,16 @@ public class MembershipService {
         boolean wasRemoved = MemberRegistry.getInstance().removeMember(selectedMember);
 
         if (wasRemoved) {
-            UIUtil.showInfoAlert("Member Removed", "Success",
-                    selectedMember.getFirstName() + " " + selectedMember.getLastName() + " has been successfully removed.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.memberRemoved"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    selectedMember.getFirstName() + " " + selectedMember.getLastName() +
+                            LanguageManager.getInstance().getString("msg.removedSuccess"));
         } else {
-            UIUtil.showErrorAlert("Removal Error", "Error", "Could not find member in registry.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.removalFailed"),
+                    LanguageManager.getInstance().getString("error.operationError"),
+                    LanguageManager.getInstance().getString("error.couldNotFindMember"));
         }
 
         return wasRemoved;

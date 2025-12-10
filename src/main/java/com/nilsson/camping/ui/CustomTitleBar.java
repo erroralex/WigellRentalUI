@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui;
 
+import com.nilsson.camping.app.LanguageManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +19,7 @@ public class CustomTitleBar extends HBox {
 
     // Timer components
     public Label timeDisplayLabel = new Label("00:00:00");
-    private Label prefixLabel = new Label("Session Timer: ");
+    private Label prefixLabel = new Label(LanguageManager.getInstance().getString("header.sessionTimer") + " ");
     private HBox timerContainer;
     private final Runnable onExitCleanup;
 

@@ -1,6 +1,7 @@
 package com.nilsson.camping.model.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.nilsson.camping.app.LanguageManager;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecreationalVehicle extends Vehicle implements IRentable {
@@ -26,7 +27,9 @@ public class RecreationalVehicle extends Vehicle implements IRentable {
 
     @Override
     public String toString() {
-        String status = this.isRented() ? " (RENTED)" : " (Available)";
+        String status = this.isRented() ? " " +
+                LanguageManager.getInstance().getString("status.rented") : " " +
+                LanguageManager.getInstance().getString("status.available");
         return String.format("%s %s (%s, %s) - Daily Price: %.2f SEK%s",
                 this.getMake(),
                 this.getModel(),

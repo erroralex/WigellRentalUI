@@ -1,5 +1,6 @@
 package com.nilsson.camping.service;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.data.DataHandler;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.items.IRentable;
@@ -33,8 +34,11 @@ public class InventoryService {
             inventory.addRecreationalVehicle(newVehicleData);
 
             // Show success confirmation
-            UIUtil.showInfoAlert("Vehicle Added", "Success",
-                    newVehicleData.getMake() + " " + newVehicleData.getModel() + " has been successfully added.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.vehicleAdded"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    newVehicleData.getMake() + " " + newVehicleData.getModel() +
+                            LanguageManager.getInstance().getString("msg.addedSuccess"));
             return newVehicleData;
         }
         // Cancel was clicked
@@ -44,7 +48,10 @@ public class InventoryService {
     // Accept the Vehicle object from the View
     public void handleEditRecreationalVehicle(RecreationalVehicle selectedRecreationalVehicle) {
         if (selectedRecreationalVehicle == null) {
-            UIUtil.showErrorAlert("Edit Error", "No Vehicle Selected", "Please select a vehicle to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.editError"),
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditItem"));
             return;
         }
 
@@ -56,8 +63,11 @@ public class InventoryService {
 
             DataHandler.saveRecreationalVehicle(Inventory.getInstance().getRecreationalVehicleList());
 
-            UIUtil.showInfoAlert("Vehicle Updated", "Success",
-                    updatedRecreationalVehicle.getModel() + " " + updatedRecreationalVehicle.getMake() + " has been successfully updated.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.vehicleUpdated"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    updatedRecreationalVehicle.getModel() + " " + updatedRecreationalVehicle.getMake() +
+                            LanguageManager.getInstance().getString("msg.updateSuccess"));
         }
     }
 
@@ -67,8 +77,12 @@ public class InventoryService {
         }
 
         Inventory.getInstance().removeRecreationalVehicle(selectedRecreationalVehicle);
-        UIUtil.showInfoAlert("Recreational Vehicle Removed", "Success", selectedRecreationalVehicle.getMake()
-                + " " + selectedRecreationalVehicle.getModel() + " has been removed.");
+        UIUtil.showInfoAlert(
+                LanguageManager.getInstance().getString("msg.vehicleRemoved"),
+                LanguageManager.getInstance().getString("msg.success"),
+                selectedRecreationalVehicle.getMake()
+                + " " + selectedRecreationalVehicle.getModel() +
+                        LanguageManager.getInstance().getString("msg.removedSuccess"));
         return true;
     }
 
@@ -91,8 +105,11 @@ public class InventoryService {
             inventory.addGear(newGearData);
 
             // Show success confirmation
-            UIUtil.showInfoAlert("Gear Added", "Success",
-                    newGearData.getModel() + " has been successfully added.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.gearAdded"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    newGearData.getModel() +
+                            LanguageManager.getInstance().getString("msg.addedSuccess"));
             return newGearData;
         }
         // Cancel was clicked
@@ -101,7 +118,10 @@ public class InventoryService {
 
     public void handleEditGear(Gear selectedGear) {
         if (selectedGear == null) {
-            UIUtil.showErrorAlert("Edit Error", "No Gear Selected", "Please select a gear item to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.editError"),
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditItem"));
             return;
         }
 
@@ -113,8 +133,11 @@ public class InventoryService {
 
             DataHandler.saveGear(Inventory.getInstance().getGearList());
 
-            UIUtil.showInfoAlert("Gear Updated", "Success",
-                    updatedGear.getModel() + " has been successfully updated.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.gearAdded"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    updatedGear.getModel() +
+                            LanguageManager.getInstance().getString("msg.updateSuccess"));
         }
     }
 
@@ -126,9 +149,16 @@ public class InventoryService {
         boolean wasRemoved = Inventory.getInstance().removeGear(selectedGear);
 
         if (wasRemoved) {
-            UIUtil.showInfoAlert("Gear Removed", "Success", selectedGear.getModel() + " has been successfully removed.");
+            UIUtil.showInfoAlert(
+                    LanguageManager.getInstance().getString("msg.gearRemoved"),
+                    LanguageManager.getInstance().getString("msg.success"),
+                    selectedGear.getModel() +
+                            LanguageManager.getInstance().getString("msg.removedSuccess"));
         } else {
-            UIUtil.showErrorAlert("Removal Error", "Registry Mismatch", "Could not find the selected gear in the inventory registry.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.removalFailed"),
+                    LanguageManager.getInstance().getString("error.registryMismatch"),
+                    LanguageManager.getInstance().getString("error.couldNotFindGear"));
         }
         return wasRemoved;
     }
