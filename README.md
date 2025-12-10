@@ -1,56 +1,57 @@
 # 🏕️ Wigell Camping Admin Portal
 
-**Wigell Camping Admin Portal** is a robust, Java-based management system designed for the administration of a premium camping membership club. It provides comprehensive tools for managing inventory (vehicles & gear), tracking rentals, handling membership data, and visualizing financial performance.
+**Wigell Camping Admin Portal** is a JavaFX application for managing a camping membership club. It handles inventory (vehicles & gear), rental tracking, member management, and financial reporting.
 
-The application is built using **Pure JavaFX** (No FXML) with a focus on Object-Oriented Design principles, layered architecture, and custom UI styling.
+The application is built using **Pure JavaFX** (No FXML) with a focus on Object-Oriented Design principles and layered architecture.
 
 ---
 
 ## ✨ Key Features
 
-### 1. ⚙️ Dynamic Inventory & Rental System
-* **Polymorphic Inventory:** Manages a diverse catalog of rentable items, abstracting generic `Gear` (Tents, Backpacks) and `Vehicles` (RVs, Caravans) under a unified system.
-* **Smart Availability:** Automatically filters items based on their current rental status.
-* **Rental Lifecycle:** Full workflow support for creating new rentals, calculating costs, and processing returns.
+### 1. Inventory & Rental Management
+* **Inventory:** Manages a catalog of rentable items, handling both `Gear` (Tents, Backpacks) and `Vehicles` (RVs, Caravans) via a common interface.
+* **Availability:** Items are automatically filtered based on their current rental status.
+* **Rentals:** functionality to create new rentals, calculate costs based on days/membership, and process returns.
 
-### 2. 💳 Strategy-Based Pricing Engine
-The system implements the **Strategy Pattern** to calculate rental costs dynamically based on membership tiers:
-* **Standard:** Base daily rates.
-* **Student:** Applies a **20% discount** to all rentals.
-* **Premium:** Applies a **20% surcharge** (reflecting premium service add-ons).
+### 2. Pricing Strategies
+The system uses the **Strategy Pattern** to calculate rental costs based on the member's tier:
+* **Standard:** Regular daily rates.
+* **Student:** 20% discount on all rentals.
+* **Premium:** 20% surcharge (for extra services).
 
-### 3. 🧑‍🤝‍🧑 Membership Management
-* **CRUD Operations:** Create, Read, Update, and Delete members with ease.
-* **History Tracking:** View detailed rental history for every individual member.
-* **Data Integrity:** Input validation ensures data consistency across the application.
+### 3. Membership Management
+* **CRUD:** Add, edit, and remove members.
+* **History:** View past rental history for each member.
+* **Data:** Single source of truth for membership levels to prevent data conflicts.
 
-### 4. 📈 Analytics Dashboard
-* **Real-time Profits:** Instantly calculates income for "Today" vs "Total" historical revenue.
-* **Data Visualization:** Features a dynamic **Bar Chart** that renders rental income over the last 14 days.
+### 4. Financial Tracking
+* **Profits View:** Displays income for the current day and total historical revenue.
+* **Chart:** A bar chart visualizes daily rental income over the last 14 days.
 
-### 5. 🎨 Custom UI & UX
-* **Programmatic JavaFX:** The entire UI is built in pure Java code, offering strict type safety and fine-grained control over layout behavior.
-* **Theming Engine:** Supports hot-swapping between **Dark Mode** (Default) and **Light Mode** CSS themes.
-* **Session Timer:** A multi-threaded background service tracks active session time in the custom title bar.
+### 5. User Interface
+* **JavaFX:** UI built entirely in Java code.
+* **Themes:** Toggle between **Dark Mode** and **Light Mode**.
+* **Localization:** Switch between **English** and **Swedish** text instantly.
+* **Session Timer:** Tracks active session time in the window title bar.
 
 ---
 
 ## 🛠️ Technical Architecture
 
-This project follows a strict **Model-View-Service** architecture to ensure separation of concerns and high cohesion.
+The project follows a **Model-View-Service** architecture.
 
-### Design Patterns Used
-* **Strategy Pattern:** Used for `IPricePolicy` to decouple pricing logic from the rental service.
-* **Singleton Pattern:** Ensures `Inventory`, `MemberRegistry`, and `RentalRegistry` have a single shared instance throughout the application lifecycle.
-* **Observer Pattern:** Utilized via JavaFX Observables to update the UI (Charts, Tables) instantly when underlying data changes.
+### Design Patterns
+* **Strategy Pattern:** Decouples pricing logic (`IPricePolicy`) from the rental service.
+* **Singleton Pattern:** Used for data registries (`Inventory`, `MemberRegistry`) and the `LanguageManager`.
+* **Observer Pattern:** Updates UI components (Charts, Tables) when data changes.
 
 ### Technology Stack
-* **Language:** Java 8+
-* **GUI Framework:** JavaFX (Controls, Charts, Graphics)
+* **Language:** Java 8
+* **GUI Framework:** JavaFX
 * **Build Tool:** Maven
-* **Persistence:** JSON (via Jackson Library) for saving/loading data.
+* **Persistence:** JSON (Jackson Library)
 * **Icons:** Ikonli (FontAwesome)
-
+  
 ---
 
 ## 🔑 Login Credentials
