@@ -151,7 +151,10 @@ public class VehicleView extends VBox {
 
         // Check if an item is selected
         if (selectedRecreationalVehicle == null) {
-            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required", "Please select a vehicle from the table to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditItem"));
             return;
         }
         inventoryService.handleEditRecreationalVehicle(selectedRecreationalVehicle);
@@ -171,19 +174,28 @@ public class VehicleView extends VBox {
         RecreationalVehicle selectedRecreationalVehicle = recreationalVehicleTable.getSelectionModel().getSelectedItem();
 
         if (selectedRecreationalVehicle == null) {
-            UIUtil.showErrorAlert("No Vehicle Selected", "Selection Required", "Please select a vehicle from the table to remove.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectRemoveItem"));
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedRecreationalVehicle.getMake() + " " + selectedRecreationalVehicle.getModel() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert(
+                LanguageManager.getInstance().getString("confirm.removal"),
+                LanguageManager.getInstance().getString("confirm.confirm"),
+                LanguageManager.getInstance().getString("confirm.selected") + " " +
+                        selectedRecreationalVehicle.getMake() + " " + selectedRecreationalVehicle.getModel() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveRecreationalVehicle(selectedRecreationalVehicle);
             if (wasRemovedFromRegistry) {
                 masterData.remove(selectedRecreationalVehicle);
             } else {
-                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The vehicle could not be " + "removed from the registry.");
+                UIUtil.showErrorAlert(LanguageManager.getInstance().getString("error.removalFailed"),
+                        LanguageManager.getInstance().getString("error.operationError"),
+                        LanguageManager.getInstance().getString("error.message"));
             }
         }
     }

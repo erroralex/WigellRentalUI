@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.ui.UIUtil;
@@ -14,8 +15,8 @@ public class ShowAllVehiclesDialog extends Dialog<RecreationalVehicle> {
     public ShowAllVehiclesDialog() {
 
         // Dialog setup
-        setTitle("All Vehicles");
-        setHeaderText("All Vehicles in Inventory");
+        setTitle(LanguageManager.getInstance().getString("txt.showAllVehicleTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.showAllVehicleHeader"));
 
         this.setOnShowing(dialogEvent -> {
             UIUtil.applyDialogSetup(this);
@@ -32,7 +33,7 @@ public class ShowAllVehiclesDialog extends Dialog<RecreationalVehicle> {
 
         if (recreationalVehicleList == null || recreationalVehicleList.isEmpty()) {
             // No vehicles.
-            content.getChildren().add(new javafx.scene.control.Label("No Vehicles was found in list."));
+            content.getChildren().add(new javafx.scene.control.Label(LanguageManager.getInstance().getString("txt.noVehicleFound")));
         } else {
             // Vehicles exists
             ListView<RecreationalVehicle> recreationalVehiclesListView = new ListView<>(FXCollections.observableArrayList(recreationalVehicleList));

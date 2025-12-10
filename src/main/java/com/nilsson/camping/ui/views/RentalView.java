@@ -212,7 +212,10 @@ public class RentalView extends VBox {
             } else if (result.getSelectedVehicle() != null) {
                 item = result.getSelectedVehicle();
             } else {
-                UIUtil.showErrorAlert("New Rental Failed", "No Item Selected", "No item selected for rental.");
+                UIUtil.showErrorAlert(
+                        LanguageManager.getInstance().getString("error.rentalFailed"),
+                        LanguageManager.getInstance().getString("error.noItemSelected"),
+                        LanguageManager.getInstance().getString("error.pleaseSelectItem"));
                 return;
             }
 
@@ -228,7 +231,9 @@ public class RentalView extends VBox {
                     externalRefreshAction.run();
                 }
             } else {
-                UIUtil.showErrorAlert("New Rental Failed", "Operation Error", "Failed to create new rental.");
+                UIUtil.showErrorAlert(LanguageManager.getInstance().getString("error.rentalFailed"),
+                        LanguageManager.getInstance().getString("error.operationError"),
+                        LanguageManager.getInstance().getString("error.rentalFailed"));
             }
         });
     }
@@ -238,13 +243,18 @@ public class RentalView extends VBox {
         Rental selectedRental = rentalTable.getSelectionModel().getSelectedItem();
 
         if (selectedRental == null) {
-            UIUtil.showErrorAlert("No Rental Selected", "Selection Required", "Please select a rental from the table to return.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectRentalReturn"));
             return;
         }
 
         // Confirmation pop-up.
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Return", "Are you sure?",
-                "Do you want to return the selected item for member " +
+        boolean confirmed = UIUtil.showConfirmationAlert(
+                LanguageManager.getInstance().getString("confirm.return"),
+                LanguageManager.getInstance().getString("confirm.confirm"),
+                LanguageManager.getInstance().getString("confirm.rentalForMember") + " " +
                         rentalService.getMemberNameFromId(selectedRental.getMemberId()) + "?");
 
         if (confirmed) {
@@ -259,7 +269,9 @@ public class RentalView extends VBox {
                     externalRefreshAction.run();
                 }
             } else {
-                UIUtil.showErrorAlert("Return Failed", "Operation Error", "The rental could not be removed from the registry.");
+                UIUtil.showErrorAlert(LanguageManager.getInstance().getString("error.returnFailed"),
+                        LanguageManager.getInstance().getString("error.operationError"),
+                        LanguageManager.getInstance().getString("error.message"));
             }
         }
     }

@@ -29,17 +29,21 @@ public class EditGearDialog extends Dialog<Gear> {
 
         this.gearToEdit = gearToEdit;
 
-        setTitle("Edit Camping Gear");
-        setHeaderText("Enter the details for " + gearToEdit.getModel());
+        setTitle(LanguageManager.getInstance().getString("txt.editGearTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.editGearHeader") + gearToEdit.getModel());
 
         // Apply theme and mouse-drag
         this.setOnShowing(dialogEvent -> {
             UIUtil.applyDialogSetup(this);
         });
 
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType saveButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.save"),
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.cancel"),
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+
         getDialogPane().getButtonTypes().clear();
-        getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
         // Form Layout
         GridPane grid = createGridPane();;
@@ -50,23 +54,23 @@ public class EditGearDialog extends Dialog<Gear> {
         typeBox.setMaxWidth(Double.MAX_VALUE);
 
         // Grid layout
-        grid.add(new Label("Model Name"), 0, 0);
+        grid.add(new Label(LanguageManager.getInstance().getString("txt.modelName")), 0, 0);
         grid.add(modelField, 1, 0);
         modelField.setText(gearToEdit.getModel());
-        modelField.setPromptText("(e.g., Trail Trekker 2P)");
+        modelField.setPromptText(LanguageManager.getInstance().getString("txt.modelNamePrompt"));
 
-        grid.add(new Label("Type"), 0, 1);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.type")), 0, 1);
         grid.add(typeBox, 1, 1);
 
-        grid.add(new Label("Capacity"), 0, 2);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.capacity")), 0, 2);
         grid.add(capacityField, 1, 2);
         capacityField.setText(gearToEdit.getCapacity());
-        capacityField.setPromptText("(e.g., 2 people)");
+        capacityField.setPromptText(LanguageManager.getInstance().getString("txt.capacityPrompt"));
 
-        grid.add(new Label("Daily Price (SEK)"), 0, 3);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.dailyPrice")), 0, 3);
         grid.add(priceField, 1, 3);
         priceField.setText(String.valueOf(gearToEdit.getDailyPrice()));
-        priceField.setPromptText("(e.g., 123)");
+        priceField.setPromptText(LanguageManager.getInstance().getString("txt.dailyPricePrompt"));
 
         getDialogPane().setContent(grid);
 

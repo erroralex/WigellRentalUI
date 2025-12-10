@@ -130,7 +130,10 @@ public class MemberView extends VBox {
 
         // Check if an item is selected
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select an item from the table to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditItem"));
             return;
         }
         membershipService.handleEditMember(selectedMember);
@@ -150,19 +153,29 @@ public class MemberView extends VBox {
         Member selectedMember = memberTable.getSelectionModel().getSelectedItem();
 
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("No Member Selected", "Selection Required", "Please select a member from the table to remove.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.missingMember"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectRemoveMember"));
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedMember.getFirstName() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert(
+                LanguageManager.getInstance().getString("confirm.removal"),
+                LanguageManager.getInstance().getString("confirm.confirm"),
+                LanguageManager.getInstance().getString("confirm.selected") + " " +
+                        selectedMember.getFirstName() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = membershipService.removeMemberFromRegistry(selectedMember);
             if (wasRemovedFromRegistry) {
                 masterMemberData.remove(selectedMember);
             } else {
-                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The member could not be removed from the registry.");
+                UIUtil.showErrorAlert(
+                        LanguageManager.getInstance().getString("confirm.removal"),
+                        LanguageManager.getInstance().getString("error.operationError"),
+                        LanguageManager.getInstance().getString("error.messageMember"));
             }
         }
     }
@@ -172,7 +185,10 @@ public class MemberView extends VBox {
 
         // Check if a member is selected
         if (selectedMember == null) {
-            UIUtil.showErrorAlert("No Member Selected", "Selection Required", "Please select a member from the table to view their history.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.missingMember"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectMemberHistory"));
             return;
         }
 

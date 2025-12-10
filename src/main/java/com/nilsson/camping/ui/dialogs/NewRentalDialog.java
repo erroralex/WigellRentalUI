@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.model.NewRentalResult;
 import com.nilsson.camping.model.items.Gear;
@@ -23,19 +24,23 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
     private final DatePicker startDatePicker = new DatePicker(LocalDate.now());
     private final TextField daysField = new TextField();
 
-    private static final String TYPE_GEAR = "Gear";
-    private static final String TYPE_VEHICLE = "Vehicle";
+    private static final String TYPE_GEAR = LanguageManager.getInstance().getString("txt.newRentalTypeGear");
+    private static final String TYPE_VEHICLE = LanguageManager.getInstance().getString("txt.newRentalTypeVehicle");
 
     public NewRentalDialog() {
 
-        setTitle("New Rental");
-        setHeaderText("Choose member, item and rental period.");
+        setTitle(LanguageManager.getInstance().getString("txt.newRentalTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.newRentalHeader"));
 
         // Theme/drag support
         this.setOnShowing(event -> UIUtil.applyDialogSetup(this));
 
-        ButtonType createButtonType = new ButtonType("Create Rental", ButtonBar.ButtonData.OK_DONE);
-        getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
+        ButtonType createButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.createRental"),
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.cancel"),
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        getDialogPane().getButtonTypes().addAll(createButtonType, cancelButtonType);
 
         GridPane grid = createGridPane();
 
@@ -43,7 +48,7 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
         List<Member> members = MemberRegistry.getInstance().getMembers();
         memberBox.getItems().addAll(members);
         memberBox.setMaxWidth(Double.MAX_VALUE);
-        memberBox.setPromptText("Select member");
+        memberBox.setPromptText(LanguageManager.getInstance().getString("txt.selectMember"));
 
         // Show member
         memberBox.setCellFactory(cb -> new ListCell<Member>() {
@@ -94,25 +99,25 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
         vehicleBox.setButtonCell(vehicleBox.getCellFactory().call(null));
 
         // Days
-        daysField.setPromptText("(e.g., 3)");
+        daysField.setPromptText(LanguageManager.getInstance().getString("txt.daysPrompt"));
 
         // Layout
-        grid.add(new Label("Member"), 0, 0);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.member")), 0, 0);
         grid.add(memberBox, 1, 0);
 
-        grid.add(new Label("Item Type"), 0, 1);
+        grid.add(new Label(LanguageManager.getInstance().getString("txt.itemType")), 0, 1);
         grid.add(itemTypeBox, 1, 1);
 
-        grid.add(new Label("Gear Item"), 0, 2);
+        grid.add(new Label(LanguageManager.getInstance().getString("txt.itemGear")), 0, 2);
         grid.add(gearBox, 1, 2);
 
-        grid.add(new Label("Vehicle Item"), 0, 3);
+        grid.add(new Label(LanguageManager.getInstance().getString("txt.itemVehicle")), 0, 3);
         grid.add(vehicleBox, 1, 3);
 
-        grid.add(new Label("Start Date"), 0, 4);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.startDate")), 0, 4);
         grid.add(startDatePicker, 1, 4);
 
-        grid.add(new Label("Number of Days"), 0, 5);
+        grid.add(new Label(LanguageManager.getInstance().getString("txt.numberOfDays")), 0, 5);
         grid.add(daysField, 1, 5);
 
         getDialogPane().setContent(grid);
@@ -142,13 +147,19 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 if (TYPE_GEAR.equals(type)) {
                     gear = gearBox.getValue();
                     if (gear == null) {
-                        UIUtil.showErrorAlert("Missing Item", "No Gear Selected", "Please select a gear item to rent.");
+                        UIUtil.showErrorAlert(
+                                LanguageManager.getInstance().getString("error.missingItem"),
+                                LanguageManager.getInstance().getString("error.noItemSelected"),
+                                LanguageManager.getInstance().getString("error.pleaseSelectItem"));
                         return null;
                     }
                 } else {
                     vehicle = vehicleBox.getValue();
                     if (vehicle == null) {
-                        UIUtil.showErrorAlert("Missing Item", "No Vehicle Selected", "Please select a vehicle to rent.");
+                        UIUtil.showErrorAlert(
+                                LanguageManager.getInstance().getString("error.missingItem"),
+                                LanguageManager.getInstance().getString("error.noItemSelected"),
+                                LanguageManager.getInstance().getString("error.pleaseSelectItem"));
                         return null;
                     }
                 }
@@ -157,10 +168,13 @@ public class NewRentalDialog extends Dialog<NewRentalResult> {
                 try {
                     days = Integer.parseInt(daysField.getText().trim());
                     if (days <= 0) {
-                        throw new NumberFormatException("days must be > 0");
+                        throw new NumberFormatException(LanguageManager.getInstance().getString("error.numFormat"));
                     }
                 } catch (NumberFormatException ex) {
-                    UIUtil.showErrorAlert("Invalid Days", "Input Error", "Please enter a positive whole number for days.");
+                    UIUtil.showErrorAlert(
+                            LanguageManager.getInstance().getString("error.invalidDays"),
+                            LanguageManager.getInstance().getString("error.input"),
+                            LanguageManager.getInstance().getString("error.daysInput"));
                     return null;
                 }
 

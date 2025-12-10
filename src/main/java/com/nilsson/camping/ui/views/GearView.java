@@ -139,7 +139,10 @@ public class GearView extends VBox {
 
         // Check if an item is selected
         if (selectedGear == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select an item from the table to edit.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectEditItem"));
             return;
         }
         inventoryService.handleEditGear(selectedGear);
@@ -158,12 +161,19 @@ public class GearView extends VBox {
         Gear selectedGear = gearTable.getSelectionModel().getSelectedItem();
 
         if (selectedGear == null) {
-            UIUtil.showErrorAlert("No Item Selected", "Selection Required", "Please select a item from the table to remove.");
+            UIUtil.showErrorAlert(
+                    LanguageManager.getInstance().getString("error.noItemSelected"),
+                    LanguageManager.getInstance().getString("error.selectionRequired"),
+                    LanguageManager.getInstance().getString("error.pleaseSelectRemoveItem"));
             return;
         }
 
         // Confirmation dialog
-        boolean confirmed = UIUtil.showConfirmationAlert("Confirm Removal", "Are you sure?", "Do you want to permanently remove " + selectedGear.getModel() + "?");
+        boolean confirmed = UIUtil.showConfirmationAlert(
+                LanguageManager.getInstance().getString("confirm.removal"),
+                LanguageManager.getInstance().getString("confirm.confirm"),
+                LanguageManager.getInstance().getString("confirm.selected") + " " +
+                        selectedGear.getModel() + "?");
 
         if (confirmed) {
             boolean wasRemovedFromRegistry = inventoryService.handleRemoveGear(selectedGear);
@@ -171,7 +181,10 @@ public class GearView extends VBox {
             if (wasRemovedFromRegistry) {
                 masterData.remove(selectedGear);
             } else {
-                UIUtil.showErrorAlert("Removal Failed", "Operation Error", "The item could not be removed from the registry.");
+                UIUtil.showErrorAlert(
+                        LanguageManager.getInstance().getString("error.removalFailed"),
+                        LanguageManager.getInstance().getString("error.operationError"),
+                        LanguageManager.getInstance().getString("error.message"));
             }
         }
     }

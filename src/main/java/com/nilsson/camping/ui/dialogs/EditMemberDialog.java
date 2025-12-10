@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.application.Platform;
@@ -27,17 +28,21 @@ public class EditMemberDialog extends Dialog<Member> {
 
         this.memberToEdit = memberToEdit;
 
-        setTitle("Edit Member");
-        setHeaderText("Enter the details for " + memberToEdit.getFirstName() + " " + memberToEdit.getLastName());
+        setTitle(LanguageManager.getInstance().getString("txt.editMemberTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.editMemberHeader") + memberToEdit.getFirstName() + " " + memberToEdit.getLastName());
 
         // Apply theme and mouse-drag
         this.setOnShowing(dialogEvent -> {
             UIUtil.applyDialogSetup(this);
         });
 
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType saveButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.save"),
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.cancel"),
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+
         getDialogPane().getButtonTypes().clear();
-        getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
         // Form Layout
         GridPane grid = createGridPane();;
@@ -48,16 +53,16 @@ public class EditMemberDialog extends Dialog<Member> {
         levelBox.setMaxWidth(Double.MAX_VALUE);
 
         // Grid layout
-        grid.add(new Label("First Name"), 0, 0);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.firstName")), 0, 0);
         grid.add(firstNameField, 1, 0);
         firstNameField.setText(memberToEdit.getFirstName());
-        firstNameField.setPromptText("(e.g., John)");
+        firstNameField.setPromptText(LanguageManager.getInstance().getString("txt.firstNamePrompt"));
 
-        grid.add(new Label("Last Name"), 0, 1);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.lastName")), 0, 1);
         grid.add(lastNameField, 1, 1);
         lastNameField.setText(memberToEdit.getLastName());
 
-        grid.add(new Label("Membership Level"), 0, 2);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.membershiplevel")), 0, 2);
         grid.add(levelBox, 1, 2);
 
         getDialogPane().setContent(grid);

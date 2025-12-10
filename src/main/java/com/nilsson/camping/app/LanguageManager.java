@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 // https://docs.oracle.com/cd/E10926_01/doc/owb.101/b12155/oracle/owb/transformation/LanguageManager.html
+// https://en.wikipedia.org/wiki/Internationalization_and_localization
 
 public class LanguageManager {
 

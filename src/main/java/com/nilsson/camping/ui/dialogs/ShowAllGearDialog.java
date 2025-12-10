@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.items.Gear;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.ui.UIUtil;
@@ -14,8 +15,8 @@ public class ShowAllGearDialog extends Dialog<Gear> {
     public ShowAllGearDialog() {
 
         // Dialog setup
-        setTitle("All Gear");
-        setHeaderText("All Gear in Inventory");
+        setTitle(LanguageManager.getInstance().getString("txt.showAllGearTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.showAllGearHeader"));
 
         this.setOnShowing(dialogEvent -> {
             UIUtil.applyDialogSetup(this);
@@ -32,7 +33,8 @@ public class ShowAllGearDialog extends Dialog<Gear> {
 
         if (gearList == null || gearList.isEmpty()) {
             // No gear.
-            content.getChildren().add(new javafx.scene.control.Label("No Gear was found in list."));
+            content.getChildren().add(new javafx.scene.control.Label(
+                    LanguageManager.getInstance().getString("txt.noGearFound")));
         } else {
             // Gear exists
             ListView<Gear> gearListView = new ListView<>(FXCollections.observableArrayList(gearList));

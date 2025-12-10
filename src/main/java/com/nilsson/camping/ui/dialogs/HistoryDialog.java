@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.Member;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.collections.FXCollections;
@@ -13,8 +14,9 @@ public class HistoryDialog extends Dialog<Void> {
     public HistoryDialog(Member member) {
 
         // Dialog setup
-        setTitle("Member History");
-        setHeaderText("History for: " + member.getFirstName() + " " + member.getLastName() + " (ID: " + member.getId() + ")");
+        setTitle(LanguageManager.getInstance().getString("txt.historyTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.historyHeader") + " " + member.getFirstName() +
+                " " + member.getLastName() + " (ID: " + member.getId() + ")");
 
         this.setOnShowing(dialogEvent -> {
             UIUtil.applyDialogSetup(this);
@@ -31,7 +33,8 @@ public class HistoryDialog extends Dialog<Void> {
 
         if (historyList == null || historyList.isEmpty()) {
             // No history.
-            content.getChildren().add(new javafx.scene.control.Label(member.getFirstName() + " has no recorded history yet."));
+            content.getChildren().add(new javafx.scene.control.Label(member.getFirstName() +
+                    LanguageManager.getInstance().getString("txt.noRecorded")));
         } else {
             // History exists
             ListView<String> historyListView = new ListView<>(FXCollections.observableArrayList(historyList));

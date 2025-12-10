@@ -1,5 +1,6 @@
 package com.nilsson.camping.ui.dialogs;
 
+import com.nilsson.camping.app.LanguageManager;
 import com.nilsson.camping.model.items.RecreationalVehicle;
 import com.nilsson.camping.ui.UIUtil;
 import javafx.application.Platform;
@@ -20,9 +21,9 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
     private final TextField priceField = new TextField();
     private final ComboBox<String> typeBox = new ComboBox<>();
 
-    private static final String CARAVAN = "Caravan";
-    private static final String MOTORHOME = "Motorhome";
-    private static final String CAMPERVAN = "Campervan";
+    private static final String CARAVAN = LanguageManager.getInstance().getString("txt.caravan");
+    private static final String MOTORHOME = LanguageManager.getInstance().getString("txt.motorhome");
+    private static final String CAMPERVAN = LanguageManager.getInstance().getString("txt.campervan");
 
     private final RecreationalVehicle recreationalVehicleToEdit;
 
@@ -30,8 +31,8 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
 
         this.recreationalVehicleToEdit = recreationalVehicleToEdit;
 
-        setTitle("Edit Vehicle");
-        setHeaderText("Enter the details for " + recreationalVehicleToEdit.getMake() + " " +
+        setTitle(LanguageManager.getInstance().getString("txt.editVehicleTitle"));
+        setHeaderText(LanguageManager.getInstance().getString("txt.editVehicleHeader") + " " + recreationalVehicleToEdit.getMake() + " " +
                 recreationalVehicleToEdit.getModel());
 
         // Apply theme and mouse-drag
@@ -39,9 +40,13 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
             UIUtil.applyDialogSetup(this);
         });
 
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType saveButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.save"),
+                ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType(LanguageManager.getInstance().getString("btn.cancel"),
+                ButtonBar.ButtonData.CANCEL_CLOSE);
+
         getDialogPane().getButtonTypes().clear();
-        getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
         // Form Layout
         GridPane grid = createGridPane();;
@@ -52,33 +57,33 @@ public class EditVehicleDialog extends Dialog<RecreationalVehicle> {
         typeBox.setMaxWidth(Double.MAX_VALUE);
 
         // Grid layout
-        grid.add(new Label("Make"), 0, 0);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.make")), 0, 0);
         grid.add(makeField, 1, 0);
         makeField.setText(recreationalVehicleToEdit.getMake());
-        makeField.setPromptText("(e.g., Kabe)");
+        makeField.setPromptText(LanguageManager.getInstance().getString("txt.makePrompt"));
 
-        grid.add(new Label("Model"), 0, 1);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.model")), 0, 1);
         grid.add(modelField, 1, 1);
         modelField.setText(recreationalVehicleToEdit.getModel());
-        modelField.setPromptText("(e.g., Amethyst XXL)");
+        modelField.setPromptText(LanguageManager.getInstance().getString("txt.modelPrompt"));
 
-        grid.add(new Label("Type"), 0, 2);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.type")), 0, 2);
         grid.add(typeBox, 1, 2);
 
-        grid.add(new Label("Year"), 0, 3);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.year")), 0, 3);
         grid.add(yearField, 1, 3);
         yearField.setText(recreationalVehicleToEdit.getYear());
-        yearField.setPromptText("(e.g., 2023)");
+        yearField.setPromptText(LanguageManager.getInstance().getString("txt.yearPrompt"));
 
-        grid.add(new Label("Capacity"), 0, 4);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.capacity")), 0, 4);
         grid.add(capacityField, 1, 4);
         capacityField.setText(recreationalVehicleToEdit.getCapacity());
-        capacityField.setPromptText("(e.g., 4 people)");
+        capacityField.setPromptText(LanguageManager.getInstance().getString("txt.capacityPrompt"));
 
-        grid.add(new Label("Daily Price (SEK)"), 0, 5);
+        grid.add(new Label(LanguageManager.getInstance().getString("table.dailyPrice")), 0, 5);
         grid.add(priceField, 1, 5);
         priceField.setText(String.valueOf(recreationalVehicleToEdit.getDailyPrice()));
-        priceField.setPromptText("(e.g., 1234)");
+        priceField.setPromptText(LanguageManager.getInstance().getString("txt.dailyPricePrompt"));
 
         getDialogPane().setContent(grid);
 
