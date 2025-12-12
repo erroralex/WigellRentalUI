@@ -7,7 +7,6 @@ import com.nilsson.camping.model.items.IRentable;
 import com.nilsson.camping.model.registries.Inventory;
 import com.nilsson.camping.model.registries.MemberRegistry;
 import com.nilsson.camping.model.registries.RentalRegistry;
-
 import java.time.LocalDate;
 import java.util.List;
 

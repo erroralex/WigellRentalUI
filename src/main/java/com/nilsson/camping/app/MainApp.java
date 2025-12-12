@@ -30,7 +30,7 @@ public class MainApp extends Application {
             // Removes Standard Title Bar
             primaryStage.initStyle(StageStyle.UNDECORATED);
 
-            // Custom Title Bar - Pass the Runnable for 'X' button
+            // Custom Title Bar
             customTitleBar = new CustomTitleBar(primaryStage, this::handleCloseOrLogout);
 
             // Instantiate Session Timer and Static UserSession

@@ -98,6 +98,6 @@ src/main/java/com/nilsson/camping
 
 ## 📜 License
 
-This project was developed for educational purposes as part of a System Development course. Distributed under the MIT License.
+This project was developed for educational purposes as part of a System Development course. Distributed under the **MIT License**.
 
 ---

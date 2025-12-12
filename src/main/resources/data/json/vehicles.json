@@ -94,7 +94,7 @@
   "year" : "2022",
   "capacity" : "5 people",
   "type" : "Caravan",
-  "rented" : false,
+  "rented" : true,
   "itemType" : "Caravan",
   "itemName" : "Fendt Opal 560"
 }, {
