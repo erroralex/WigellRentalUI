@@ -10,11 +10,6 @@ public class StudentPricePolicy implements IPricePolicy {
     }
 
     @Override
-    public double getMonthlyCost() {
-        return standardPricePolicy.getMonthlyCost() * STUDENT_DISCOUNT;
-    }
-
-    @Override
     public double calculatePrice(int days) {
         return standardPricePolicy.calculatePrice(days) * STUDENT_DISCOUNT;
     }

@@ -4,5 +4,4 @@ public interface IPricePolicy {
 
     double calculatePrice(int days);
 
-    double getMonthlyCost();
 }

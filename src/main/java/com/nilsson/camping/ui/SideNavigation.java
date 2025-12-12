@@ -193,6 +193,7 @@ public class SideNavigation extends VBox {
         // ──────────────────────────────────────────────────────
         // Language Toggle Button
         // ──────────────────────────────────────────────────────
+
         FontIcon languageIcon = new FontIcon(FontAwesome.GLOBE);
         Button btnLanguage = createNavButton(LanguageManager.getInstance().getString("nav.toggleLanguage"), languageIcon);
         btnLanguage.setOnAction(e -> {

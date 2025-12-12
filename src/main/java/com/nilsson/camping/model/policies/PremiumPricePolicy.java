@@ -10,11 +10,6 @@ public class PremiumPricePolicy implements IPricePolicy {
     }
 
     @Override
-    public double getMonthlyCost() {
-        return standardPricePolicy.getMonthlyCost() * PREMIUM_RATE;
-    }
-
-    @Override
     public double calculatePrice(int days) {
         return standardPricePolicy.calculatePrice(days) * PREMIUM_RATE;
     }
